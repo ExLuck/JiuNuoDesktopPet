@@ -1,409 +1,409 @@
-# 啾糯桌宠手工实测清单
+# JiuNuo Desktop Pet manual test checklist
 
-以下测试只使用你自己新建的临时文件。不要拿现有文件做删除测试，也不要清空整个回收站。
+The tests below use only temporary files you create yourself. Do not use an existing file for a deletion test, and do not empty your whole recycle bin.
 
-角色阶段的范围、素材和验收进度以 [角色说明](docs/CHARACTERS.md) 为准。正式免安装包包含两位角色、完整动作及专属语音；交付后由你亲自执行下面的实机检查，代理不自动启动桌宠。请使用最新交付的 `dist\啾糯桌宠-免安装版`，不要使用旧品牌的归档或旧发布目录。
+The character phase's scope, assets and acceptance progress are defined by [the character guide](docs/CHARACTERS.md). The official portable package contains both characters, the complete animations and their own voices; after delivery you run the on-device checks below yourself, and the agent does not start the pet automatically. Use the most recently delivered `dist\JiuNuoDesktopPet-Portable`, not an archive or an old release directory under the old branding.
 
-菲比动作与标定素材已齐全；正式包不包含独立测试工具，直接按第 0.4～0.5 节从正常右键菜单检查操作。糯糯保留原进食测试；菲比不应吃、舔或显示饥饿条。捣蛋测试仅使用你主动准备的普通空白测试窗口，不使用正在编辑重要内容的应用。
+Feibi's animations and calibration assets are complete. The official package contains no standalone test tools, so check her from the ordinary right-click menu following sections 0.4-0.5. Nuonuo keeps the original feeding tests; Feibi should not eat, lick or show a hunger bar. Mischief testing uses only a plain empty test window you have prepared deliberately, never an application where you are editing something that matters.
 
-正式版的复测入口为 `dist\啾糯桌宠-免安装版\啾糯桌宠.exe`，可完整解压同名 ZIP 后运行；打包与核验状态以[角色发布进度](docs/CHARACTERS.md#当前进度与阶段退出条件)为准。先从托盘退出旧进程，再打开新版正常 EXE。不要混合复制旧预览版、测试版或行为控制版的文件。
+The retest entry point for the official edition is `dist\JiuNuoDesktopPet-Portable\JiuNuoDesktopPet.exe`, which can be run after extracting the ZIP of the same name in full; packaging and verification status are defined by [the character release progress](docs/CHARACTERS.md#current-progress-and-phase-exit-conditions). Exit the old process from the tray first, then open the new version's normal EXE. Do not mix in copied files from an old preview, test or Behavior Control build.
 
-已有的单独行为控制版保留，当前不随正式版更新；第 0.6～0.7 节仅供持有旧独立开发测试包时参考。
+The existing separate Behavior Control edition is retained and is not currently updated with the official edition; sections 0.6-0.7 are for reference only if you still have an old standalone development test package.
 
-上下撕裂继续按原方法观察：专属演示第七项为撕窗，此前藏帽、碎窗项需要右键归还才能继续。重点是临时变大 → 抓稳并压低蓄力 → 向上和向下拉开 → 最大展开短暂停住 → 放手缩回原体型 → 两片完整收帽 → 右键后原位归还。分别检查 60% / 100% / 200% 体型、不同 Windows 缩放及副屏；表演不应改保存尺寸，手脸重叠窗口处应能右键或拖动。中断后临时尺寸也应清除。正常完成的尺寸证据为 `PrankTearGrowth` / `PrankTearSizeRestored`，收帽证据仍是 `PrankRemainsStored`。
+The vertical tear is still observed the original way: the seventh item of the standalone demonstration is the window tear, and the earlier hat-hiding and smash items need a right-click return before it can continue. The important parts are the temporary growth → gripping firmly and pressing low to wind up → pulling apart upwards and downwards → a brief hold at maximum spread → releasing and shrinking back to the original size → both pieces fully stored in the hat → a right-click returning it to its original position. Check this separately at 60%, 100% and 200% body size, at different Windows scale factors, and on a secondary monitor; the performance should not change the saved size, and a window where her hand or face overlaps should still be right-clickable or draggable. After an interruption the temporary size should also be cleared. The size evidence for a normal completion is `PrankTearGrowth` and `PrankTearSizeRestored`, and the storage evidence is still `PrankRemainsStored`.
 
-## 0. 开始与退出
+## 0. Starting and quitting
 
-### v1.3.1 四项修复（待用户实测）
+### v1.3.1 four fixes (awaiting user testing)
 
-先从托盘退出旧版，再启动 v1.3.1 正式包；开启共存、关闭安静模式。
+Exit the old version from the tray first, then start the v1.3.1 official package; turn coexistence on and quiet mode off.
 
-1. **音量**：固定同一个音量滑条，比较两人日常录音，再听菲比大招前台词。响的录音应压低，不应出现调滑条后突然恢复原始大音量。悄悄话/困倦仍较轻；禁音后两人都无声。日志 `VoicePlayed` / `VoiceBurstStarted` 包含共享音量与实际补偿音量。
-2. **图标接力**：删除一个新建的临时快捷方式，检查踢入嘴后只继续咀嚼，不再次张嘴吸食；再批量删三个临时快捷方式。接住后立即拖起、开菜单或切换模式，不应把已经吃掉的图标再次排队；日志应每条一次 `GhostConsumed`。
-3. **鼠标捏脸**：两人的左右脸分别轻拉、拉远保持、向上/下斜拉再松手。检查眯眼、腮红、嘴部张合及柔软回弹，不能残留黑边、皮肤裂口、体型变化或重影。身体/帽子仍可正常拖拽。两人换朝向后再测，并测试 100%/125%/150% 缩放。效果参照 [离线预览](docs/media/pinch-continuity-v131.gif)，主观表现待确认。
-4. **远距离投喂**：把两人放到屏幕两端，右键投喂；应原地转向、摘帽、掏食、抛接，不能先跑到一起。交换左右，再把一人放到窗台上；有双屏时分到两个显示器。食物应抵达张开的嘴，接住后才扣除饥饿值。飞行中拖走角色、移动所站窗口或关闭共存应安全结束，无残留食物。`PairSceneStarted` 中 Feed 的 `KeepPositions=True`、距离和飞行时长可辅助定位。
+1. **Volume**: fix the volume slider in one position, compare both characters' everyday recordings, then listen to Feibi's line before a finisher. A loud recording should be attenuated, and there should be no sudden return to the original loud volume after moving the slider. Whispered and sleepy clips should still be quieter, and with mute on neither character makes a sound. The `VoicePlayed` and `VoiceBurstStarted` logs include the shared volume and the actual compensated volume.
+2. **Icon relay**: delete a newly created temporary shortcut and check that after it is kicked into her mouth she only carries on chewing, without opening her mouth to slurp again; then delete three temporary shortcuts at once. Immediately after a catch, pick her up, open the menu or switch modes, and an icon already eaten must not be queued again; the log should show one `GhostConsumed` per item.
+3. **Cheek pinching**: for each character, pull each cheek lightly, pull far and hold, and pull diagonally up and down before releasing. Check the narrowed eyes, the blush, the mouth opening and closing and the soft rebound, with no leftover black edges, skin splits, body size changes or ghosting. The body and hat should still drag normally. Retest after turning both characters to face the other way, and test at 100%, 125% and 150% scaling. The effect is referenced against [the offline preview](docs/media/pinch-continuity-v131.gif), and the subjective result is still to be confirmed.
+4. **Long-distance feeding**: put the two at opposite ends of the screen and feed from the right-click menu; they should turn where they stand, take the hat off, pull the food out and throw and catch it, without walking together first. Swap left and right, then put one on a window ledge; with two monitors, put one on each. The food should reach her open mouth, and hunger should drop only after the catch. Dragging a character away during the flight, moving the window she is standing on, or turning coexistence off should all end it safely with no food left behind. `KeepPositions=True` for Feed in `PairSceneStarted`, along with the distance and the flight time, helps locate problems.
 
-自动验证全程后台静音，没有替你启动桌宠。出现异常时提供对应步骤、完整录屏及其时间段日志即可；不必提供真实文件内容。
+The automated verification runs silently in the background throughout and does not start the pet for you. If something goes wrong, providing the step, a complete screen recording and the log for that period is enough; the actual file contents are not needed.
 
-### 捏脸与叨手手（正式包，待实测）
+### Cheek pinching and nibbling (official package, awaiting testing)
 
-先退出旧版，双击当前正式包的根目录 EXE。分别切换糯糯与菲比啾比，或打开双宠共存逐个试：
+Exit the old version first, then double-click the root EXE of the current official package. Switch between Nuonuo and Feibi Jiubi, or turn on coexistence and try each in turn:
 
-1. 在角色空闲时，左键按住左脸颊缓慢向外拖，再快速拉到较远处并保持 1–2 秒。脸颊轮廓应连续拉伸，保持时嘴部短促张合；眼睛、发夹、身体和脚不应一起扯长，不应出现角色自己拉脸、双轮廓或体型变化。松手从当前位置缩回。
-2. 用右脸重复；检查两侧能否命中，菲比啾比右脸的蓝色发夹应仍在原来一侧。分别用 60%、100%、200% 大小和不同缩放的副屏重复，手势范围应随角色尺寸等比例变化。
-3. 从帽子或身体拖拽，仍应是原本的拎起/抛出，不应误入捏脸。捏脸中松开鼠标、右键打开菜单、点“让她回家”、关闭共存后，角色不应卡住或保持长脸。
-4. 若发生错位、跳帧、卡顿或持续叨手不播放，请给出角色、左右脸、尺寸、显示器缩放和时间点，并提供 `activity.log` 中附近的 `CheekPinchStarted`、`CheekPinchReleased`、`CheekPinchSettled` 或 `UiFrameSlow` 记录及录屏。
+1. While the character is idle, hold the left button on her left cheek and drag slowly outward, then pull quickly to a greater distance and hold for 1-2 seconds. The cheek outline should stretch continuously, and holding should open and close her mouth briefly; the eyes, hairpin, body and feet should not stretch along with it, and there should be no character pulling her own face, no double outline and no body size change. Releasing shrinks back from the current position.
+2. Repeat on the right cheek, checking that both sides register hits, and that Feibi Jiubi's blue hairpin stays on its original side. Repeat at 60%, 100% and 200% size and on a secondary monitor at a different scale factor; the gesture range should scale proportionally with the character size.
+3. Dragging from the hat or the body should still be the original pick-up and throw, and must not be mistaken for a cheek pinch. Releasing the mouse mid-pinch, right-clicking to open the menu, clicking "Bring her home", or turning coexistence off should leave the character neither stuck nor with a permanently stretched face.
+4. If there is misalignment, dropped frames, stuttering or continuous nibbling that never plays, give the character, which cheek, the size, the monitor scale factor and the time, and provide the nearby `CheekPinchStarted`, `CheekPinchReleased`, `CheekPinchSettled` or `UiFrameSlow` entries from `activity.log` plus a screen recording.
 
-实现与素材来源见 [捏脸说明](docs/CHEEK_PINCH.md)。
+The implementation and asset provenance are in [the cheek pinch guide](docs/CHEEK_PINCH.md).
 
-### v1.2.1 动作连续性复测
+### v1.2.1 animation continuity retest
 
-先看单人走路和跑步连续两个循环，再开启共存，依次看揪脸、靠睡和抛食。重点看切换前后体型、帽顶是否完整、身体是否因手脚伸出而横跳，以及食物能否落到嘴里。分别在 100% 和 125% 显示器测试。只在撕窗大招的预定阶段才应明显变大；若其他时候整只桌宠仍反复缩放，提供出问题的动作名称、完整录屏和相同时间段的日志，继续区分素材和显示环境问题。
+First watch two consecutive loops of solo walking and running, then turn coexistence on and watch the cheek pinch, the nap and the food throw in turn. The key things are whether the body size and the top of the hat stay complete across transitions, whether the body jumps sideways when a hand or foot extends, and whether the food lands in her mouth. Test at 100% and 125% separately. She should visibly grow only during the tear finisher's designated phase; if the whole pet still scales repeatedly at other times, provide the name of the action that misbehaved, a complete screen recording and the log for the same period, so asset problems can still be told from display environment problems.
 
-### 右键菜单卡顿复测（9 月 8 日本地正式版）
+### Right-click menu stutter retest (8 September local official build)
 
-1. 退出旧进程，运行 `dist\啾糯桌宠-免安装版\啾糯桌宠.exe` 的正常入口，不是自动专属演示。
-2. 等她走动时右键角色，也分别试一次托盘右键。菜单打开后她应停住；悬停条目、进入“桌宠角色”子菜单、拖动大小滑条应有响应。
-3. 按 Esc 或点击菜单外关闭，再重复打开；她应继续活动，不突然快进或永久停住。两位角色各检查一次。
-4. 有帽中窗口时打开菜单，窗口不能因菜单前台变化而被自动归还；主动点“把窗口还回来”仍应有效。
-5. 若仍卡住，记录大致时间和当时动作，提供 `activity.log`（必要时加 `activity.previous.log`）。新增 `PetMenuOpened` / `PetMenuClosed` 可定位菜单会话；`UiFrameSlow` 表示一次界面帧工作超过 100 毫秒，不等同于整个卡住时长。
+1. Exit the old process and run the normal entry point of `dist\JiuNuoDesktopPet-Portable\JiuNuoDesktopPet.exe`, not the automated feature demonstration.
+2. Right-click the character while she is walking, and separately try right-clicking the tray once. She should stop once the menu opens, and hovering items, opening the "Pet character" submenu and dragging the size slider should all respond.
+3. Press Esc or click outside the menu to close it, then open it again; she should carry on moving, with no sudden fast-forward and no permanent freeze. Check once for each character.
+4. Open the menu while a window is in the hat; the window must not be returned automatically because the menu changed the foreground. Clicking "Give the window back" deliberately should still work.
+5. If it still freezes, note roughly when and what she was doing, and provide `activity.log` (and `activity.previous.log` if needed). The new `PetMenuOpened` and `PetMenuClosed` locate a menu session, and `UiFrameSlow` means one interface frame's work exceeded 100 milliseconds, which is not the same as the whole freeze duration.
 
-### 双宠共存与同步设置（v1.2.2 正式包，待实测）
+### Both pets together and synced settings (v1.2.2 official package, awaiting testing)
 
-先退出旧进程并启动更新后的正式包。两人出现后从任意一只身上右键，使用同一个菜单检查：
+Exit the old process first and start the updated official package. Once both appear, right-click either one and use that single menu to check:
 
-1. 勾选“双宠共存”，确认两人同时出现且起初并排；分别拖动，另一人仍能自己活动。再次启动程序时，共存偏好应保留。
-2. 调整“大小”滑条，观察两人的普通体型一起变化；分别拖到不同显示器后再调一次，允许因各屏工作区和 DPI 而有不同的实际像素尺寸。
-3. 勾选“安静模式”，确认两人都停止自主走动和捣蛋；取消后恢复。勾选“禁音”，分别触发两人的声音，均不应出声。
-4. 两项模式均关闭时，两条都显示。分别勾选“禁食模式”和“无限模式”，确认饥饿条与捣蛋条立即一起消失；两项都开启时，无论先取消哪一项，两条都应继续隐藏，最后一项取消才一起恢复。隐藏不清空菲比的捣蛋值，她仍按原冷却捣蛋。
-5. 从任意一只右键选择“让她回家”，两人应回到同屏相邻位置；“捣蛋一下”和“把窗口还回来”只作用于菲比，禁食只改变糯糯的饥饿行为，但共存时同步隐藏双方的条。
-6. 关闭“双宠共存”或选择“桌宠角色”，确认只留所选的一只，托盘只有一个图标；菲比帽中的窗口在她退出共存前按原安全归还规则处理。从托盘退出程序，两人都应消失。
+1. Tick "Both pets together" and confirm both appear at once, side by side initially; drag each one and the other should still move on its own. The coexistence preference should persist when you start the program again.
+2. Adjust the "size" slider and watch both characters' ordinary body size change together; drag them to different monitors and adjust again, allowing different actual pixel sizes because of each screen's work area and DPI.
+3. Tick "Quiet mode" and confirm both stop autonomous walking and mischief; unticking restores it. Tick "Mute" and trigger each character's sound; neither should make a sound.
+4. With both modes off, both bars are shown. Tick "Fasting mode" and "Infinite mode" separately and confirm the hunger bar and the mischief bar disappear together immediately; with both on, whichever you untick first, both bars should stay hidden, and they return together only when the last one is unticked. Hiding does not clear Feibi's mischief value, and she still makes mischief on her original cooldown.
+5. Right-click either one and choose "Bring her home"; both should return to adjacent positions on the same screen. "Play a prank" and "Give the window back" affect only Feibi, and fasting changes only Nuonuo's hunger behaviour, but while coexisting it hides both characters' bars in step.
+6. Turn "Both pets together" off, or choose "Pet character", and confirm only the chosen one remains with a single tray icon; a window in Feibi's hat is handled by the original safe return rules before she leaves coexistence. Quit from the tray and both should disappear.
 
-7. 保持禁食开启、无限关闭，退出再启动，两条仍应隐藏；分别以糯糯和菲比为主角色重复。关闭共存后，单人菲比应恢复捣蛋条，单人糯糯仍隐藏饥饿条；重新共存再次一起隐藏。
+7. With fasting on and infinite off, quit and start again; both bars should still be hidden. Repeat with Nuonuo and then Feibi as the primary character. After turning coexistence off, a solo Feibi should get her mischief bar back while a solo Nuonuo still hides the hunger bar; turning coexistence back on hides both again.
 
-若某一步失败，请记下操作时间，并提供日志中的 `CoexistenceModeChanged`、`ProgressDisplayVisibilityChanged`、`PetLoaded` 和相关设置事件。规则的正式记录见[双宠共存与同步设置](docs/CHARACTERS.md#双宠共存与同步设置2026-09-23-已采用待实机验收)。
+If a step fails, note the time of the action and provide the `CoexistenceModeChanged`, `ProgressDisplayVisibilityChanged`, `PetLoaded` and related settings events from the log. The official record of the rules is in [both pets together and synced settings](docs/CHARACTERS.md#both-pets-together-and-synced-settings-2026-09-23-adopted-awaiting-on-device-acceptance).
 
-测试前先从托盘退出旧版，避免旧进程的单实例保护接走新启动请求。完整解压本轮 ZIP 后，双击根目录的 `啾糯桌宠.exe`；本机也可直接使用：
+Before testing, exit the old version from the tray so the old process's single-instance protection does not take over the new launch request. After extracting this round's ZIP in full, double-click `JiuNuoDesktopPet.exe` in the root folder; locally you can also use:
 
 ```text
-.\dist\啾糯桌宠-免安装版\啾糯桌宠.exe
+.\dist\JiuNuoDesktopPet-Portable\JiuNuoDesktopPet.exe
 ```
 
-发布包已内置运行时，不需要安装额外组件。仅在开发源码时，才在项目目录使用以下替代入口：
+The release package bundles the runtime, so no extra components need installing. Only when developing from source, use this alternative entry point in the project directory:
 
 ```powershell
-dotnet '.\src\SoftMochiPet\bin\x64\Release\net8.0-windows\啾糯桌宠.dll'
+dotnet '.\src\SoftMochiPet\bin\x64\Release\net8.0-windows\JiuNuoDesktopPet.dll'
 ```
 
-测试结束时，从系统托盘右键当前角色的桌宠图标，选择“退出桌宠”。不要直接结束进程，这样当前角色的生命状态会立即保存。
+When testing finishes, right-click the current character's pet icon in the system tray and choose "Exit". Do not kill the process directly, since this way the current character's life state is saved immediately.
 
-### 0.0.1 正式名称与升级兼容
+### 0.0.1 Official name and upgrade compatibility
 
-- 免安装根目录只有一个正常启动 EXE“啾糯桌宠.exe”，正式包不含测试工具。正常启动不自动演示。
-- 根启动器及“程序文件”内主 EXE 的产品名均为“啾糯桌宠”；窗口和托盘提示以“啾糯桌宠 · 当前角色”显示，角色菜单仍为“糯糯”“菲比啾比”。
-- 新版应继续读取旧版的角色选择、大小、音量/禁音和两角色存档，不另建新品牌数据目录。具体兼容决定见 [正式更名说明](README.md#正式更名与旧版兼容)。
-- 有旧版进程运行时，新版仍遵守同一单实例保护；退出旧版后再启动新版，避免将旧版画面误认为更新无效。
-- 需要随系统启动时，在新版菜单重新勾选“开机自启”，检查 Run 命令指向新目录的“啾糯桌宠.exe”，值名仍为 `SoftMochiPet`，不产生第二条品牌启动项。
+- The portable root has exactly one normal launch EXE, `JiuNuoDesktopPet.exe`, and the official package contains no test tools. A normal launch runs no demonstration automatically.
+- The product name of both the root launcher and the main EXE inside `Program` is `JiuNuoDesktopPet`; the window and tray tooltip show "JiuNuo Desktop Pet · current character", and the character menu still reads "Nuonuo" and "Feibi Jiubi".
+- The new version should continue reading the old version's character choice, size, volume and mute and both characters' saves, without creating a new branded data directory. The specific compatibility decisions are in [the official rename notes](README.md#official-rename-and-compatibility-with-older-versions).
+- With an old version's process running, the new version still honours the same single-instance protection; exit the old version before starting the new one, so you do not mistake the old version's display for the update having failed.
+- To start with the system, tick "Start with Windows" again in the new version's menu and check that the Run command points at `JiuNuoDesktopPet.exe` in the new directory, that the value name is still `SoftMochiPet`, and that no second branded startup entry is created.
 
-需要观察日志时，可另开 PowerShell：
+To watch the log, open another PowerShell:
 
 ```powershell
 Get-Content "$env:LOCALAPPDATA\SoftMochiPet\activity.log" -Wait
 ```
 
-日志每两秒保存一次运行快照，状态变化会立即记录；超过 8 MB 后旧内容移到 `activity.previous.log`。
+The log saves a runtime snapshot every two seconds, and state changes are recorded immediately; past 8 MB the old content moves to `activity.previous.log`.
 
-## 0.1 语音
+## 0.1 Voice
 
-以下录音验收先选择糯糯。首次启动默认开启语音；既有禁音和音量偏好继续保留。分别触发以下动作：
+Choose Nuonuo for these recording checks first. Voice is on by default on a first launch, and existing mute and volume preferences are retained. Trigger each of the following:
 
-- 删除一个专用测试文件触发进食：吸食时应播放积极语气，吃完应播放肯定语气；
-- 高饥饿时自主舔图标：出发时应委屈；若桌面没有可见图标，应播放超级伤心语气；
-- 自主探索、睡眠：分别应听到疑问、冷静语气；
-- 窗口快速上抛：从至少 7 条较柔和的短回应中轮换，不应再听到原先尖锐的“惊叫”；快速下撤仍可播放失控惊恐，并打断正在播放的普通语音；
-- 把她甩出或让她从较高处落下：仅在明显撞地且途中没有刚播过语音时播放短促的落地回应；普通小台阶、自己起跳以及“途中叫一声、落地又叫一声”的连播都不应出现；
-- 饥饿时的讨食、舔图标和打滚共用一段反应间隔，不应在几十秒内轮流触发、反复播放同一句；
-- 左键拖动她：应有委屈语气，但连续点击不会反复叠音。
+- delete a dedicated test file to trigger feeding: the slurp should play a positive tone, and finishing should play an affirmative one;
+- autonomous icon licking at high hunger: setting off should sound aggrieved; with no visible desktop icon it should play the very sad tone;
+- autonomous exploration and sleep: you should hear the questioning and the calm tones respectively;
+- being tossed up quickly by a window: it should rotate through at least 7 softer short responses, and the previous sharp "scream" should no longer appear; a quick downward pull can still play the panicked out-of-control clip, interrupting any ordinary line playing;
+- flinging her or dropping her from a height: a short landing response plays only on an obvious ground impact where no line played on the way down; ordinary small steps, her own jumps, and a "shout on the way plus shout on landing" pair should never occur;
+- begging, icon licking and the roll while hungry share one response interval, and should not take turns within tens of seconds repeating the same line;
+- dragging her with the left button: there should be an aggrieved tone, but clicking repeatedly does not stack the audio.
 
-右键托盘勾选“禁音”后，再触发动作应完全静音；取消勾选时会播放一段日常回应。同一个录音在 12 秒内不得再次播放，即使它属于另一个动作；日志中的 `VoiceSkipped Reason=FileRepeatCooldown` 表示这层防重复保护已经生效。还可用 `VoicePlayed`、`VoiceCompleted`、`VoiceMissing` 和 `Voice media failed` 定位素材、打断或解码问题。
+After ticking "Mute" in the tray, triggering an action should be completely silent; unticking plays an everyday response. The same recording must not play again within 12 seconds even if it belongs to a different action; `VoiceSkipped Reason=FileRepeatCooldown` in the log means that repeat protection took effect. `VoicePlayed`, `VoiceCompleted`, `VoiceMissing` and `Voice media failed` also help locate asset, interruption or decoding problems.
 
-### 0.1.1 菲比专属录音
+### 0.1.1 Feibi's own recordings
 
-使用本轮免安装包，切换为“菲比啾比”并取消禁音。所有录音与适用情境见 [语音说明](docs/CHARACTERS.md#菲比专属语音)。每次动作之间留出冷却，不要求每个动画阶段都出声：
+Using this round's portable package, switch to "Feibi Jiubi" and unmute. All the recordings and the situations they apply to are in [the voice guide](docs/CHARACTERS.md#feibis-own-voice). Leave a cooldown between actions, and do not expect a sound at every animation phase:
 
-1. 切入、让她回家、取消禁音，以及非安静模式的站立待机期间，应听到菲比自己的日常录音。9 段编号录音均在随机池内，但随机播放不保证短时间听齐。日志 `VoicePlayed Character=feibijiubi` 的 `File` 可确认选中哪段。
-2. 自主睡觉时检查“困倦”，拖动时检查委屈类，甩出/窗口抛起时应从 9 段编号录音随机回应，不再播放“菲比啾比_坠落.wav”；探索停下时仍为“疑惑”。分次甩出并留出冷却，日志中的 `Cue=Scream` / `Panic` 只能选择编号文件；刚在日常中播放过的同一编号在 12 秒内不得再次用于坠落。轻微下落不应反复叫，落地短回应不变，不能夹入糯糯录音。
-3. 按第 0.5 节准备测试窗口：踢打冲撞有积极或兴奋回应，藏帽偏轻声/悄悄话，满条撕窗有咬牙切齿回应，结束有俏皮短声。捣蛋各语音至少隔 3.5 秒，短阶段被跳过是防连播保护。
-4. 声音正在播放时勾选“禁音”，应立即停；再拖拽、捣蛋仍无声。取消禁音后恢复；右键菜单音量条有效。进入安静模式后不再自动日常闲聊或捣蛋出声，但睡眠及手动拖拽反应仍由禁音控制。
-5. 发声中切换角色或取消捣蛋，旧声音应停止。来回切换不串音、没有多段同时播放，同一文件 12 秒内不重复。
-6. 检查实际响度、底噪、截断与动作贴合度，特别留意 `041` 和“失落轻声”是否过轻。后台没有试听或调整原录音；发现不合适时提供 `File` 文件名及触发动作，便于精确改映射。
+1. On switching in, being brought home, unmuting, and during standing idle outside quiet mode, you should hear Feibi's own everyday recordings. All 9 numbered recordings are in the random pool, though random playback does not guarantee hearing them all in a short time. The `File` field of `VoicePlayed Character=feibijiubi` confirms which one was chosen.
+2. Check "sleepy" during autonomous sleep and the aggrieved set while dragging; when flung or tossed by a window she should respond from the 9 numbered recordings at random and no longer play the "Feibi Jiubi falling" file, while stopping after exploration is still "puzzled". Fling her a few times with cooldowns between, and `Cue=Scream` / `Panic` in the log may only select a numbered file; a numbered file just played in an everyday context must not be reused for a fall within 12 seconds. A slight drop should not make her cry out repeatedly, the short landing response is unchanged, and none of Nuonuo's recordings should slip in.
+3. Prepare a test window as in section 0.5: kicks, punches and charges get a positive or excited response, hat hiding leans towards soft whispering, a full-bar tear gets the gritted-teeth response, and the ending gets a short playful one. Mischief lines are at least 3.5 seconds apart, and a short phase being skipped is the anti-overlap protection.
+4. Tick "Mute" while a sound is playing and it should stop immediately; dragging and mischief afterwards stay silent. Unticking restores it, and the volume bar in the right-click menu works. In quiet mode there is no automatic everyday chatter or mischief sound, while sleepiness and manual dragging reactions are still governed by mute.
+5. Switch characters or cancel mischief while a sound is playing and the old sound should stop. Switching back and forth should not bleed audio, play two clips at once, or repeat the same file within 12 seconds.
+6. Check the actual loudness, noise floor, clipping and how well each fits its action, paying particular attention to whether `041` and "dejected soft" are too quiet. Nothing was auditioned or adjusted in the background; if something does not fit, give the `File` name and the triggering action so the mapping can be changed precisely.
 
-## 0.2 头顶对话气泡开关
+## 0.2 The speech bubble toggle
 
-默认关闭气泡；先验证关闭态，再主动勾选右键菜单“显示头顶对话气泡”：
+Bubbles are off by default; verify the off state first, then deliberately tick "Show speech bubbles" in the right-click menu:
 
-- 关闭时分别观察启动、站立待机、探索、睡醒、攀爬、拖动和回家：两人都不应弹出头顶对话气泡。重启后仍默认或保持所选开关状态。
-- 开启后，两人各自出现符合性格的短句，气泡跟随角色、鼠标可穿透且不会抢走当前应用焦点；拖到显示器边缘、不同缩放的显示器后，文字仍完整且不被任务栏遮挡。糯糯假图标原有的文件名显示仍保留。
-- 开启双宠共存后，在“双人互动演示 → 让她们聊两句”手动触发，应先由一人说一句、再由另一人回答，不能两句叠在同一个气泡里；站立空闲一段时间后也应偶尔自主聊天。拖拽或专属互动开始时对话应中断，不应卡住两人行动。
-- 开启“安静模式”应立即隐藏气泡；取消后恢复原开关偏好。单独勾选“禁音”只静音，不关闭文字；关闭气泡也不应让角色失声。
-- 按第 0.1 节检查原有语音与音量偏好。菲比非安静模式站立待机期间仍可随机播放日常录音，日志 `IdleVoiceAttempt` 可用于定位尝试时机。
-- 糯糯未禁食时的饥饿条、菲比的捣蛋条，以及右键/托盘菜单应正常显示；气泡开关不应隐藏这些控件。
-- 专属测试进度只在右键菜单、测试窗口标题和报告中出现，不应在头顶显示步骤、倒计时或收尾文字。
+- While off, watch startup, standing idle, exploring, waking, climbing, dragging and going home: neither character should pop up a speech bubble. After a restart the toggle should still be at its default or at whatever you chose.
+- Once on, each character shows short lines matching her temperament, the bubble follows the character, passes the mouse through and never steals focus from the current application; dragged to a monitor edge, or onto a monitor at a different scale factor, the text should still be complete and not covered by the taskbar. The file name on Nuonuo's fake icon is still displayed as before.
+- With coexistence on, trigger it manually from "Two-pet interactions → Let them chat"; one should speak a line and the other answer, never both in one bubble. After standing idle for a while they should also chat on their own occasionally. Dragging or the start of a dedicated interaction should interrupt the conversation, and must not freeze either of them.
+- Turning "Quiet mode" on should hide the bubbles immediately, and turning it off restores your toggle preference. Ticking "Mute" alone only silences sound and does not turn off the text; turning the bubbles off should likewise not silence her.
+- Check the existing voice and volume preferences as in section 0.1. Feibi can still play an everyday recording at random during standing idle outside quiet mode, and the `IdleVoiceAttempt` log locates when it was attempted.
+- Nuonuo's hunger bar when not fasting, Feibi's mischief bar, and the right-click and tray menus should all display normally; the bubble toggle should not hide any of those controls.
+- Feature test progress appears only in the right-click menu, the test window title and the report, and should never show a step, a countdown or closing text above her head.
 
-## 0.3 启动与生活模式
+## 0.3 Startup and life modes
 
-右键角色或托盘图标，验证开机自启和安静模式；禁食模式仅在糯糯菜单中出现：
+Right-click the character or the tray icon to verify start with Windows and quiet mode; fasting mode appears only in Nuonuo's menu:
 
-1. 勾选“开机自启”，当前用户 Run 启动项应指向所用版本的有效入口；取消后应移除。源码模式不应误注册旧便携包入口；若当前源码启动方式不支持注册，应明确提示失败而不是显示成功。
-2. 勾选“禁食模式（永不饥饿）”，头顶饥饿标签和进度条应立即完整隐藏，重启后仍保持隐藏；内部饥饿值固定为 0，观察期间不得讨食、舔图标或触发饥饿打滚，但仍可走动和响应普通删除进食。
-3. 取消禁食模式后，头顶饥饿条应立即恢复，饥饿值按时间正常增长，不应跳回启用前的旧高值。
-4. 勾选“安静模式（只站立或睡觉）”，当前巡游或互动应停止；持续观察时只能站立眨眼或随机进入睡眠，不得走动、攀爬或舔图标。
-5. 安静模式下删除一个专用测试文件，不应触发跑动或进食；左键拖动、松手下落以及窗口直接撞击仍应保留。取消安静模式后，自主行为恢复。
+1. Tick "Start with Windows" and the current user's Run entry should point at a valid entry point for the edition in use; unticking should remove it. Source mode should not mistakenly register an old portable package entry point, and if the current source launch method cannot register, it should clearly report a failure rather than showing success.
+2. Tick "Fasting mode (never hungry)" and the hunger label and bar above her head should disappear completely and immediately, and stay hidden after a restart; the internal hunger value is pinned at 0, and during observation there should be no begging, icon licking or hungry roll, while ordinary walking and responding to ordinary deletion feeding remain.
+3. After unticking fasting mode the hunger bar should return immediately and hunger should grow normally over time, without jumping back to the old high value from before it was enabled.
+4. Tick "Quiet mode (stand or sleep only)" and the current roaming or interaction should stop; while watching, she should only stand and blink or enter sleep at random, with no walking, climbing or icon licking.
+5. In quiet mode, delete a dedicated test file; it should trigger no running or feeding. Left-button dragging, falling after release and direct window impacts should all still work. Autonomous behaviour resumes once quiet mode is turned off.
 
-日志应分别出现 `StartupRegistrationChanged`、`FastingModeChanged` 和 `QuietModeChanged`。完成测试后可按个人偏好保留开关状态。
+The log should show `StartupRegistrationChanged`, `FastingModeChanged` and `QuietModeChanged` respectively. Once testing is done you can leave the toggles however you prefer.
 
-## 0.4 角色切换与隔离
+## 0.4 Character switching and isolation
 
-先记录设置、糯糯 `TotalMeals` 及菲比捣蛋数值，不删除、合并或重命名存档。路径以 [角色数据边界](docs/CHARACTERS.md#角色与数据边界) 为准。
+Record the settings, Nuonuo's `TotalMeals` and Feibi's mischief value first, and do not delete, merge or rename a save. The paths are defined by [characters and data boundaries](docs/CHARACTERS.md#characters-and-data-boundaries).
 
-1. 打开托盘“桌宠角色”，应看到“糯糯”和“菲比啾比”。依次切换并反复往返，始终只保留一个桌宠窗口和一个托盘图标，进程不重启；菜单勾选、提示名和大小标签与实际角色一致。
-2. 普通待机、走动、睡眠、窗口平台和窗口容器内分别切换。旧角色画面、声音和动作不得混入新角色；气泡关闭时两人均无文字，开启时只显示当前角色的台词。切换后应重新得到有效支撑或自然下落，不能悬在空中。
-3. 拖拽期间请求切换；尚未松手时应保留旧角色和拖拽状态，松手后再应用请求，不应卡住鼠标捕获。再请求一次并在生效前点击当前勾选角色，应取消待切换，松手后保持原角色。
-4. 选择糯糯并删除一个专用文件，在前往假图标、张嘴吸入、满足动作三个时机分别请求切入菲比。已进入吞食/满足的当前一份先完成；切换生效后所有待吃假图标和队列清理，不交给菲比，不重复计餐。
-5. 按第 6 节创建并删除 5 个专用文件，中途从糯糯切入菲比。只保留切换前糯糯真正吃完的记录；剩余假图标清理。菲比不产生进食增量，切回糯糯也不补吃已取消的旧队列。系统真实删除结果不受影响。
-6. 在 60%、100%、200% 下切换，尺寸百分比保持，标签变成当前角色名。勾选“禁音”后往返切换两角色，都应无音频；取消禁音，两角色分别恢复自己的录音，不串音。
-7. 糯糯开启禁食后切入菲比：菲比仍只有捣蛋条，不显示禁食菜单；切回糯糯，原禁食偏好保留。安静模式两角色共用；菲比不捣蛋、不加条，但已收起的窗口仍保留，可由右键恢复。
-8. 糯糯吃一个专用文件；菲比则用“逗逗她”增加捣蛋值。往返切换和正常退出重启，两角色记录各自连续，菲比不继承餐数、糯糯不继承捣蛋值。菲比删除专用文件时不留下假图标、不跑去吃或舔。
-9. 如果菲比素材仍缺帧，选择时应保持当前角色、存档和勾选，日志记录 `CharacterChangeRejected` 及缺失素材原因，不弹头顶提示。不要为这一步修改原始素材；只有在独立测试副本中才可人为制造缺帧情形。
+1. Open "Pet character" in the tray and you should see "Nuonuo" and "Feibi Jiubi". Switch between them repeatedly, back and forth; there should always be exactly one pet window and one tray icon and the process should never restart, with the menu tick, the tooltip name and the size label all matching the actual character.
+2. Switch during ordinary idling, walking, sleep, on a window platform and inside a window container. The old character's visuals, sound and actions must not bleed into the new one; with bubbles off neither shows text, and with them on only the current character's lines appear. After switching she should find valid support again or fall naturally, never hang in the air.
+3. Request a switch while dragging; before you let go the old character and the drag state should be kept, and the request applied after release, without the mouse capture getting stuck. Request again and click the currently ticked character before it takes effect, which should cancel the pending switch and keep the original character after release.
+4. Choose Nuonuo, delete a dedicated file, and request a switch to Feibi at three moments: while she is heading to the fake icon, while her mouth is slurping it in, and during the satisfied animation. The current item already in the swallow or satisfied phase finishes first; once the switch takes effect, all pending fake icons and the queue are cleared, nothing is handed to Feibi, and no meal is counted twice.
+5. Create and delete 5 dedicated files as in section 6, switching from Nuonuo to Feibi partway through. Only what Nuonuo genuinely finished eating before the switch should be recorded, and the remaining fake icons cleared. Feibi produces no feeding increment, and switching back to Nuonuo does not make up for the cancelled old queue. The system's real deletion results are unaffected.
+6. Switch at 60%, 100% and 200%; the size percentage holds and the label changes to the current character's name. Tick "Mute" and switch back and forth, and both should be silent; untick it and each should return to her own recordings with no bleed.
+7. Turn fasting on for Nuonuo and switch to Feibi: Feibi should still have only the mischief bar and no fasting menu item; switching back to Nuonuo keeps the original fasting preference. Quiet mode is shared; Feibi makes no mischief and gains no bar value, while an already stored window is kept and can be restored by right-clicking.
+8. Have Nuonuo eat a dedicated file, and use "Tease her" to raise Feibi's mischief value. Switching back and forth and a normal exit and restart should leave each character's record continuous, with Feibi inheriting no meal count and Nuonuo no mischief value. When Feibi deletes a dedicated file she should leave no fake icon and neither run to eat nor lick it.
+9. If Feibi's assets are still missing frames, selecting her should keep the current character, save and tick, with `CharacterChangeRejected` and the missing asset reason logged and no bubble shown. Do not modify the original assets for this step; a missing-frame situation may only be created deliberately in a separate test copy.
 
-可结合 `CharacterChangeRequested`、`CharacterChanged`、`CharacterChangeRejected`、`CharacterStartupFallback` 和 `CharacterSpritesReady` 定位时机；事件不存在本身不能代替画面验收。出现异常时记录切换前后角色、所在状态和菜单模式。
+`CharacterChangeRequested`, `CharacterChanged`, `CharacterChangeRejected`, `CharacterStartupFallback` and `CharacterSpritesReady` help locate the timing; an event simply not existing is no substitute for accepting the visuals. If something goes wrong, record the characters before and after, the state she was in, and the menu mode.
 
-### 0.4.1 菲比画面与角色表现
+### 0.4.1 Feibi's visuals and character behaviour
 
-以下检查须在 33 套动作、帽子道具及遮罩准备完整后进行，当前状态以 [角色阶段进度](docs/CHARACTERS.md#当前进度与阶段退出条件) 为准。
+The checks below require the 33 action sets, the hat prop and the masks to be fully prepared; the current status is defined by [the character phase progress](docs/CHARACTERS.md#current-progress-and-phase-exit-conditions).
 
-- 在待机、跑走、上抛、坠落、着陆、睡觉、攀爬、拖拽、跳跃及整场捣蛋中观察完整动作：大白帽、金发、两只小脚完整，不能因动作幅度变大而被裁掉。
-- 分别调到 60%、100%、200%，检查帽沿和头发是否有洋红边、白晕或黑底；白帽和衣服不能变透明，紫色眼睛和原有瞳孔高光不能被键色挖空。
-- 双脚保持统一站立基准；相邻帧不跳大小、不突然改变位置，循环首尾不抽动。跳跃和跑动应能看出主动蹬地、帽沿与头发稍后跟随，不只靠播放加速体现活泼。
-- 菲比不出现伸舌、吞食、满足或饥饿表演；捣蛋按第 0.5 节检查脚、拳、肩及双手的实际接触，不能隔空命中。攀爬与滑边手脚仍贴窗沿。
-- 相近困倦和好奇状态下观察数分钟：菲比应更轻快、偏向探索和跳跃，困倦时仍休息，不绕过安静模式。捣蛋不是鼠标追踪，不追鼠标。
+- Watch the complete animations during idling, running and walking, being tossed, falling, landing, sleeping, climbing, dragging, jumping and a whole mischief sequence: the big white hat, the blonde hair and both little feet should stay complete and must not be cropped because an action's range grew.
+- Set 60%, 100% and 200% in turn and check the hat brim and hair for magenta edges, white halos or black backing; the white hat and clothes must not become transparent, and the purple eyes and their original highlights must not be keyed out.
+- Both feet keep one standing baseline; adjacent frames should not jump in size or position suddenly, and a loop should not twitch at its start and end. Jumping and running should visibly push off the ground with the hat brim and hair following slightly behind, rather than conveying liveliness through faster playback alone.
+- Feibi should never show a tongue, swallowing, satisfaction or hunger performances; check mischief contact of the foot, fist, shoulder and both hands as in section 0.5, with no hits through thin air. Climbing and edge sliding should keep her hands and feet against the window edge.
+- Watch for several minutes at similar sleepiness and curiosity: Feibi should be brisker and lean towards exploring and jumping, still resting when sleepy and never bypassing quiet mode. Mischief is not mouse tracking and she does not chase the mouse.
 
-## 0.5 菲比窗口捣蛋
+## 0.5 Feibi's window mischief
 
-准备一个你自己新开的测试窗口，例如空文件夹窗口，使用正常大小而非最大化，完整放在单个显示器工作区内，右侧至少留出当前桌宠一整只宽度的空白。菲比也放在同一屏幕。手动“捣蛋一下”可以直接攻击当前前台窗口；最大化、全屏、实际遮挡、受保护内容、权限或边界不安全的窗口仍会被安全检查拒绝，未找到兼容目标时拒绝捣蛋是正常边界。
+Prepare a test window you have just opened yourself, such as an empty folder window, at a normal size rather than maximized, entirely inside a single monitor's work area, with at least one whole pet's width of empty space to its right. Put Feibi on that same screen. A manual "Play a prank" can attack the current foreground window directly; a maximized, fullscreen, genuinely obscured, protected, or permission- or boundary-unsafe window is still refused by the safety checks, and refusing mischief when no compatible target is found is normal.
 
-1. 切入菲比，确认头顶只有捣蛋条，无饥饿数字或饥饿条；菜单有“允许自主捣蛋”“捣蛋状态”“捣蛋一下”“逗逗她”“把窗口还回来”，无禁食模式。全新配置或首次从 v4 及更早版本升级时自主开关应勾选；v5 已主动关闭的选择应保留。状态行不可点击，尚未收起窗口时归还项不可用。
-2. 为集中观察手动动作，先关闭自主，确认条变灰、状态行说明已关闭。捣蛋条未满且帽子空闲时点击“捣蛋一下”，完整结束后再点，按踢、打、冲撞、藏帽轮换；每次只移动一个目标，不能连锁撞其他窗口。已有存货时按下节另测。
-   另外在她睡觉或刚落地的 `sleep` / `land` 动画中点击一次“捣蛋一下”：菜单关闭后应先唤醒或等落地动画结束，再自动执行；日志应出现 `MischiefManualRequested`、必要时的 `MischiefManualDeferred` 与 `MischiefManualDeferredExecuting`，不应直接丢失请求或把菜单点击变成拖拽。
-3. 踢、打、撞都应先蓄力，脚/拳/肩触碰真实窗沿才移动窗口。窗口不被激活、不改大小、不越出工作区；角色完成动作自身的收手、收腿和站稳后结束，不再追加蹲下、伸手或得意动作。不能角色尚未接触窗口就提前滑走。
-4. 藏帽应依次看到摘帽、端帽、真实窗口缩成卡片，经过帽口被前帽沿遮住，再收进帽内；真实应用仅最小化，任务栏入口还在。菲比戴好帽子后可以正常活动，窗口仍保持收起；自行等待一段时间，应不会自动取出。不能用通用假窗口或只做透明淡出。
-5. 右键点“把窗口还回来”，应看到同一卡片展开并恢复真实窗口，内容不变。点击帽子或特效不再触发归还。另试从 Windows 任务栏自行恢复目标：菲比应停止托管，不再把窗口收回。
-6. 窗口被踢动或表演中，主动激活、拖动、最大化或关闭测试窗口，检查桌宠立即放弃控制；不能持续拉回旧位置、重复最小化或让截图残留在桌面。
-7. 自主仍关闭，依次点“逗逗她”，每次间隔至少 1.5 秒，每次有效增加 12 点；连续快速点击不应叠加。此时灰条保持不脉动，满值后不会自行修改窗口，仍需手动点“捣蛋一下”。另在自主开启时观察接近满值的轻微弹动，不应频闪。
-8. 条满后手动触发：先抛帽，帽子飞向旁边、弹一下，角色变为无帽；再爆踢，命中才出现卡通碎裂。蓄力和碎片展开比普通攻击更从容，能看清动作；碎片保留同一测试窗口内容，随后收进帽子，不直接自动复原真实窗口。角色捡回同一顶帽子并戴好，不追加蹲下或伸手动作；等待后右键恢复，才从帽中返还并接回真实窗口。
-9. 大招结束条清零，状态行显示冷却；时长以[正式节奏参数](docs/CHARACTERS.md#自主捣蛋默认值与节奏)为准。冷却时不继续加条，也不自动连发；手动小动作仍可体验。先右键恢复存货，冷却结束后再逗满并手动触发，下一次满条招式为撕裂：先双手抓住、鼓劲，再清楚上下拉开；裂口及两半必须跟随双手，而不是独立播放的中线切开。两半随后收进帽子，真实窗口继续最小化，右键恢复才返还。
-10. 扔帽并接管窗口后主动抓住菲比，拖动并上抛，再轻放。窗口应仍保持收起，不能因为中断自动恢复；拖拽、上抛、坠落和着陆都保持无帽，落稳后回去捡帽戴好，最后由你右键恢复窗口。不能留下孤立帽子，也不能锁住鼠标捕获。
-11. 分别在藏帽和无帽大招完成后开启安静、点“让她回家”、调节尺寸或跨屏拖动：窗口应继续保持收起，右键恢复仍可用。切换角色、正常退出、锁屏、休眠或真实显示布局/工作区变化属于安全例外，应归还托管窗口并清理特效；旧角色动作不混入新角色，内容与保存状态不变。
-12. 开启“允许自主捣蛋”，条恢复蓝紫色，观察状态行从蓄力到冷却或等待。按[正式节奏参数](docs/CHARACTERS.md#自主捣蛋默认值与节奏)累计有效活跃时间：普通动作完成不扣条，满值只触发一场大招。没有合适窗口时显示等待及重试时间，满条不得因此从 100 回落；自主模式不会为了攻击强行激活或扩大安全范围。长时间开着菜单、睡眠或表演本身不计加条时间。
-13. 睡眠、安静、Windows 锁屏期间不加条；解锁、唤醒或离线重启后不集中爆发。关闭自主应立即取消待执行意图，恢复后不会立即连发旧任务。
-14. 在 60%、100%、200% 及不同 DPI 屏幕重复踢打和藏帽，确认接触、卡片、帽沿遮挡和帽子道具仍对齐；若窗口跨屏、被遮挡或右侧空间不足，应安全拒绝，不拍错应用画面。
+1. Switch to Feibi and confirm there is only a mischief bar above her head, with no hunger number or hunger bar; the menu should have "Allow autonomous mischief", "Mischief", "Play a prank", "Tease her" and "Give the window back", and no fasting mode. On a brand-new configuration, or the first upgrade from v4 or earlier, the autonomy toggle should be ticked; a choice already turned off at v5 should be preserved. The status row is not clickable, and the return item is unavailable while no window is stored.
+2. To concentrate on the manual actions, turn autonomy off first and confirm the bar turns grey and the status row says it is off. With the bar unfilled and the hat free, click "Play a prank", wait for it to finish completely, then click again; it should rotate through kick, punch, charge and hat hiding. Each one moves a single target and must not knock other windows in a chain. With something already stored, test that separately in the next section.
+   Also click "Play a prank" once during her `sleep` or a just-landed `land` animation: once the menu closes she should wake up or wait for the landing animation to end, then run it automatically. The log should show `MischiefManualRequested`, plus `MischiefManualDeferred` and `MischiefManualDeferredExecuting` where applicable, and must neither lose the request nor turn the menu click into a drag.
+3. Kicks, punches and charges should all wind up first, and the window should move only once the foot, fist or shoulder touches the real window edge. The window is not activated, not resized and not pushed out of the work area; the character ends after the action's own hand recovery, leg recovery and settling, with no crouch, reach or gloating added. The window must not slide away before she has touched it.
+4. Hat hiding should show, in order, the hat coming off, being held, the real window shrinking to a card, passing the hat opening and being covered by the front brim, and then going inside; the real application is only minimized and its taskbar entry remains. Once Feibi's hat is back on she can move normally with the window still stored; wait a while yourself and it should never be taken out automatically. It must not use a generic fake window or merely fade out transparently.
+5. Right-click "Give the window back" and you should see the same card unfold and restore the real window with its content unchanged. Clicking the hat or the effects no longer triggers a return. Separately, restore the target yourself from the Windows taskbar: Feibi should stop holding it and never store it again.
+6. While the window is being kicked or during a performance, deliberately activate, drag, maximize or close the test window, and check that the pet gives up control immediately; it must not keep pulling it back to its old position, re-minimize it repeatedly, or leave a screenshot on the desktop.
+7. With autonomy still off, click "Tease her" repeatedly at least 1.5 seconds apart, each adding 12 points; rapid consecutive clicks should not stack. The grey bar stays unpulsing, and even at full she does not modify a window by herself — you still have to click "Play a prank". Separately, with autonomy on, watch for the slight bounce as it approaches full, which should not strobe.
+8. With the bar full, trigger it manually: the hat is thrown first, flies to one side and bounces once, and the character becomes hatless; then the burst kick, with the cartoon shattering appearing only on the hit. The wind-up and the shards spreading are more deliberate than an ordinary attack so the action is clear; the shards keep that same test window's content and then go into the hat, rather than restoring the real window automatically. The character retrieves that same hat and puts it on, with no crouch or reach added; only after you wait and right-click to restore does it come back out of the hat and reconnect to the real window.
+9. After a finisher the bar resets and the status row shows the cooldown; the durations are defined by [the official rhythm parameters](docs/CHARACTERS.md#autonomous-mischief-defaults-and-rhythm). During the cooldown the bar does not keep filling and nothing fires automatically, while manual small actions can still be tried. Right-click to restore the stored window first, then after the cooldown fill the bar by teasing and trigger manually again; the next full-bar move is the tear: first both hands grip and build effort, then it pulls clearly apart up and down. The rupture and both halves must follow both hands, rather than a separately played centre-line cut. The halves then go into the hat, the real window stays minimized, and only a right-click restore returns it.
+10. After throwing the hat and taking over a window, grab Feibi deliberately, drag her, toss her up, then set her down gently. The window should stay stored and must not restore automatically because of the interruption; dragging, being tossed, falling and landing all stay hatless, and once steady she goes back to pick the hat up and wear it, with you ultimately restoring the window by right-clicking. No orphaned hat should be left behind, and the mouse capture must not lock up.
+11. After hat hiding and after a hatless finisher respectively, turn quiet mode on, click "Bring her home", change the size, or drag her across screens: the window should stay stored and the right-click restore should still work. Switching characters, a normal exit, locking, sleeping, or a real display layout or work area change are safe exceptions and should return the held window and clean up the effects; the old character's animations must not bleed into the new one, and the content and saved state stay unchanged.
+12. Turn "Allow autonomous mischief" on, the bar returns to blue-purple, and watch the status row move from building up to cooling down or waiting. Accumulate genuine active time as in [the official rhythm parameters](docs/CHARACTERS.md#autonomous-mischief-defaults-and-rhythm): completing an ordinary action does not reduce the bar, and a full bar triggers exactly one finisher. With no suitable window it shows waiting and the retry time, and a full bar must not drop back from 100 because of that; autonomous mode never force-activates a window or widens the safety range in order to attack. Leaving the menu open for a long time, sleeping, and the performance itself do not count as fill time.
+13. Nothing fills during sleep, quiet mode or a Windows lock; after unlocking, waking or restarting from offline there should be no burst of activity. Turning autonomy off should cancel a pending intent immediately, and turning it back on should not fire the old task straight away.
+14. Repeat kicking, punching and hat hiding at 60%, 100% and 200% and on screens at different DPI, confirming the contact, the card, the brim occlusion and the hat prop all still align; if a window spans screens, is obscured, or has too little space to its right, it should be refused safely and must not capture the wrong application's image.
 
-记录异常动作种类、条值、开关、菜单状态行、目标是否前台/遮挡、显示器比例和完整录屏。日志重点看 `MischiefStatus`、`PrankStarted`、`PrankPhaseChanged`、`PrankInterrupted`、`PrankCompleted`、`prank.motion.*`、`prank.snapshot.*`、`prank.cancel`；捣蛋日志不记录窗口标题、正文或截图。
+Record the type of misbehaving action, the bar value, the toggles, the menu status row, whether the target was foreground or obscured, the monitor scale factors and a complete screen recording. In the log the key entries are `MischiefStatus`, `PrankStarted`, `PrankPhaseChanged`, `PrankInterrupted`, `PrankCompleted`, `prank.motion.*`, `prank.snapshot.*` and `prank.cancel`; the mischief log never records a window title, its content or a screenshot.
 
-### 0.5.1 自主升级、状态与双窗口存货
+### 0.5.1 Autonomy upgrade, status and two-window storage
 
-这部分使用正常入口，由你亲自准备两个没有重要内容的窗口 A、B。它们必须各自满足第 0.5 节的安全要求；手动测试允许当前前台窗口，但不得最大化、全屏或被实际遮挡。以下均为待实机验收，不以离线测试代替两真实窗口结果。
+This part uses the normal entry point, and you prepare two windows A and B with nothing important in them. Each has to meet the safety requirements of section 0.5; manual testing allows the current foreground window, but it must not be maximized, fullscreen or genuinely obscured. Everything below awaits on-device acceptance, and offline tests are no substitute for the result with two real windows.
 
-1. 首次用新版正常启动后检查 `settings.json` 的版本应为 5。若原文件版本小于 5，本次应自动开启自主；随后从菜单关闭，正常退出再启动，仍应关闭且保持灰条。不要为测试删除或篡改现有配置；新安装、旧版迁移的其他覆盖由隔离离线夹具检查。专属测试入口不应触发真实配置升级。
-2. 保持自主关闭，先把 A 藏帽，或完成一次碎窗/撕窗并收帽。A 继续最小化，任务栏入口保留。把 B 放到菲比可接近的同屏安全位置后，点击桌面取消 B 前台，再点“捣蛋一下”：应可踢、打、撞 B，A 不恢复，B 不藏帽，也不覆盖 A 的原图。
-3. 反复完整执行小动作。即使条已满且帽子占用，仍只能对 B 做小动作，状态行解释等待帽子腾空，不重复藏入或破坏 B。普通小动作不扣条，A 不会因为经过一段时间自动归还。
-4. B 正在被踢、打、撞时主动激活或移动 B，使本次小动作取消。A 应继续保持最小化；B 的普通失败或接管不能触发 A 归还。随后另试一次小动作进行中点“把窗口还回来”：B 的动作先停止，再取回 A；恢复内容、窗口身份和原位置必须属于 A，不能串成 B。
-5. 重新收起 A，在 B 小动作期间从任务栏主动恢复 A：应释放 A 的存货所有权，不重新最小化 A、不留旧快照；B 按自己的安全结果收尾。帽子腾空后，后续藏帽或大招才可再次使用该槽位。
-6. 有 A 存货时，回家、安静、大小调整、普通跨屏拖拽和开关右键菜单应保留 A。另分别检查切换角色、正常退出、锁屏/休眠或真实显示布局/工作区变化：当前小动作应停止，并安全释放 A。不要用直接杀进程代替正常退出测试。
-7. 开启自主并准备合适 B，检查有 A 存货时仍按普通节奏尝试小动作。没有安全 B 时只等待重试；满条保持 100。观察菜单状态是否准确区分已关闭、蓄力、冷却、等待窗口和帽子占用；拖拽时仍可蓄力，状态说明等你松手，不能手中突然出手。未满数值不应提前显示 100。同时复测右键高亮、子菜单、滑条、Esc 关闭后继续运动，没有补帧快进。
-8. 在 100% 主屏与 125% 副屏分别准备无重要内容、非最大化的兼容窗口，让菲比自主发动一次碎窗大招。重点看 `FetchHat → PickHat → CollectRemains → WearHat`：捡帽不应卡住或退出进程，碎片应进入帽内；目标在等待期间保持最小化，右键“把窗口还回来”后恢复同一窗口。若异常，保留当次 `activity.log` 中 `PrankPhaseChanged`、`Hat prop`、`PrankStoppedSafely`、`prank.cancel` 和 `Stack` 附近的行；分享前脱敏本机信息。
+1. After the first normal launch of the new version, check that `settings.json` is at version 5. If the original file was below 5, autonomy should be enabled this once; then turn it off from the menu, exit normally and start again, and it should still be off with a grey bar. Do not delete or tamper with your existing configuration for this test; new installations and the other overrides in an old-version migration are checked by isolated offline fixtures. The feature test entry point should not trigger a real configuration upgrade.
+2. With autonomy off, first hide A in the hat, or complete a smash or tear and store it. A stays minimized with its taskbar entry. Put B somewhere safe on the same screen that Feibi can reach, click the desktop to take B out of the foreground, then click "Play a prank": she should be able to kick, punch and charge B, A should not be restored, B should not be hidden in the hat, and A's original image must not be overwritten.
+3. Run small actions through to completion repeatedly. Even with the bar full and the hat occupied, only small actions on B are possible, the status row explains that it is waiting for the hat to free up, and B is neither stored nor destroyed again. An ordinary small action does not reduce the bar, and A is never returned automatically just because time has passed.
+4. While B is being kicked, punched or charged, activate or move B deliberately so that this small action is cancelled. A should stay minimized, and B's ordinary failure or takeover must not trigger A's return. Then try clicking "Give the window back" during another small action: B's action stops first, then A is retrieved; the restored content, window identity and original position must all belong to A and must not get crossed with B.
+5. Store A again, and while a small action on B is running, restore A yourself from the taskbar: A's storage ownership should be released, A should not be re-minimized, and no old snapshot should remain, while B finishes according to its own safety result. Only once the hat is free can a later hat hiding or finisher use that slot again.
+6. With A stored, going home, quiet mode, size changes, ordinary dragging across screens and opening and closing the right-click menu should all keep A. Separately check switching characters, a normal exit, locking or sleeping, and a real display layout or work area change: the current small action should stop and A should be released safely. Do not substitute killing the process for testing a normal exit.
+7. Turn autonomy on and prepare a suitable B, and check that with A stored she still attempts small actions on the ordinary rhythm. With no safe B she only waits and retries, and a full bar stays at 100. Watch whether the menu status accurately distinguishes off, building up, cooling down, waiting for a window, and the hat being occupied; while dragging she can still build up and the status says it is waiting for you to let go, and she must not suddenly strike while held. An unfilled value should never show as 100 early. At the same time, retest the right-click highlight, the submenus, the slider, and movement continuing after closing with Esc, with no catch-up fast-forward.
+8. On a 100% primary and a 125% secondary monitor, prepare a compatible non-maximized window with nothing important in it and let Feibi launch a smash finisher autonomously. The key sequence is `FetchHat → PickHat → CollectRemains → WearHat`: picking the hat up should neither hang nor exit the process, and the shards should go into the hat; the target stays minimized during the wait, and right-clicking "Give the window back" restores that same window. If something goes wrong, keep the lines near `PrankPhaseChanged`, `Hat prop`, `PrankStoppedSafely`, `prank.cancel` and `Stack` from that run's `activity.log`, and sanitize local information before sharing.
 
-日志中 `PrankStorageParked` 表示为下一小动作停放 A，`PrankStorageReturnRequested` 表示接回原存货；结合 `PrankManualRestoreCompleted`、原生确认及 `MischiefStatus` 判断，不凭事件名单独判定画面通过。分享日志前检查并脱敏路径与句柄以外的个人信息。
+In the log, `PrankStorageParked` means A was parked for the next small action and `PrankStorageReturnRequested` means the stored one was reconnected; judge this together with `PrankManualRestoreCompleted`, the native confirmation and `MischiefStatus`, rather than deciding the visuals passed from an event name alone. Before sharing a log, check it and sanitize personal information beyond paths and handles.
 
-## 0.6 菲比独立专属功能演示
+## 0.6 Feibi's standalone feature demonstration
 
-此入口只演示菲比啾比的专属玩法，自动创建专用测试窗口。正式范围、已发现问题与修复验收状态见 [独立专属功能测试入口](docs/CHARACTERS.md#独立专属功能测试入口已采用)及该文档的当前进度。
+This entry point demonstrates only Feibi Jiubi's exclusive gameplay and creates its own dedicated test window automatically. The official scope, the problems found and the fix acceptance status are in [the standalone feature test entry point](docs/CHARACTERS.md#the-standalone-feature-test-entry-point-adopted) and that document's current progress.
 
-1. 先从托盘退出当前桌宠。专属测试入口只在开发构建中提供；正式包不含 `测试工具`。在开发构建目录中双击 `测试工具\菲比啾比专属功能测试.exe`，不要单独移动它，日常启动使用正式包根目录 `啾糯桌宠.exe`。
-2. 观察右键菜单及专用测试窗口标题上的当前步骤，不应出现头顶气泡。顺序固定为：踢窗 → 一拳打飞 → 冲撞 → 藏帽并等待右键归还 → 逗弄涨满捣蛋条 → 扔帽碎窗、收进帽子并等待右键恢复 → 扔帽撕窗、收进帽子并等待右键恢复 → 无帽中断后捡帽并等待右键恢复。报告中的步骤标识依次为 `Kick / Punch / Charge / HatStoreReturn / Tease / Shatter / Tear / HatlessInterruption`。没有走跑、睡觉、窗口物理、尺寸、禁音或回家的独立演示；为接近目标而跑动仍属于专属动作的一部分。
-3. 演示继承你原来的尺寸、音量与禁音偏好；原来禁音时不会主动开声音。需要听感验收时，由你选择是否取消禁音。演示只保存临时会话设置和状态，不改真实偏好、真实生活存档或开机自启，也不操作你的应用窗口。
-4. 如某项失败，确认流程停在该项，后续步骤没有被连续标记为失败。记录提示和步骤，处理遮挡等问题后，右键选择“重试本项”；应重做当前动作，通过后才继续下一项。
-5. 想提前停止时，右键角色或托盘，选择“停止专属功能测试”；直接左键点击角色也会停止。锁屏、休眠、退出会取消演示。确认专用测试窗口及残留特效被清理，后续步骤不再继续；测试中禁音仍立即生效。
-6. 演示结束、失败暂停或停止后，查看 `%TEMP%\SoftMochiPet.FeatureTest\<session>\feature-test-report.json`。如果找不到本次目录，在诊断日志中查 `FeatureDemoStarted` / `FeatureDemoFinished` 的 `ReportDirectory`。
+1. Exit the current pet from the tray first. The feature test entry point is provided only in development builds, and the official package contains no `Test Tools`. In a development build directory, double-click `Test Tools\JiuNuoDesktopPet-FeatureTest.exe` without moving it on its own, and use the official package's root `JiuNuoDesktopPet.exe` for everyday launches.
+2. Watch the current step in the right-click menu and the dedicated test window title; no speech bubble should appear. The order is fixed: kick a window → punch it away → charge → hide it in the hat and wait for a right-click return → tease until the mischief bar fills → throw the hat, smash the window, store it and wait for a right-click restore → throw the hat, tear the window, store it and wait for a right-click restore → pick the hat up after a hatless interruption and wait for a right-click restore. The step identifiers in the report are, in order, `Kick / Punch / Charge / HatStoreReturn / Tease / Shatter / Tear / HatlessInterruption`. There is no separate demonstration of walking, running, sleeping, window physics, size, mute or going home; running to approach a target is still part of the exclusive actions.
+3. The demonstration inherits your existing size, volume and mute preferences, and will not turn sound on if you had it muted. If you want to accept how it sounds, it is up to you whether to unmute. The demonstration saves only temporary session settings and state, and changes no real preference, no real life save and no start with Windows, and never operates your application windows.
+4. If an item fails, confirm the flow stops at that item and that later steps are not marked as failures one after another. Note the hint and the step, fix whatever is in the way, then right-click and choose "Retry this item"; it should redo the current action, and only on a pass does the next item run.
+5. To stop early, right-click the character or the tray and choose "Stop feature test"; left-clicking the character also stops it. Locking, sleeping and quitting all cancel the demonstration. Confirm the dedicated test window and any leftover effects are cleaned up and that later steps do not continue; mute still takes effect immediately during a test.
+6. After the demonstration finishes, pauses on a failure, or is stopped, look at `%TEMP%\SoftMochiPet.FeatureTest\<session>\feature-test-report.json`. If you cannot find this run's directory, look up `ReportDirectory` on `FeatureDemoStarted` / `FeatureDemoFinished` in the diagnostic log.
 
-藏帽只演示一次。藏帽、碎窗、撕窗及无帽中断项在表演完成后进入 `WaitingForManualRestore`，表示正常等待，不是失败。你可以先观察一段时间，确认窗口没有自行恢复，再右键“把窗口还回来”；也允许立即恢复，不设最短等待门槛。人工等待没有超时，动画及收到请求后的恢复检查仍有时限。程序不得自动调用恢复来继续演示，点击帽子或特效不代替右键；点击角色会停止整场演示。
+Hat hiding is demonstrated only once. The hat hiding, smash, tear and hatless-interruption items enter `WaitingForManualRestore` once the performance finishes, which means a normal wait and not a failure. You can watch for a while first to confirm the window is not restoring on its own, then right-click "Give the window back"; restoring immediately is also allowed, with no minimum wait. Human waiting has no timeout, while the animations and the restore check after a request still do. The program must never call the restore itself to continue the demonstration, clicking the hat or the effects is no substitute for the right-click, and clicking the character stops the whole demonstration.
 
-第八项若在无帽拖动、抛起或捡帽观察完成前右键恢复，模拟动作应立即停止并优先归还窗口。真实归还确认后，该项及整场报告标为 `NeedsReview`，`Evidence.HatlessInterruptionObserved=false`；这不是窗口恢复失败，也不能当成完整无帽表演已通过。需要完整观察时可重新运行此入口，待无帽表演结束后再右键恢复。
+If, in the eighth item, you right-click to restore before the hatless dragging, tossing and hat retrieval have been observed, the simulated action should stop immediately and returning the window takes priority. Once the real return is confirmed, that item and the whole report are marked `NeedsReview` with `Evidence.HatlessInterruptionObserved=false`; that is not a window restore failure, and it must not be taken as the complete hatless performance having passed. To observe it fully, run this entry point again and right-click to restore only after the hatless performance ends.
 
-逗弄涨条是独立步骤，不应因窗口预检失败而被阻止；后续窗口动作仍须准备自有测试窗口并通过实际安全检查。观察窗口准备时不抢焦点，目标具备可见位置后才进入动作；本版整场真实执行尚需按本节确认。
+Filling the bar by teasing is an independent step and should not be blocked by a window precheck failing; the later window actions still have to prepare their own test window and pass the real safety checks. Watch that preparing the window does not steal focus and that it enters the action only once the target has a visible position; this build's whole run on real hardware still needs confirming as described in this section.
 
-这一版还要观察攻击的蓄力与突然出手、接触瞬间短停/小闪星、窗口快速移开及角色单次回弹，不能出现隔空命中、往复抖动或原地滑步。攻击结束不再追加蹲下、伸手或得意动作；大招放慢，能看清蓄力、出手和破坏过程。到碎窗、撕窗与无帽中断步骤时，满槽后应先念指定的“菲八啾比”，整句结束才接近窗口和扔帽；已禁音时跳过声音，不应停在那里。播放期间退出/停止后不得继续攻击。语音日志对应 `VoiceBurstStarted`、`VoiceBurstFinished`，应在 `PrankPhaseChanged Phase="Approach"` 前结束。
+This build also needs you to watch the attack's wind-up and sudden strike, the brief pause and small star flash at the moment of contact, the window moving away quickly and the character's single rebound, with no hits through thin air, no back-and-forth jitter and no sliding on the spot. An attack no longer adds a crouch, reach or gloat at the end; the finishers are slowed down so the wind-up, the strike and the destruction are all visible. At the smash, tear and hatless-interruption steps, once the bar is full she should first say the specified "Feibi Jiubi" line, and only once the whole line finishes should she approach the window and throw the hat; with mute on the sound is skipped and she should not stall there. After quitting or stopping during playback, the attack must not continue. The voice logs are `VoiceBurstStarted` and `VoiceBurstFinished`, which should end before `PrankPhaseChanged Phase="Approach"`.
 
-`Completed` 要求对应窗口的实际位移或最小化/归还检查通过，不说明画面和声音已经合格。帽中、碎裂、撕裂及无帽中断目标必须先接受真实右键请求，再确认同一窗口已恢复；第八项不能仅凭捡回帽子而通过。报告版本应为 `Revision: 6`，`ManualRestore.State` 区分 `WaitingForManualRestore`、`ManualRestoreRequested`、`Restored`，`HeldSeconds` 记录实际等待时长，`RequestedAt` 记录真实右键请求时间。大招应先捡帽，再把碎片或两半收进帽口，戴帽后桌面没有残留碎片；右键后依次出帽、合回窗口画面、恢复真实窗口并戴帽。自行等待后仍未恢复的观察与录屏可结合这些字段验收；快速点击恢复不证明长期持有已经观察充分。
+`Completed` requires that window's real displacement, or the minimize and return check, to have passed, and says nothing about the visuals or sound being acceptable. A target in the hat, smashed, torn, or hatless-interrupted must first receive a genuine right-click request, after which that same window is confirmed restored; the eighth item cannot pass on retrieving the hat alone. The report version should be `Revision: 6`, `ManualRestore.State` distinguishes `WaitingForManualRestore`, `ManualRestoreRequested` and `Restored`, `HeldSeconds` records how long it actually waited, and `RequestedAt` records the time of the genuine right-click request. A finisher should pick the hat up first, then put the shards or halves into the hat opening, and once it is on there should be no shards left on the desktop; after a right-click it comes out of the hat, the window image is reassembled, the real window is restored and the hat goes back on. Observation and a screen recording of it still not restoring after you have waited can be accepted alongside those fields; clicking restore quickly does not prove that a long hold was adequately observed.
 
-目标失败查看 `LastTargetCheck`，成功动作查看本次 `Evidence`，阶段查看 `PhaseHint`；日志含 `FeatureDemoWaitingForManualRestore`、`FeatureDemoManualRestoreRequested`、`FeatureDemoPhase` 及原生事件 `prank.target.inspected`、`prank.selection.rejected`、`prank.operation.confirmed`。请提供本次报告和对应日志，分享前检查并脱敏本地路径。多屏与不同缩放、正常模式鼠标拖拽/点击、开机自启、锁屏与解锁仍需分别手测，不属于本次自动步骤。
+For a target failure look at `LastTargetCheck`, for a successful action look at that run's `Evidence`, and for the phase look at `PhaseHint`; the log contains `FeatureDemoWaitingForManualRestore`, `FeatureDemoManualRestoreRequested` and `FeatureDemoPhase` plus the native events `prank.target.inspected`, `prank.selection.rejected` and `prank.operation.confirmed`. Please provide this run's report and the matching log, checking and sanitizing local paths before sharing. Multiple monitors and different scale factors, mouse dragging and clicking in normal mode, start with Windows, and locking and unlocking all still need testing separately and are not part of these automated steps.
 
-## 0.7 独立行为控制版
+## 0.7 The standalone Behavior Control edition
 
-入口为 `dist\啾糯桌宠-行为控制版\啾糯桌宠-行为控制版.exe`，完整解压行为版 ZIP 后从根目录启动；没有“测试工具”。范围与隔离规则见 [行为控制版说明](docs/CHARACTERS.md#独立行为控制版已采用)，交付状态以该文档末节为准。以下由你亲自验收，后台检查不能代替这些真实操作。
+The entry point is `dist\JiuNuoDesktopPet-BehaviorControl\JiuNuoDesktopPet-BehaviorControl.exe`, started from the root folder after extracting the Behavior Control ZIP in full; there is no "Test Tools". The scope and isolation rules are in [the Behavior Control guide](docs/CHARACTERS.md#the-standalone-behavior-control-edition-adopted), and the delivery status is defined by the final section of that document. Everything below is for you to accept personally, and background checks are no substitute for these real actions.
 
-1. 先退出旧桌宠再打开行为版。右键应出现“直接触发行为”，按当前角色分类显示，默认不自动走跑；“自动日常活动（行为控制版）”每次重启均关闭。普通版与行为版不能同时运行，重复打开应提示先退出，不应把正在操作的角色拉回家。
-2. 两角色分别点选站立、好奇、走跑、探索、巡游、蹦跳、翻滚、睡眠/醒来、自由落下及抛起。关闭菜单后才开始，走跑应有真实位移，睡觉后“醒来啦”才可用。可用窗口顶边检查爬、滑下和跳下；没有地形、空间或支撑时不应假装成功。
-3. 切为糯糯，关闭辟谷，露出桌面后分别点“好饿”“舔舔图标”“吸入图标副本”。副本外观应来自真实图标，吃完后原图标与文件依然存在；“满足（动作欣赏）”只播放动作，不增加进食次数。菲比菜单不得出现这些食物条目。
-4. 为菲比准备无重要内容的窗口，摆在同屏可接近且无遮挡的位置。直接点选踢、打、撞、藏帽、碎窗、上下撕窗，指定攻击不必先涨满条；当前前台窗口也应可被手动指定，只要不是最大化或全屏。目标不合适时查看菜单状态；程序不得为达成效果擅自激活目标或扩大安全范围。
-5. 藏帽或碎窗/撕窗收帽后先等待，真实窗口仍应收起；“停止当前动作”不得代替归还。另选一个兼容窗口检查踢打冲撞仍可用，新增藏帽/大招应因帽子占用变灰。最后点“把窗口还回来”，确认原窗口内容与位置完整恢复。分别检查中途停止、回家、切角和正常退出的收尾。
-6. 点选抛帽再捡回、逗弄和捣蛋槽加满。抛帽应完整捡回戴好，不留无帽中间态；连续逗弄间隔仍保留。开启安静模式、让她睡觉、手中拖拽或占用帽子时，检查相关条目的灰项与状态是否准确。菜单打开、子菜单切换及大小滑条保持响应，关菜单后不补帧快进。
-7. 在行为版改角色、尺寸、音量/禁音后退出重开，偏好保留；“自动日常活动（行为控制版）”仍默认关闭。再退出行为版，打开正式版核对原有设置与生活记录未被行为版改写。不要删除或篡改原配置来制造迁移场景，首次白名单与旧配置保护由隔离离线夹具覆盖。
+1. Exit the old pet before opening the Behavior Control edition. Right-clicking should show "Trigger a behavior", categorised by the current character, with no automatic walking or running by default; "Automatic daily activity (Behavior Control)" is off at every restart. The ordinary and Behavior Control editions cannot run at the same time, and opening a second one should tell you to exit first rather than pulling the character you are working with back home.
+2. For each character, click through stand, curious, walking and running, explore, roam, hop, roll, sleep and wake, free fall and toss. It should begin only once the menu closes, walking and running should produce real displacement, and "Wake up" should only be available after she is asleep. Use a window's top edge to check climbing, sliding down and jumping down; with no terrain, space or support it must not pretend to succeed.
+3. Switch to Nuonuo, turn fasting off, show the desktop, and click "So hungry", "Lick an icon" and "Slurp an icon copy" in turn. The copy's appearance should come from the real icon, and after she eats it the original icon and file should still be there; "Satisfied (Animation showcase)" plays the animation only and adds no feeding count. Feibi's menu must not show any of these food items.
+4. Prepare a window with nothing important in it for Feibi, positioned on the same screen where she can reach it and unobscured. Click kick, punch, charge, hide in the hat, smash, and tear directly; a targeted attack does not need a full bar first. The current foreground window should also be targetable manually, as long as it is not maximized or fullscreen. Where a target is unsuitable, read the menu status; the program must not activate a target or widen the safety range on its own to make something work.
+5. After hat hiding, or after a smash or tear is stored, wait and the real window should still be stored; "Stop current action" must not act as a return. Choose another compatible window and check that kicking, punching and charging still work, while a new hat hiding or finisher should be greyed out because the hat is occupied. Finally click "Give the window back" and confirm the original window's content and position are fully restored. Check the endings for stopping partway, going home, switching characters and a normal exit separately.
+6. Click toss the hat and fetch it, tease, and fill the mischief meter. Throwing the hat should end with it fully retrieved and worn, leaving no hatless intermediate state, and the interval between consecutive teases is retained. With quiet mode on, with her asleep, while held in your hand, or with the hat occupied, check that the relevant items are correctly greyed out with accurate status. Opening the menu, moving between submenus and the size slider should all stay responsive, with no catch-up fast-forward after the menu closes.
+7. Change the character, size, volume and mute in the Behavior Control edition, then exit and reopen; the preferences should persist and "Automatic daily activity (Behavior Control)" should still default to off. Then exit the Behavior Control edition, open the official edition and verify your original settings and life record were not overwritten by it. Do not delete or tamper with the original configuration to create a migration scenario; the first-run whitelist and the protection of an old configuration are covered by isolated offline fixtures.
 
-异常记录角色、菜单项、当时条件与时间，结合 `BehaviorControlStarted` / `BehaviorControlUnavailable` / `BehaviorControlStopped` / `BehaviorControlCompleted` 及原有窗口日志定位。菜单显示完成不等于观感通过；窗口动作仍须核对实际目标，涉及声音由你决定是否取消禁音。
+For a problem, record the character, the menu item, the conditions at the time and the time itself, and locate it with `BehaviorControlStarted` / `BehaviorControlUnavailable` / `BehaviorControlStopped` / `BehaviorControlCompleted` plus the existing window logs. The menu showing completion is not the same as the look of it passing; window actions still have to be checked against the real target, and whether to unmute for anything involving sound is up to you.
 
-## 1. 基础画面与稳定性
+## 1. Basic visuals and stability
 
-启动后先观察 30 秒：
+Watch for 30 seconds after starting:
 
-- 窗口应为 220×220 左右，透明区域不应出现黑底或洋红边。
-- 双脚应接触任务栏上方的工作区底边，不能下沉、悬空或剧烈抖动。
-- 头顶、头发和双脚均不能被裁掉。
-- 糯糯未禁食时显示 `饥饿 0～100`，55 以上变橙、80 以上变红；禁食时整条隐藏。菲比始终无饥饿条，只按第 0.5 节显示捣蛋条。
-- 待机帧应缓慢变化，动作之间没有瞬移或明显跳帧。
-- 站立待机只做自然眨眼，身体不应左右漂移；多观察几轮后应随机进入原有的躺下睡眠动作，再正常起身。
-- 鼠标单纯经过不触发眼睛追踪或身体追逐、躲避、跟随、拥抱；糯糯无额外瞳孔，菲比保留原图紫色眼睛与原生瞳孔高光。
+- The window should be about 220×220, and the transparent area should show no black backing or magenta edges.
+- Both feet should touch the bottom of the work area above the taskbar, without sinking, floating or shaking violently.
+- The top of her head, her hair and both feet must never be cropped.
+- Nuonuo, when not fasting, shows `Hunger 0-100`, turning orange above 55 and red above 80; fasting hides the whole bar. Feibi never has a hunger bar and only shows the mischief bar as described in section 0.5.
+- Idle frames should change slowly, with no teleporting or obvious dropped frames between actions.
+- Standing idle should only blink naturally, with no left-right drift of the body; after a few rounds she should enter the original lying-down sleep animation at random, then get up normally.
+- The mouse merely passing by should not trigger eye tracking or the body chasing, dodging, following or hugging; Nuonuo has no extra pupils, and Feibi keeps the original image's purple eyes and native pupil highlights.
 
-### 1.1 尺寸滑条
+### 1.1 The size slider
 
-右键当前角色或托盘图标，在菜单内拖动以当前角色名开头的大小滑条：
+Right-click the current character or the tray icon and drag the size slider labelled with the current character's name:
 
-1. 从 100% 分别调到 60%、140% 和 200%，角色应即时连续缩放，不需要重启。
-2. 若她正站在任务栏或窗口上，缩放前后脚底应留在原位置，不能弹起、陷入平台或横向跳动。
-3. 角色主体、命中区域、碰撞体及当前角色的饥饿条或捣蛋条应随窗口尺寸保持可用，头发和脚不能被裁掉；气泡关闭时不应出现文字，开启时气泡不能盖住角色脸部。
-4. 退出后重新启动，应恢复最后设置的百分比；`settings.json` 中的 `PetSize` 应同步更新。
-5. 在小屏幕或高 DPI 显示器上选择 200% 时，允许程序为当前工作区临时缩小；移回空间充足的显示器后应恢复设定尺寸。
+1. Go from 100% to 60%, 140% and 200% in turn; the character should scale smoothly and immediately with no restart needed.
+2. If she is standing on the taskbar or a window, her soles should stay in the same place before and after scaling, without popping up, sinking into the platform or jumping sideways.
+3. The character's body, hit area, collision box and the current character's hunger or mischief bar should all stay usable as the window size changes, with the hair and feet never cropped; with bubbles off no text should appear, and with them on a bubble must not cover her face.
+4. Quit and restart, and it should return to the last percentage set; `PetSize` in `settings.json` should be updated to match.
+5. Choosing 200% on a small screen or a high-DPI monitor may let the program shrink temporarily for the current work area; moving back to a monitor with enough space should restore the configured size.
 
-### 1.2 拖拽与甩动手感
+### 1.2 Dragging and flinging feel
 
-1. 左键慢慢把她挪一小段再松手：应像轻放一样直接落稳，不能无缘无故飞出去。
-2. 按住后快速水平甩动并在移动中松手：她应沿甩动方向继续飞一段，速度逐渐衰减，而不是在松手点立刻垂直掉落。
-3. 分别快速向上、斜上和斜下甩：轨迹应保留对应二维方向，向上甩会越过顶点再下落。
-4. 甩向显示器外侧：脚底锚点到达没有显示器的区域前应软弹回来，不能永久丢到屏幕外。
-5. 悬空拖动时使用专用的软糯下垂动作，头、头发和双脚完整；松手后平滑衔接跳跃/坠落与 Q 弹着陆。
+1. Move her slowly a short distance with the left button and release: she should settle directly as if placed gently, and must not fly off for no reason.
+2. Hold and fling horizontally at speed, releasing mid-movement: she should carry on flying in the fling's direction, decelerating gradually, rather than dropping vertically at the release point.
+3. Fling quickly upward, diagonally up and diagonally down in turn: the trajectory should keep the corresponding two-dimensional direction, and an upward fling should pass an apex before falling.
+4. Fling her towards the outside of the monitor: the sole anchor should bounce back softly before reaching an area with no monitor, and she must never be lost off screen permanently.
+5. Dragging in mid-air uses the dedicated soft dangling animation with the head, hair and both feet complete; after release it should transition smoothly into the jump or fall and the bouncy landing.
 
-日志应分别出现 `DragReleasedGently` 或 `DragReleasedWithInertia`，后者带有 `Velocity`、`Speed` 和 `SampleSeconds`；随后应出现 `FallStarted` 与 `Landed`。
+The log should show either `DragReleasedGently` or `DragReleasedWithInertia`, the latter with `Velocity`, `Speed` and `SampleSeconds`, followed by `FallStarted` and `Landed`.
 
-## 2. 窗口地形与重力
+## 2. Window terrain and gravity
 
-先打开测试平台：
+Open the test platform first:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\tools\runtime_test_platform.ps1
 ```
 
-然后依次测试：
+Then test in order:
 
-1. 把弗糯糯拖到平台上方约 200～400 像素处松手。
-2. 她应逐渐加速下落，播放坠落动作，并落在窗口最上边缘。
-3. 落地后应完整播放一次约 1 秒的压扁—回弹动作，双脚最终贴住窗沿。
-4. 把平台窗口向下移动约 150 像素。她应先保持原高度、与窗沿自然分开，再受重力落到平台的新位置。
-5. 横向移走或关闭平台。平台不在脚下后，她应掉到下一层窗口或桌面底部。
-6. 叠放两个不同高度的普通窗口，从上方松手；她应先落在最先穿过的上层窗口，而不是穿透到下层。
+1. Drag Nuonuo to about 200-400 pixels above the platform and release.
+2. She should accelerate downward gradually, play the falling animation, and land on the window's top edge.
+3. After landing she should play one complete squash-and-rebound of about 1 second, with her feet finally against the window edge.
+4. Move the platform window down by about 150 pixels. She should hold her height and separate naturally from the edge first, then fall under gravity to the platform's new position.
+5. Move the platform sideways or close it. With no platform under her feet she should fall to the next window down or to the bottom of the desktop.
+6. Stack two ordinary windows at different heights and release her from above; she should land on the upper window she passes first, rather than falling through to the lower one.
 
-接着测试窗沿惯性：
+Then test ledge inertia:
 
-7. 弗糯糯站稳后，缓慢上下移动平台；她应稳定跟随，不应抖动或自己起跳。
-8. 用较快速度把平台向上拖动约 120～250 像素；她应先随平台上升，随后脱离窗沿向上抛起，播放紧凑的惊讶失重动作，双脚可见、头发和袖子有惯性，到最高点后切换为坠落。腾空期间平台追上脚底时应把她再次顶起，不能从她身上穿过；平台尚未追上或向下移动时，她应保持自由弹道，不能像粘在窗沿上一样同步移动。
-9. 用较快速度把平台向下拖动；她的脚应与窗沿短暂分开，随后追落到平台的实时位置。不能像粘住一样同步下降，也不能穿过平台或无故掉到桌面。
-10. 快速上移的日志应依次出现 `PlatformLaunch`、`FallStarted`、`TossApexReached` 和 `Landed`；向下移动应出现 `PlatformDownwardRelease`、`FallStarted`，随后 `Landed` 回到相同平台句柄，不应出现 `PlatformSupportLost`。
+7. With Nuonuo settled, move the platform slowly up and down; she should follow stably without shaking or jumping by herself.
+8. Drag the platform upward quickly by about 120-250 pixels; she should rise with it, then separate from the edge and be tossed upward, playing a tight surprised weightless animation with both feet visible and inertia in her hair and sleeves, switching to falling after the apex. While airborne, the platform catching up with her soles should lift her again and must not pass through her; while the platform has not caught up, or is moving downward, she should keep her free trajectory and must not move in sync as though stuck to the edge.
+9. Drag the platform downward quickly; her feet should separate briefly from the edge, then catch up and land on the platform's live position. She must not descend in sync as though stuck, pass through the platform, or fall to the desktop for no reason.
+10. A quick upward move should log `PlatformLaunch`, `FallStarted`, `TossApexReached` and `Landed` in order; a downward move should log `PlatformDownwardRelease` and `FallStarted`, then `Landed` back on the same platform handle, with no `PlatformSupportLost`.
 
-接着测试窗口地形行为：
+Then test window terrain behaviour:
 
-11. 让她站在普通窗口顶边并持续观察；自主选择跳跃时，应播放独立的压缩—起跳—空中团子动作，沿水平和垂直方向形成真实抛物线并落到可碰撞的窗口或桌面。
-12. 保持普通窗口开启观察 2～5 分钟：走到边缘时应随机出现普通掉头、跳出去、抱边滑下或主动跳向下层；滑边时双手贴住真实窗口侧边，身体沿侧边连续下降后才松手坠落。
-13. 她站在普通窗口上时突然点击该窗口的最大化按钮：原顶边消失后她应向屏幕外侧上方弹飞，而不是原地悬空或穿入窗口；日志出现 `WindowMaximizeBounce`。
-14. 让糯糯站在窗口外，从左侧和右侧快速横向拖动另一个普通窗口撞她。她应沿撞击方向带少量上抛弧线飞出；日志出现 `WindowSideImpact`，且 `Direction` 与窗口方向一致。
-15. 把糯糯拖到一个尺寸足够大的普通窗口内部并松手。她应落到窗口内部底边；来回或上下摇晃该窗口时，她保持惯性并与左右、顶部、底部四壁反弹，不能粘在窗口上。拖出或关闭窗口后应解除容器。
-16. 此项只测糯糯：容器内高饥饿不应跑去舔图标；删除专用文件后应解除容器并跑出去进食。菲比不受删除影响，不产生进食任务。
+11. Let her stand on an ordinary window's top edge and keep watching; when she chooses to jump autonomously she should play the separate squash, take-off and mid-air ball animation, forming a real parabola horizontally and vertically and landing on a collidable window or the desktop.
+12. Keep an ordinary window open and watch for 2-5 minutes: on reaching an edge she should at random turn back, jump off, hug the edge and slide down, or deliberately jump to the level below; while sliding, both hands should stay against the real window's side and her body should descend continuously along it before she lets go and falls.
+13. While she is standing on an ordinary window, suddenly click that window's maximize button: with the original top edge gone she should be flung up and outward off screen rather than hanging in place or sinking into the window; the log shows `WindowMaximizeBounce`.
+14. With Nuonuo standing outside a window, drag another ordinary window quickly sideways into her from the left and from the right. She should fly off in the impact direction with a slight upward arc; the log shows `WindowSideImpact` with `Direction` matching the window's direction.
+15. Drag Nuonuo inside an ordinary window that is large enough and release. She should land on the window's inner bottom edge; rocking that window side to side or up and down should keep her inertia and bounce her off the left, right, top and bottom walls, never sticking to the window. Dragging her out or closing the window should release the container.
+16. This item tests Nuonuo only: high hunger inside a container should not send her off to lick an icon; deleting a dedicated file should release the container and send her out to eat. Feibi is unaffected by a deletion and produces no feeding task.
 
-容器日志依次使用 `WindowEnclosureEntered`、`WindowEnclosureImpact` 和 `WindowEnclosureSettled`；拖出或窗口关闭时出现 `WindowEnclosureReleased`。盒内删除进食会出现 `WindowEnclosureMealEscape`，盒内舔图标请求则记录 `IconLickSuppressedInEnclosure`。
+The container logs are `WindowEnclosureEntered`, `WindowEnclosureImpact` and `WindowEnclosureSettled` in order, with `WindowEnclosureReleased` when she is dragged out or the window closes. Deletion feeding inside the box shows `WindowEnclosureMealEscape`, and an icon lick request inside the box logs `IconLickSuppressedInEnclosure`.
 
-边缘行为日志依次使用 `TerrainEdgeActionChosen`、`TerrainHopStarted`、`EdgeSlideStarted` / `EdgeSlideReleased` 或 `TerrainJumpDownStarted`，因此可以区分是随机未选中还是物理衔接失败。
+The edge behaviour logs are `TerrainEdgeActionChosen`, `TerrainHopStarted`, `EdgeSlideStarted` / `EdgeSlideReleased` or `TerrainJumpDownStarted` in order, so a random non-selection can be told from a physics transition failing.
 
-多显示器测试时，把平台横跨两块显示器，例如按你的屏幕排列调整 `Left`：
+For multi-monitor testing, span the platform across two monitors, adjusting `Left` to your own screen arrangement:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\tools\runtime_test_platform.ps1 -Left 2300 -Top 650 -Width 700 -Height 320
 ```
 
-分别把她放到窗口位于两块屏幕上的部分。两边都应能落稳；跨屏后尺寸、脚底位置和速度不应突变。最大化窗口、任务栏、工具提示和隐藏窗口不应成为可站立平台。
+Put her on the part of the window on each screen in turn. She should settle on both, and the size, sole position and velocity should not change abruptly across screens. A maximized window, the taskbar, tooltips and hidden windows should never become standable platforms.
 
-## 2.5 鼠标交互边界
+## 2.5 Mouse interaction boundaries
 
-关闭安静模式，分别让糯糯和菲比啾比正常待机和巡游，持续观察 3～5 分钟：
+Turn quiet mode off and let Nuonuo and Feibi Jiubi idle and roam normally, watching for 3-5 minutes:
 
-- 将鼠标停在附近、缓慢绕行或快速经过她身边，均不应触发追逐、躲避、跟随或抱住鼠标；
-- 左键按住角色仍能打断巡游并拖动，松手后的轻放、甩动与上抛仍按第 1.2 节验收；
-- 右键角色仍能打开菜单，非角色透明区域的点击仍应落到下面的应用。
+- parking the mouse nearby, circling slowly, or passing quickly should never trigger chasing, dodging, following or hugging the mouse;
+- holding the left button on the character should still interrupt roaming and drag her, and the gentle placement, fling and toss after release are still accepted as in section 1.2;
+- right-clicking the character should still open the menu, and a click on the transparent non-character area should still land on the application underneath.
 
-## 3. 自主行为
+## 3. Autonomous behaviour
 
-不操作 3～5 分钟，观察新的生活循环：
+Leave it alone for 3-5 minutes and watch the new life loop:
 
-- 每次回到待机后，糯糯最多原地停留约 5 秒，菲比最多约 4 秒，随后开始新行为；不能无缘由长时间停在同一帧。
-- 普通状态下开始慢走后应持续走：到达平台一侧直接掉头或转向攀爬目标，中间没有“走一小段—停几秒—再走”的节奏。
-- 有可攀爬窗口时，她会走到窗口左侧或右侧，播放双手双脚交替的攀爬动作并沿真实侧边上升。
-- 攀爬可能成功或滑落；成功必须准确站上目标窗口顶边并继续巡游，失败必须进入真实坠落/着陆，不能瞬移回地面。
-- 即使困倦较低也会偶尔随机小睡，至少保持数秒可见；困倦较高时概率明显增加。她应从站立逐帧降低到侧躺，保持同一卧姿缓慢呼吸；醒来时反向起身，不能瞬间切回站立。
-- 仅糯糯在饥饿较高时选择舔图标、讨食或完整打滚。菲比不出现上述食物行为，自主捣蛋按第 0.5 节验收。
+- After returning to idle, Nuonuo stays in place for at most about 5 seconds and Feibi about 4, then starts a new behaviour; she must not stay on the same frame for a long time for no reason.
+- Once she starts walking slowly in an ordinary state she should keep walking: on reaching one side of the platform she turns back or heads for a climbing target directly, with no "walk a little, stop a few seconds, walk again" rhythm.
+- With a climbable window available she walks to its left or right side, plays the alternating hands-and-feet climbing animation and ascends along the real side edge.
+- A climb may succeed or slip; a success must land her accurately on the target window's top edge and continue roaming, and a failure must enter a real fall and landing, never teleporting back to the ground.
+- Even at low sleepiness she naps at random occasionally, staying visible for at least a few seconds; the probability rises noticeably at higher sleepiness. She should go frame by frame from standing down to lying on her side, keeping the same lying pose and breathing slowly; waking reverses it to get up, and must not snap straight back to standing.
+- Only Nuonuo chooses to lick an icon, beg or do a complete roll at high hunger. Feibi shows none of those food behaviours, and her autonomous mischief is accepted as in section 0.5.
 
-合格表现是“持续生活、有随机性但不机械连播”。散步必须沿脚下平台移动，平台消失时转为坠落。
+Acceptable behaviour is "a continuous life, random but not mechanically repetitive". A walk has to move along the platform under her feet, and turn into a fall when that platform disappears.
 
-攀爬测试可保持第 2 节的测试平台开启，并把弗糯糯放回同一显示器的桌面底部。默认平台底边在她可跳起抓住的范围内；观察约 1～3 分钟。日志应出现 `ClimbTargetChosen`、`ClimbStarted`，随后出现 `ClimbSucceeded` 或 `ClimbSlipped`。成功后 `Support` 应变成平台窗口句柄。
+For the climbing test you can keep section 2's test platform open and put Nuonuo back on the desktop floor of the same monitor. By default the platform's bottom edge is within her jump-and-grab range; watch for about 1-3 minutes. The log should show `ClimbTargetChosen` and `ClimbStarted`, followed by `ClimbSucceeded` or `ClimbSlipped`. On success, `Support` should become the platform window's handle.
 
-此外，糯糯应偶尔选择可见图标，跑到其右侧舔一下，同次舔舐后约 70 秒冷却。真实图标不消失、不移动、不改名。菲比不会执行此行为。
+Separately, Nuonuo should occasionally choose a visible icon, run to its right and lick it once, with about a 70-second cooldown after each lick. The real icon should not disappear, move or be renamed. Feibi never performs this behaviour.
 
-如需强制观察某一种需求，请先从托盘退出桌宠，备份：
+To force a particular need for observation, exit the pet from the tray first and back up:
 
-下例仅用于糯糯需求检查。菲比睡眠/探索可在独立备份后改自己的 `Sleepiness` / `Curiosity`；改饥饿或饱腹不应影响行为，也不应显示饥饿条。菲比捣蛋用菜单测试，不用修改存档强行绕过冷却。不要混用两角色备份。
+The example below is for checking Nuonuo's needs only. Feibi's sleep and exploration can be driven by changing her own `Sleepiness` and `Curiosity` after a separate backup; changing hunger or fullness should affect no behaviour and should not show a hunger bar. Test Feibi's mischief through the menu rather than editing a save to bypass a cooldown. Do not mix the two characters' backups.
 
 ```powershell
 Copy-Item "$env:APPDATA\SoftMochiPet\life-state.json" "$env:APPDATA\SoftMochiPet\life-state.self-test-backup.json" -Force
 notepad "$env:APPDATA\SoftMochiPet\life-state.json"
 ```
 
-只修改下列四个数字，其他字段不要动：
+Change only the four numbers below and leave the other fields alone:
 
-| 目标 | Hunger | Fullness | Sleepiness | Curiosity |
+| Goal | Hunger | Fullness | Sleepiness | Curiosity |
 |---|---:|---:|---:|---:|
-| 饥饿舔图标/打滚 | 100 | 5 | 10 | 10 |
-| 困倦睡觉 | 5 | 20 | 100 | 10 |
-| 好奇探索 | 10 | 20 | 10 | 100 |
-| 饱腹休息 | 5 | 100 | 20 | 10 |
+| Hungry icon licking / roll | 100 | 5 | 10 | 10 |
+| Sleepy napping | 5 | 20 | 100 | 10 |
+| Curious exploration | 10 | 20 | 10 | 100 |
+| Full resting | 5 | 100 | 20 | 10 |
 
-保存后重新启动，最多观察 90 秒。行为有随机权重，不要求第一次决策就触发。测试完先退出，再恢复备份。
+Save, restart, and watch for up to 90 seconds. Behaviour has random weighting, so the first decision is not required to trigger it. Exit before restoring the backup.
 
 ```powershell
 Copy-Item "$env:APPDATA\SoftMochiPet\life-state.self-test-backup.json" "$env:APPDATA\SoftMochiPet\life-state.json" -Force
 ```
 
-## 4. 高饥饿与舔图标
+## 4. High hunger and icon licking
 
-第 4～6 节仅适用于糯糯；菲比反向检查为无舔舐、无进食和无假图标。
+Sections 4-6 apply to Nuonuo only; the inverse check for Feibi is no licking, no feeding and no fake icons.
 
-按第 3 节的方法把 `Hunger` 设为 `100`、`Fullness` 设为不高于 `8`，再启动桌宠；确保桌面至少有一个完全可见、没有被窗口遮住的图标并等待她自主选择舔图标：
+Using the method in section 3, set `Hunger` to `100` and `Fullness` to no more than `8`, then start the pet. Make sure there is at least one fully visible desktop icon not covered by a window, and wait for her to choose icon licking autonomously:
 
-- 她应立即选择附近的一个真实桌面图标，而不是跑向鼠标或菜单位置。
-- 她应站在图标右侧，朝左播放约 1.8 秒的舔舐动作；伸舌中段应与图标右边缘接触。
-- 头顶、头发和双脚始终完整；舌头应短宽圆润，收舌后有鼓脸、压缩和软弹回正，不应突然趴下或剧烈跳帧。
-- 动作结束后图标的位置、图像和名称都完全不变；状态中的 `Hunger` 应为 100 左右，`Fullness` 不高于 8，`TotalMeals` 不增加。
-- 如果触发时她正在坠落、着陆、被拖动或吃文件，应等待站稳或吃完后再去舔。
-- 暂时隐藏桌面图标或用窗口完全盖住它们，高饥饿决策时应提示“舔不到”，随后留在原地播放完整饥饿打滚；不能跑向旧坐标。
+- She should immediately choose a real desktop icon nearby, rather than heading for the mouse or a menu position.
+- She should stand to the icon's right and play the roughly 1.8-second licking animation facing left, with the middle of the tongue extension touching the icon's right edge.
+- The top of her head, her hair and both feet stay complete throughout; the tongue should be short, wide and rounded, and after retracting there should be puffed cheeks, a squash and a soft spring back, with no sudden collapse or violent frame jumping.
+- After the animation the icon's position, image and name should all be completely unchanged; `Hunger` in the state should be about 100, `Fullness` no more than 8, and `TotalMeals` unchanged.
+- If she is falling, landing, being dragged or eating a file when it triggers, she should wait until she is steady or has finished before going to lick.
+- Hide the desktop icons temporarily or cover them completely with a window, and a high-hunger decision should report "cannot reach to lick", then stay where she is and play the complete hungry roll; she must not run to the old coordinates.
 
-## 5. 单次删除动画
+## 5. Single deletion animation
 
-在桌面新建一个专用文件：
+Create a dedicated file on the desktop:
 
 ```powershell
 $desktop = [Environment]::GetFolderPath('Desktop')
 Set-Content -LiteralPath (Join-Path $desktop 'FNN_TEST_FOOD_SINGLE.txt') -Value 'disposable test file'
 ```
 
-等待 2 秒，然后在桌面上点中这个真实图标并按 `Delete`：
+Wait 2 seconds, then select that real icon on the desktop and press `Delete`:
 
-- 真实文件消失后，应立即在完全相同的位置留下相同图标和文件名。
-- 假图标不能跑到鼠标菜单或其他点击位置。
-- 弗糯糯应跑到图标右侧，朝左张大嘴，而不是站到错误方向。
-- 图标和文字应先留在原处，再抖动、拉伸、缩小并被吸入口中。
-- 整个吞食过程应清楚、偏慢；只有进入嘴里以后假图标才消失。
-- 吞完后播放满足动作，状态中的饥饿降低、饱腹和 `TotalMeals` 增加。
+- Once the real file disappears, the same icon and file name should be left immediately in exactly the same place.
+- The fake icon must not move to the mouse menu or any other clicked position.
+- Nuonuo should run to the icon's right and open her mouth wide facing left, not stand in the wrong direction.
+- The icon and text should stay in place first, then shake, stretch, shrink and be drawn into her mouth.
+- The whole swallow should be clear and on the slow side, and the fake icon should disappear only after it is inside her mouth.
+- After swallowing she plays the satisfied animation, and in the state hunger drops while fullness and `TotalMeals` increase.
 
-如果假图标没有出现，先退出桌宠，并确认 `%APPDATA%\SoftMochiPet\settings.json` 中的 `ReactToDeletes` 为 `true`。
+If the fake icon never appears, exit the pet first and confirm `ReactToDeletes` is `true` in `%APPDATA%\SoftMochiPet\settings.json`.
 
-## 6. 连续删除与自助餐
+## 6. Consecutive deletions and the buffet
 
-创建 5 个临时文件：
+Create 5 temporary files:
 
 ```powershell
 $desktop = [Environment]::GetFolderPath('Desktop')
@@ -412,81 +412,81 @@ $desktop = [Environment]::GetFolderPath('Desktop')
 }
 ```
 
-等待 2 秒。按住 `Ctrl` 只选择这 5 个测试图标（不要使用 `Ctrl+A`），然后只按一次 `Delete`：
+Wait 2 seconds. Hold `Ctrl` and select only those 5 test icons (do not use `Ctrl+A`), then press `Delete` exactly once:
 
-- 每个真实图标被删除后，都应立即在各自原始位置留下自己的假图标和文字，五个假图标不能堆在同一个点。
-- 图标和文件名应对应原位置；日志中的同一次 `DesktopSelectionCaptured` 应列出五个不同中心点，随后的五个 `DeletionQueued` 应具有不同 `QueueId` 和坐标。
-- 她吃第一份时，其余假图标必须继续留在各自原位，不能先消失再突然出现。
-- 第二次快速删除后应进入“自助餐”反应。
-- 她应逐个前往对应位置并完整吸入，顺序不能丢失；前一份吃完才处理下一份。
-- 餐间满足动作可以缩短，但吸入动作不能被跳过。
-- 最终 5 个假图标全部消失，`TotalMeals` 应增加 5。
+- As each real icon is deleted, its own fake icon and text should be left immediately in its own original position, and the five fake icons must not pile up at one point.
+- The icons and file names should correspond to their original positions; a single `DesktopSelectionCaptured` in the log should list five different centre points, and the five following `DeletionQueued` entries should have different `QueueId` values and coordinates.
+- While she eats the first one, the other fake icons must stay in their own positions and must not disappear and then suddenly reappear.
+- A second quick deletion should produce the "buffet" reaction.
+- She should go to each position in turn and slurp each one completely, never losing the order; the next is handled only after the previous one is finished.
+- The satisfied animation between courses may be shortened, but the slurp animation must not be skipped.
+- Finally all 5 fake icons disappear and `TotalMeals` should increase by 5.
 
-不要用已有文件测试。回收站中只处理这些 `FNN_TEST_FOOD_*` 项，不要为了清理测试而清空整个回收站。
+Do not test with existing files. In the recycle bin, handle only these `FNN_TEST_FOOD_*` items, and do not empty the whole recycle bin just to clean up a test.
 
-## 7. 角色状态与保存
+## 7. Character state and saving
 
-以下四项需求和进食统计检查用于糯糯。菲比另检查独立的困倦、好奇和捣蛋保存：饥饿/饱腹归零、餐数不增长；捣蛋保存无窗口句柄或快照，离线不增加、不恢复旧动作。正式路径见 [角色数据边界](docs/CHARACTERS.md#角色与数据边界)，跨角色隔离见第 0.4 节。
+The four needs and the feeding statistics checks below are for Nuonuo. For Feibi, separately check her own sleepiness, curiosity and mischief saving: hunger and fullness are zeroed and the meal count does not grow, and the mischief save holds no window handle or snapshot, does not increase offline and does not restore an old action. The official paths are in [characters and data boundaries](docs/CHARACTERS.md#characters-and-data-boundaries), and cross-character isolation is in section 0.4.
 
-从托盘退出后查看：
+After exiting from the tray, look at:
 
 ```powershell
 Get-Content "$env:APPDATA\SoftMochiPet\life-state.json"
 Get-ChildItem "$env:APPDATA\SoftMochiPet" -Filter '*.tmp'
 ```
 
-检查：
+Check that:
 
-- 清醒一段时间后：饥饿、困倦、好奇缓慢上升，饱腹下降。
-- 吃文件后：饥饿下降、饱腹上升、`TotalMeals` 增加，扩展名计入 `FoodTypeCounts`。
-- 完成探索后：好奇下降。
-- 睡眠结束后：困倦明显下降。
-- 四项数值始终在 0～100。
-- `life-state.json` 能正常读取，目录中没有遗留 `.tmp` 文件。
-- 退出一段时间再启动，状态会按最多 12 小时的离线时间演化，不会死亡或永久失效。
+- after a while awake: hunger, sleepiness and curiosity rise slowly while fullness falls;
+- after eating a file: hunger falls, fullness rises, `TotalMeals` increases, and the extension is counted in `FoodTypeCounts`;
+- after finishing exploring: curiosity falls;
+- after sleep ends: sleepiness falls noticeably;
+- all four values stay within 0-100;
+- `life-state.json` reads normally and no `.tmp` file is left in the directory;
+- after quitting for a while and starting again, the state evolves by an offline duration of at most 12 hours, without dying or becoming permanently invalid.
 
-## 删除图标的双人接力（请自行实测）
+## The two-pet relay for deleted icons (test this yourself)
 
-### v1.3.0 四种日常互动（待用户实测）
+### v1.3.0 four daily interactions (awaiting user testing)
 
-1. 退出旧进程，启动新版，开启双宠共存、关闭安静模式。先让两人回家，再拖到同一显示器底部的宽敞位置；不要一人站窗台、一人站地面。右键“双人互动演示”依次选小跟屁虫、路过蹭一下、一起玩小球、一起看热闹。
-2. 跟随：菲比走在前面，中途回看，糯糯稍后跟上；菲比在屏幕边缘时应停下等，不穿过边缘。蹭蹭：左右次序不应互换，面颊贴近后回位，头顶/脚不裁切。
-3. 玩球：观察完整摘帽出球、六次来回传球、收球戴帽。第二脚之后仍须踢动，不能只见球飞；球到鞋尖才换向，没有凭空跳到脚底或穿过帽子。分别把菲比放左右两侧测试，再试 60%/100%/200% 体型与 100%/125% 显示缩放。
-4. 看热闹：在她们所在屏幕新开或明显移动普通窗口；两人空闲且距离上次互动至少 18 秒时观察转头。菲比先看、糯糯晚一点；该行为不改变窗口位置/大小。前台最大化窗口也可看，但启动时所有已有窗口不应连发事件。
-5. 自主观察 3–5 分钟，走远、相遇、空闲、窗口变化对应不同触发；同一行为不应秒级重复。安静模式下四种都不应发起；原有饿了投喂、困了靠睡、删除接力仍保留优先级。
-6. 玩球中分别拖拽一人、删除新建临时文件、调整大小、关闭共存、主动捣蛋；动作应结束、球消失，两人恢复正常。站同一宽窗台时移动/最小化窗台，应安全结束，不悬空滑走。手动场景被拒绝时反馈日志中的 PairLifeUnavailable 原因和时间。
+1. Exit the old process, start the new version, turn coexistence on and quiet mode off. Bring both home first, then drag them to a roomy spot at the bottom of the same monitor; do not leave one on a window ledge and one on the ground. Right-click "Two-pet interactions" and choose Follow along, Nuzzle in passing, Play with the ball and Watch together in turn.
+2. Following: Feibi walks ahead, looks back partway, and Nuonuo follows a little later; at a screen edge Feibi should stop and wait rather than crossing it. Nuzzling: the left-right order should not swap, and after the cheeks come close they return to position with no cropping of the head or feet.
+3. Ball: watch the complete hat removal and ball appearing, six passes back and forth, and the ball being put away and the hat worn again. After the second kick it must still be kicked rather than the ball simply flying; the ball changes direction only at the toe, never jumping to her feet out of nowhere or passing through the hat. Test with Feibi on the left and on the right, then at 60%/100%/200% body size and 100%/125% display scaling.
+4. Watching together: open or clearly move an ordinary window on the screen they are on; with both idle and at least 18 seconds since the last interaction, watch them turn their heads. Feibi looks first and Nuonuo a little later, and the behaviour does not change the window's position or size. A maximized foreground window can also be watched, but all the windows already present at startup should not fire a burst of events.
+5. Watch autonomously for 3-5 minutes; walking apart, meeting, being idle and a window change should each produce their own trigger, and the same behaviour should not repeat within seconds. In quiet mode none of the four should start; the existing priorities for feeding when hungry, napping when sleepy and the deletion relay are retained.
+6. During the ball, in turn, drag one of them, delete a newly created temporary file, change the size, turn coexistence off, and trigger mischief deliberately; the action should end, the ball disappear, and both return to normal. Standing on the same wide window ledge, move or minimize that ledge and it should end safely without them floating or sliding away. When a manual scene is refused, report the `PairLifeUnavailable` reason and time from the log.
 
-### v1.2.3 共存生活与接力复测
+### v1.2.3 coexistence life and relay retest
 
-1. 完全退出旧版，启动新正式包，打开“双宠共存”、关闭安静模式，把两人留在同一显示器。约 12 秒后开始尝试第一次邀请；普通走路也可接受邀请，不必等两人同时站住。忙于攻击或被拖动时延后，每 2 秒重试。
-2. 不打开菜单观察两三分钟：应能看到自主揪脸、抛食或靠睡；每次结束后一起停留片刻，再分开活动。困倦高时优先靠睡，正常模式下饥饿高时优先投喂。不是固定每隔几十秒强制打断现有动作。
-3. 新建一个可恢复的测试快捷方式，趁菲比走路时删除：两人应一起出发，菲比踢、糯糯张嘴接。换到桌面第一列、右侧及底部边缘重复；等待和跑来时图标/文字应原位保留，到位蓄力才允许小幅滑动。
-4. 趁菲比落下或睡着时删除测试图标：最多等 5 秒，能就绪则接力，否则糯糯独自吃。不要拖着她来要求强制接力。连续选中 3 个临时文件删除，检查依次处理、不堆图标、不重复吃。
-5. 菲比帽中已有一个无未保存内容的测试窗口时，再检查双人互动和删除接力；原窗口应继续留在帽里，直到主动还窗。互动中右键“把窗口还回来”或“捣蛋一下”应先安全结束双人场景，不能同时跑两个时间轴。
-6. 从两人任意一位右键操作、交换主角色后再测；跨显示器、关闭共存、改体型、拖拽中断时不能卡住。回退单人时，提供对应时段 `PairIconKickSkipped/Waiting/Ended` 日志即可看出原因。
+1. Exit the old version completely, start the new official package, turn "Both pets together" on and quiet mode off, and leave both on the same monitor. The first invitation is attempted after about 12 seconds; ordinary walking can accept an invitation too, so you do not have to wait for both to stand still. It defers while one is busy attacking or being dragged, retrying every 2 seconds.
+2. Without opening the menu, watch for two or three minutes: you should see an autonomous cheek pinch, food throw or nap, and after each ends they pause together for a moment before going their own ways. Napping takes priority at high sleepiness, and in normal mode feeding takes priority at high hunger. It is not a fixed interruption of the current action every few tens of seconds.
+3. Create a recoverable test shortcut and delete it while Feibi is walking: the two should set off together, with Feibi kicking and Nuonuo catching with her mouth open. Repeat in the desktop's first column, at the right edge and at the bottom edge; while waiting and running over, the icon and text should stay in place, and only once they are in position and winding up should a slight slide be allowed.
+4. Delete the test icon while Feibi is falling or asleep: it should wait up to 5 seconds and relay if she becomes ready, otherwise Nuonuo eats alone. Do not drag her over to force a relay. Select and delete 3 temporary files in a row and check they are handled in order, with no piled-up icons and nothing eaten twice.
+5. With a test window containing no unsaved content already in Feibi's hat, check the two-pet interactions and the deletion relay again; the original window should stay in the hat until you deliberately return it. Right-clicking "Give the window back" or "Play a prank" during an interaction should end the two-pet scene safely first, and two timelines must never run at once.
+6. Right-click from each of them in turn, swap which is primary, and retest; crossing monitors, turning coexistence off, changing the body size and interrupting with a drag must never leave anything stuck. When it falls back to solo, providing the `PairIconKickSkipped/Waiting/Ended` log for that period is enough to show why.
 
-打开“双宠共存”和删除回应，把一个**可恢复的测试快捷方式**放在桌面中间，删除它：菲比应跑到右边，图标与文字先留在原位；菲比蓄力时图标可能小幅下落，踢出瞬间文字消隐，图标飞入糯糯张开的嘴，最后她才咀嚼。再把测试快捷方式放在桌面最左列，确认图标碰左屏幕边缘后弹入右边糯糯的嘴。一次选中三个测试快捷方式删除，确认每个图标只出现一份、按顺序处理、饥饿统计只增加三次。最后分别试着在踢出前拖起任一桌宠，以及把两只桌宠分到不同显示器；前者应恢复原位假图标并交回队列，后者应走糯糯原有的单人吸入。不要用重要文件测试。
+Turn on "Both pets together" and deletion responses, put a **recoverable test shortcut** in the middle of the desktop and delete it: Feibi should run to the right with the icon and text staying in place at first; the icon may drop slightly as she winds up, the text fades at the moment of the kick, the icon flies into Nuonuo's open mouth, and only then does she chew. Then put the test shortcut in the desktop's leftmost column and confirm the icon bounces off the left screen edge into Nuonuo's mouth on the right. Select three test shortcuts and delete them at once, confirming each icon appears exactly once, they are handled in order, and the hunger statistics increase exactly three times. Finally, try picking up either pet before the kick, and putting the two pets on different monitors; the former should restore the fake icon to its original position and hand it back to the queue, and the latter should use Nuonuo's original solo slurp. Do not test with files that matter.
 
-如有问题，提供含 `PairIconKickStarted`、`PairIconKickImpact`、`PairIconKickEnded` 或 `PairIconKickSkipped` 的 `activity.log` 片段和录屏即可。此功能目前只做了后台测试，未替你启动桌宠前台验收。
+If there is a problem, providing the `activity.log` section containing `PairIconKickStarted`, `PairIconKickImpact`, `PairIconKickEnded` or `PairIconKickSkipped` plus a screen recording is enough. This feature has so far only had background testing, and no foreground acceptance was done by starting the pet for you.
 
-## 8. 发现问题时提供这些信息
+## 8. Information to provide when you find a problem
 
-请记录：
+Please record:
 
-1. 出问题的是上述哪一步、哪个角色，以及是否刚切换角色；
-2. 一段包含完整动作的录屏，而不只是一张结束截图；
-3. 显示器分辨率、缩放比例以及主副屏排列；
-4. 下面命令的输出：
+1. which step above went wrong, which character, and whether you had just switched characters;
+2. a screen recording covering the complete action, not just a single screenshot of the end;
+3. the monitor resolution, the scale factors, and the primary and secondary screen arrangement;
+4. the output of these commands:
 
 ```powershell
 Get-Content "$env:LOCALAPPDATA\SoftMochiPet\activity.log" -Tail 80
 Get-Content "$env:APPDATA\SoftMochiPet\life-state.json"
 ```
 
-若问题发生在批量删除或窗沿抛起，请把日志范围扩大到 200 行，以便包含选区快照和起落全过程：
+If the problem happened during a batch deletion or a ledge toss, widen the log range to 200 lines so it includes the selection snapshot and the whole rise and fall:
 
 ```powershell
 Get-Content "$env:LOCALAPPDATA\SoftMochiPet\activity.log" -Tail 200
 ```
 
-这样可以区分是动画素材、坐标换算、窗口地形、删除捕获还是状态机问题。
+That makes it possible to tell an animation asset problem from a coordinate conversion, window terrain, deletion capture or state machine problem.

@@ -1,55 +1,55 @@
-# 贡献指南
+# Contributing guide
 
-当前非商业许可、素材权利与公开准备状态见 [发布准备状态](docs/RELEASE_READINESS.md)。提交贡献前请确认拥有相应权利，并同意代码按本项目许可分发；不要提交私人凭据、原始日志或未获许可的素材。
+The current noncommercial licence, the asset rights and the state of public-release preparation are in [release readiness](docs/RELEASE_READINESS.md). Before contributing, confirm you hold the relevant rights and agree that your code is distributed under this project's licence; do not submit private credentials, raw logs or assets you have no permission for.
 
-感谢你关注糯糯桌宠。项目高度依赖 Windows 桌面环境；清晰的复现条件通常比一句“不能拖动”更能帮助定位问题。
+Thank you for your interest in the pet. The project depends heavily on the Windows desktop environment, and clear reproduction conditions usually help locate a problem far more than "dragging doesn't work".
 
-## 报告 Bug
+## Reporting bugs
 
-提交 Issue 时请尽量包含：
+When opening an issue, please include as much of the following as you can:
 
-- Windows 版本和系统架构；
-- 显示器数量、排列方式、分辨率与缩放比例；
-- 任务栏位于哪一侧、是否自动隐藏；
-- 可重复的操作步骤、预期结果和实际结果；
-- 问题发生的大致时间；
-- 脱敏后的 `%LOCALAPPDATA%\SoftMochiPet\activity.log`。
+- the Windows version and system architecture;
+- the number of monitors, how they are arranged, their resolutions and scale factors;
+- which side the taskbar is on and whether it auto-hides;
+- repeatable steps, the expected result and the actual result;
+- roughly when the problem happened;
+- a sanitized `%LOCALAPPDATA%\SoftMochiPet\activity.log`.
 
-v1.3.2 起日志中的路径、显示名和窗口标题使用会话内关联编号，不记录异常原始消息；旧版日志仍可能包含个人内容。公开上传前仍应检查日志、截图和录屏，特别是第三方窗口内容。规则见 [隐私与公开边界](docs/PRIVACY.md)。
+Since v1.3.2 the paths, display names and window titles in the log use session-scoped correlation IDs and raw exception messages are not recorded; an older log may still contain personal content. Logs, screenshots and screen recordings should still be checked before being uploaded publicly, especially for third-party window content. The rules are in [privacy and the public boundary](docs/PRIVACY.md).
 
-## 提交代码
+## Submitting code
 
-1. 从最新 `main` 创建用途单一的分支；
-2. 保持改动范围清晰，不要混入构建产物或无关文件；
-3. 为可确定性验证的逻辑增加回归测试；
-4. 运行 Release 构建和逻辑测试；
-5. 涉及窗口、鼠标、显示器或 Explorer 的改动，按 `SELF_TEST.md` 完成相关实机步骤；
-6. 在 Pull Request 中说明原因、实现方式、验证环境和剩余风险。
+1. Create a single-purpose branch from the latest `main`.
+2. Keep the scope of a change clear, and do not mix in build artifacts or unrelated files.
+3. Add regression tests for logic that can be verified deterministically.
+4. Run the Release build and the logic tests.
+5. For changes involving windows, the mouse, monitors or Explorer, complete the relevant on-device steps in `SELF_TEST.md`.
+6. In the pull request, explain the reason, the approach, the environment you verified in, and the remaining risks.
 
-推荐命令：
+Recommended commands:
 
 ```powershell
 .\build.ps1
 dotnet run --project .\tests\SoftMochiPet.LogicTests\SoftMochiPet.LogicTests.csproj -c Release
 ```
 
-## 代码约定
+## Code conventions
 
-- 保持 Nullable 引用类型检查开启；
-- 优先把纯计算放在 `Core` 或可测试的服务中；
-- Win32 坐标明确区分物理像素与 WPF DIP；
-- 新增状态转换时补充结构化诊断事件；
-- 不要静默吞掉会影响用户操作的异常；
-- 不读取文件正文，不增加未经明确说明的联网或遥测行为。
+- Keep nullable reference type checking enabled.
+- Prefer putting pure computation in `Core` or in a testable service.
+- Distinguish physical pixels from WPF DIPs explicitly in Win32 coordinates.
+- Add structured diagnostic events when adding a state transition.
+- Do not silently swallow an exception that affects what the user is doing.
+- Do not read file content, and do not add network access or telemetry that has not been explicitly documented.
 
-## 不要提交
+## Do not commit
 
-- `bin`、`obj`、`dist` 和临时测试目录；
-- 本机设置、生活状态和日志；
-- 包含个人路径、用户名或隐私数据的测试样本；
-- 未确认授权的第三方内容；
-- 仅为本机有效的 IDE 用户配置。
+- `bin`, `obj`, `dist` and temporary test directories.
+- Local settings, life state and logs.
+- Test samples containing personal paths, user names or private data.
+- Third-party content whose permissions are unconfirmed.
+- IDE user configuration that is only valid on your own machine.
 
-## 许可证说明
+## Licence notes
 
-代码采用 [PolyForm Noncommercial 1.0.0](LICENSE)，适用范围见 [NOTICE](NOTICE)。提交贡献时应拥有相应权利，并同意贡献代码按本项目许可证分发；第三方内容需保留其原有许可与来源。角色素材另见 [ASSET_RIGHTS.md](ASSET_RIGHTS.md)。
+The code is under [PolyForm Noncommercial 1.0.0](LICENSE), with the scope in [NOTICE](NOTICE). When contributing you should hold the relevant rights and agree that your contributed code is distributed under this project's licence; third-party content has to keep its original licence and provenance. The character assets are covered separately in [ASSET_RIGHTS.md](ASSET_RIGHTS.md).

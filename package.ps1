@@ -111,7 +111,7 @@ Compress-Archive -LiteralPath $stagingDirectory -DestinationPath $stagingArchive
 
 # Preserve the previous release until both the new folder and archive are complete.
 $previousRelease = [System.IO.Path]::GetFullPath((Join-Path $distRoot (
-    '旧版归档\' + (Get-Date -Format 'yyyyMMdd-HHmmss') + '-' + $packageName)))
+    'old-versions\' + (Get-Date -Format 'yyyyMMdd-HHmmss') + '-' + $packageName)))
 if (-not $previousRelease.StartsWith($distPrefix, [System.StringComparison]::OrdinalIgnoreCase)) {
     throw "Invalid previous-release directory: $previousRelease"
 }

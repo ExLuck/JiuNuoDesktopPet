@@ -1,39 +1,41 @@
-# 双宠日常互动
+# Two-pet daily interactions
 
-## 当前交付与退出条件
+## Current delivery and exit conditions
 
-2026-09-28 已采用：新增小跟屁虫、路过蹭一下、一起玩小球、一起看热闹，复用现有双窗口协调、跑步、摘帽与中断清理。糯糯跟的是伙伴而非鼠标；蹭蹭由近距离相遇触发；小球独立绘制并与踢球帧同步；看热闹只观察窗口位置变化，不读取内容或操作目标窗口。安静模式不发起这四种互动。吃图标、拖拽和主动窗口捣蛋优先。
+2026-09-28, adopted: added "Follow along", "Nuzzle in passing", "Play with the ball" and "Watch together", reusing the existing two-window coordination, running, hat removal and interruption cleanup. Nuonuo follows her companion, not the mouse; the nuzzle is triggered by meeting at close range; the ball is drawn separately and synchronised with the kick frames; and watching together only observes changes in window position, never reading content or operating the target window. Quiet mode never initiates any of these four. Eating icons, dragging and deliberate window mischief all take priority.
 
-退出条件：四个手动入口与自主触发接入；六套原图直出的角色序列完成裁切与锚点校验；后台无声验证轨迹、冷却、中断清理与素材；生成离屏预览和正式免安装包。实际桌面观感由用户测试，不自动打开应用。
+Exit conditions: the four manual entry points and the autonomous triggers are wired up; six character sequences generated straight from the originals have passed frame cutting and anchor verification; background silent verification covers the trajectories, cooldowns, interruption cleanup and assets; and the offscreen previews and the official portable package are produced. The real desktop impression is tested by the user, and the application is not opened automatically.
 
-仅服务本项目两位角色，由本项目维护，不新增通用行为框架。复用来源均为项目既有代码和原始素材，无新增外部运行依赖。生成图不得作为后续模型输入；选定原表与哈希沿用 pair-sprite-manifest.json。
+This serves only this project's two characters, is maintained by this project, and adds no general behaviour framework. Everything reused comes from the project's existing code and original assets, with no new external runtime dependency. Generated images must not be used as input to a later model; the chosen source sheets and their hashes continue to live in pair-sprite-manifest.json.
 
-## 已接入的触发与表现
+## Triggers and behaviour already wired up
 
-| 互动 | 自主条件（还须通过公共忙碌/同屏/同地面检查） | 表现与冷却 |
+| Interaction | Autonomous conditions (must also pass the shared busy / same-screen / same-ground checks) | Behaviour and cooldown |
 | --- | --- | --- |
-| 小跟屁虫 | 菲比普通走动且正远离糯糯，脚部水平距离为角色窗口宽度的 1.3–4 倍 | 糯糯晚 0.8 秒起步，菲比中途停一下回看；约 8.2 秒。菲比已在边缘时停下等她，不原地空走；独立冷却 65 秒 |
-| 路过蹭一下 | 至少一人普通走动，距离为宽度的 0.3–1.05 倍 | 保持原左右次序，靠近、闭眼轻蹭、回位；到位后 3.6 秒，冷却 80 秒 |
-| 一起玩小球 | 常规邀请到期、没人很困或很饿、场地足够、玩球冷却结束 | 摘帽出球、六次传球、收球戴帽，到位后约 20.1 秒；冷却 100 秒。玩球不可用时仍可邀请原有互动 |
-| 一起看热闹 | 同屏出现新窗口，或采样间窗口位置变化累计横纵至少 64 DIP；事件在 8 秒内 | 向事件方向看，菲比先反应、糯糯晚 0.55 秒，约 4.2 秒；冷却 45 秒 |
+| Follow along | Feibi is walking normally and moving away from Nuonuo, with a horizontal foot distance of 1.3-4 times the character window width | Nuonuo sets off 0.8 seconds later and Feibi pauses midway to look back; about 8.2 seconds. If Feibi is already at an edge she stops and waits rather than walking on the spot; separate 65-second cooldown |
+| Nuzzle in passing | At least one of them is walking normally, at a distance of 0.3-1.05 times the width | Keeps their original left-right order: approach, a gentle nuzzle with eyes closed, then back into position; 3.6 seconds once in place, 80-second cooldown |
+| Play with the ball | The regular invitation is due, neither is very sleepy or very hungry, there is enough space, and the ball cooldown has elapsed | Hat off and ball out, six passes, ball away and hat back on; about 20.1 seconds once in place; 100-second cooldown. When the ball is unavailable the original interactions can still be invited |
+| Watch together | A new window appears on the same screen, or window positions shift by at least 64 DIP horizontally and vertically in total between samples; the event must be within 8 seconds | They look towards the event, Feibi reacting first and Nuonuo 0.55 seconds later; about 4.2 seconds; 45-second cooldown |
 
-四种共享至少 18 秒的场景间隔，上述独立冷却从开始时计算。安静模式不发起；任一角色困倦达到 70 或糯糯饥饿达到 55（非禁食/无限）时，由既有睡觉/投喂邀请优先。常规邀请间隔沿用 30–55 秒，玩球参与这一路径；跟随、相遇和看热闹每秒评估一次上下文。刚开始观察时的现存窗口不算新事件；普通窗口与当前前台的最大化窗口都可成为观察对象，但这里不会移动、最小化或截取它们。
+The four share a minimum 18-second gap between scenes, and the separate cooldowns above are counted from the start. Quiet mode never initiates them. When either character's sleepiness reaches 70, or Nuonuo's hunger reaches 55 (outside fasting and infinite modes), the existing sleep and feeding invitations take priority. The regular invitation interval stays at 30-55 seconds and the ball participates in that path, while following, meeting and watching together each evaluate their context once per second. Windows that already exist when observation starts do not count as new events. An ordinary window and a maximized foreground window can both become something to watch, but nothing here moves, minimizes or captures them.
 
-手动入口不受自主冷却限制，仍遵守角色可用、同一显示器、同高度且有连续支撑的约束。窗台移动/关闭/最小化时结束；跨屏、尺寸变化、锁屏、退出、关闭共存、拖拽、删除任务或手动捣蛋沿用统一清理。球仅用一个透明、穿透鼠标且不抢焦点的道具窗口，清理后不残留。失败原因记录在 PairLifeUnavailable（不同高度、支撑不共用、空间不足、无可见窗口），不记录窗口标题、截图或文件内容。
+The manual entry points are not subject to the autonomous cooldowns, but they still respect the constraints of character availability, the same monitor, the same height and continuous support. A scene ends when the window ledge moves, closes or is minimized; crossing screens, size changes, locking, quitting, turning off coexistence, dragging, a deletion task or manual mischief all go through the unified cleanup. The ball uses a single prop window that is transparent, passes the mouse through and never steals focus, and nothing is left behind after cleanup. Failure reasons are recorded in PairLifeUnavailable (different heights, support not shared, not enough space, no visible window), and no window title, screenshot or file content is recorded.
 
-## 美术与验证维护
+## Art and verification maintenance
 
-notice、nuzzle、ball 各有两位角色的 16 帧序列，共 96 帧，源表位于 assets/pair_interactions/sheets。每套以同角色待机中性脸宽校准单一缩放率、脚底对齐，透明清理仅作确定性裁切；当前六张源表全部从原始立绘由内置 imagegen 直接生成。跑步、摘帽与戴帽复用项目选定素材。轻蹭与踢球使用专属姿势；球为本项目原生绘制道具，不是生成角色图再编辑。
+Notice, nuzzle and ball each have a 16-frame sequence for both characters, 96 frames in total, with the source sheets in assets/pair_interactions/sheets. Each set calibrates a single scale factor against the same character's neutral idle face width and aligns the soles, with transparency cleanup being nothing more than a deterministic crop; all six current source sheets were generated directly from the original artwork by the built-in imagegen. Running, hat removal and hat wearing reuse the project's chosen assets. The gentle nuzzle and the ball kick use dedicated poses, and the ball is a prop drawn natively by this project, not a generated character image that was then edited.
 
-小球轨迹与动作时钟由本项目的 CompanionBallTimeline 维护，仅供运行时和离屏验证使用。鞋尖标记为选定 pair_ball 第 7 帧的 512 画布坐标：糯糯 (404,392)，菲比 (100,384)；球心向外偏移一个球半径。帽口沿用 hat_open 末帧 (235,424)。角色镜像、体型和 DPI 一起转换标记，不能以窗口中心代替鞋尖。循环传球时显式重置同名动画时间轴，防止第二脚停在上一脚末帧。
+The ball trajectory and the action clock are maintained by this project's CompanionBallTimeline, used only for runtime and offscreen verification. The toe markers are 512-canvas coordinates from frame 7 of the chosen pair_ball sheet: Nuonuo (404,392), Feibi (100,384), with the ball centre offset outward by one ball radius. The hat opening continues to use the final hat_open frame at (235,424). Character mirroring, body size and DPI all transform the markers together, and the window centre must not be used in place of the toe. When passes loop, the animation timeline of the same name is explicitly reset, so the second kick does not start stuck on the last frame of the first.
 
-后台测试涵盖跟随间距和帧率、事件有效期、五档比例/两种方向下的小球轨迹连续性、六次真实动画重启及重复取消。tools/companion_life_preview.py 使用真实运行帧生成四段无声 GIF；其中玩球读取测试程序 --companion-preview 导出的正式时间轴/真实播放器帧号，不另写模拟播放。预览位于 dist/双宠日常互动预览，不进入正式包。正式版本和发布哈希只维护于 CHARACTERS.md 的当前进度；实机验收清单见 SELF_TEST.md。
+Background tests cover the following distance and frame rate, the event validity window, ball trajectory continuity at five scale steps in two directions, six genuine animation restarts, and repeated cancellation. tools/companion_life_preview.py produces four silent GIFs from real runtime frames; the ball one reads the official timeline and real player frame numbers exported by the test program's `--companion-preview`, rather than writing a separate simulated player. The previews land in `dist/双宠日常互动预览` — the path that tool creates — and do not enter the official package. The official version and the release hashes are maintained only in the current progress section of CHARACTERS.md, and the on-device acceptance checklist is in SELF_TEST.md.
 
-## 动作提示词
+## Action prompts
+
+The prompts below are the literal generation inputs and are kept verbatim as a provenance record.
 
 ### notice_feibi
 
-原始输入：`assets/characters/feibijiubi/original.png`
+Original input: `assets/characters/feibijiubi/original.png`
 
 Create ONE professional 4 by 4 spritesheet containing exactly 16 sequential full-body animation poses of the supplied original character, row-major. Transparent background, no grid, labels, text, objects, companions or shadows. All cells equal size with wide transparent gutters; every hat, hair, hand and foot fully inside its own cell. Fixed orthographic camera, same chibi proportions, crisp smooth outlines and original colors. Fixed world-space foot baseline, identical neutral body size across frames; movement comes from articulated poses, never camera zoom. Frame 0 and frame 15 neutral standing with two visible feet. Playful, cute and expressive but anatomically consistent, no creepy stretched faces. High resolution square sheet.
 Feibijiubi: energetic adorable blonde, original giant white hat with black/blue band ALWAYS on head, purple glossy eyes, blue cross clip, white/black/blue outfit, black gloves, short striped socks and small black shoes. Main facing three-quarter towards screen LEFT. Preserve original identity.
@@ -41,7 +43,7 @@ Feibijiubi: energetic adorable blonde, original giant white hat with black/blue 
 
 ### notice_nuonuo
 
-原始输入：`assets/characters/nuonuo/original.png`
+Original input: `assets/characters/nuonuo/original.png`
 
 Create ONE professional 4 by 4 spritesheet containing exactly 16 sequential full-body animation poses of the supplied original character, row-major. Transparent background, no grid, labels, text, objects, companions or shadows. All cells equal size with wide transparent gutters; every hat, hair, hand and foot fully inside its own cell. Fixed orthographic camera, same chibi proportions, crisp smooth outlines and original colors. Fixed world-space foot baseline, identical neutral body size across frames; movement comes from articulated poses, never camera zoom. Frame 0 and frame 15 neutral standing with two visible feet. Playful, cute and expressive but anatomically consistent, no creepy stretched faces. High resolution square sheet.
 Nuonuo: soft sleepy cute grey-blue long-haired mochi girl, half-lidded FLAT eyes split pink above pale blue below, NO pupils or dark circles, original red/white outfit and red bow, small body and two little black shoes below red skirt. Complete original upper-body reference to full-body chibi. Main facing slightly towards screen RIGHT. Preserve flat original eye design.
@@ -49,7 +51,7 @@ Nuonuo: soft sleepy cute grey-blue long-haired mochi girl, half-lidded FLAT eyes
 
 ### nuzzle_feibi
 
-原始输入：`assets/characters/feibijiubi/original.png`
+Original input: `assets/characters/feibijiubi/original.png`
 
 Create ONE professional 4 by 4 spritesheet containing exactly 16 sequential full-body animation poses of the supplied original character, row-major. Transparent background, no grid, labels, text, objects, companions or shadows. All cells equal size with wide transparent gutters; every hat, hair, hand and foot fully inside its own cell. Fixed orthographic camera, same chibi proportions, crisp smooth outlines and original colors. Fixed world-space foot baseline, identical neutral body size across frames; movement comes from articulated poses, never camera zoom. Frame 0 and frame 15 neutral standing with two visible feet. Playful, cute and expressive but anatomically consistent, no creepy stretched faces. High resolution square sheet.
 Feibijiubi: energetic adorable blonde, original giant white hat with black/blue band ALWAYS on head, purple glossy eyes, blue cross clip, white/black/blue outfit, black gloves, short striped socks and small black shoes. Main facing three-quarter towards screen LEFT. Preserve original identity.
@@ -57,7 +59,7 @@ Feibijiubi: energetic adorable blonde, original giant white hat with black/blue 
 
 ### nuzzle_nuonuo
 
-原始输入：`assets/characters/nuonuo/original.png`
+Original input: `assets/characters/nuonuo/original.png`
 
 Create ONE professional 4 by 4 spritesheet containing exactly 16 sequential full-body animation poses of the supplied original character, row-major. Transparent background, no grid, labels, text, objects, companions or shadows. All cells equal size with wide transparent gutters; every hat, hair, hand and foot fully inside its own cell. Fixed orthographic camera, same chibi proportions, crisp smooth outlines and original colors. Fixed world-space foot baseline, identical neutral body size across frames; movement comes from articulated poses, never camera zoom. Frame 0 and frame 15 neutral standing with two visible feet. Playful, cute and expressive but anatomically consistent, no creepy stretched faces. High resolution square sheet.
 Nuonuo: soft sleepy cute grey-blue long-haired mochi girl, half-lidded FLAT eyes split pink above pale blue below, NO pupils or dark circles, original red/white outfit and red bow, small body and two little black shoes below red skirt. Complete original upper-body reference to full-body chibi. Main facing slightly towards screen RIGHT. Preserve flat original eye design.
@@ -65,7 +67,7 @@ Nuonuo: soft sleepy cute grey-blue long-haired mochi girl, half-lidded FLAT eyes
 
 ### ball_feibi
 
-原始输入：`assets/characters/feibijiubi/original.png`
+Original input: `assets/characters/feibijiubi/original.png`
 
 Create ONE professional 4 by 4 spritesheet containing exactly 16 sequential full-body animation poses of the supplied original character, row-major. Transparent background, no grid, labels, text, objects, companions or shadows. All cells equal size with wide transparent gutters; every hat, hair, hand and foot fully inside its own cell. Fixed orthographic camera, same chibi proportions, crisp smooth outlines and original colors. Fixed world-space foot baseline, identical neutral body size across frames; movement comes from articulated poses, never camera zoom. Frame 0 and frame 15 neutral standing with two visible feet. Playful, cute and expressive but anatomically consistent, no creepy stretched faces. High resolution square sheet.
 Feibijiubi: energetic adorable blonde, original giant white hat with black/blue band ALWAYS on head, purple glossy eyes, blue cross clip, white/black/blue outfit, black gloves, short striped socks and small black shoes. Main facing three-quarter towards screen LEFT. Preserve original identity.
@@ -73,7 +75,7 @@ Feibijiubi: energetic adorable blonde, original giant white hat with black/blue 
 
 ### ball_nuonuo
 
-原始输入：`assets/characters/nuonuo/original.png`
+Original input: `assets/characters/nuonuo/original.png`
 
 Create ONE professional 4 by 4 spritesheet containing exactly 16 sequential full-body animation poses of the supplied original character, row-major. Transparent background, no grid, labels, text, objects, companions or shadows. All cells equal size with wide transparent gutters; every hat, hair, hand and foot fully inside its own cell. Fixed orthographic camera, same chibi proportions, crisp smooth outlines and original colors. Fixed world-space foot baseline, identical neutral body size across frames; movement comes from articulated poses, never camera zoom. Frame 0 and frame 15 neutral standing with two visible feet. Playful, cute and expressive but anatomically consistent, no creepy stretched faces. High resolution square sheet.
 Nuonuo: soft sleepy cute grey-blue long-haired mochi girl, half-lidded FLAT eyes split pink above pale blue below, NO pupils or dark circles, original red/white outfit and red bow, small body and two little black shoes below red skirt. Complete original upper-body reference to full-body chibi. Main facing slightly towards screen RIGHT. Preserve flat original eye design.

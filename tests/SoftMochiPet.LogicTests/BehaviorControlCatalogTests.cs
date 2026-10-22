@@ -9,8 +9,8 @@ internal static class BehaviorControlCatalogTests
             Enum.GetValues<BehaviorControlAction>().All(action => entries.Count(item => item.Action == action) == 1),
             "Every routeable direct action must have exactly one stable menu entry.");
         Assert(entries.All(item => !string.IsNullOrWhiteSpace(item.Group) && !string.IsNullOrWhiteSpace(item.Title) &&
-            !string.IsNullOrWhiteSpace(item.Description) && item.Group.Any(IsChinese) && item.Title.Any(IsChinese)),
-            "Groups and titles must be directly readable Chinese, with a specific behavior description.");
+            !string.IsNullOrWhiteSpace(item.Description) && item.Group.Any(char.IsLetter) && item.Title.Any(char.IsLetter)),
+            "Groups and titles must be directly readable words, with a specific behavior description.");
         Assert(entries.All(item => ReferenceEquals(BehaviorControlCatalog.Get(item.Action), item)),
             "Lookup must return the same immutable metadata shown by the menu.");
         Assert(entries[0].Action == BehaviorControlAction.Stop && entries[0].Requirements == BehaviorControlRequirements.None,
@@ -68,9 +68,9 @@ internal static class BehaviorControlCatalogTests
     {
         var previews = BehaviorControlCatalog.All.Where(item => item.Kind == BehaviorControlKind.AnimationPreview).ToArray();
         Assert(previews.Length == 1 && previews[0].Action == BehaviorControlAction.Satisfied &&
-            previews[0].Title.Contains("动作欣赏", StringComparison.Ordinal) && previews[0].Description.Contains("不增加进食记录", StringComparison.Ordinal),
+            previews[0].Title.Contains("Animation showcase", StringComparison.Ordinal) && previews[0].Description.Contains("adding to the feeding record", StringComparison.Ordinal),
             "The isolated satisfaction clip must be explicitly labeled as appreciation with no claimed meal completion.");
-        Assert(BehaviorControlCatalog.Get(BehaviorControlAction.EatIcon).Description.Contains("不删除真实文件", StringComparison.Ordinal) &&
+        Assert(BehaviorControlCatalog.Get(BehaviorControlAction.EatIcon).Description.Contains("the real file is not deleted", StringComparison.Ordinal) &&
             BehaviorControlCatalog.Get(BehaviorControlAction.ThrowAndRecoverHat).Kind == BehaviorControlKind.Behavior &&
             BehaviorControlCatalog.Get(BehaviorControlAction.Run).Kind == BehaviorControlKind.Behavior,
             "Safe icon consumption, complete hat recovery and running must use the true route rather than a clip-only shortcut.");
@@ -81,7 +81,6 @@ internal static class BehaviorControlCatalogTests
             "Filling the meter is a state edit, not evidence that a real target exists or a prank completed.");
     }
 
-    private static bool IsChinese(char value) => value is >= '\u4e00' and <= '\u9fff';
 
     private static void Assert(bool condition, string message)
     {

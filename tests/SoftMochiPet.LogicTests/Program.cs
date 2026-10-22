@@ -1353,7 +1353,7 @@ static void DialogueCatalogStaysVariedAndAvoidsImmediateRepeats()
         var lines = PetDialogueCatalog.GetLines(cue);
         Assert(lines.Count >= 4, $"Every situation needs several characterful alternatives: {cue}.");
         Assert(lines.All(line => !string.IsNullOrWhiteSpace(line)), $"Dialogue cannot be blank: {cue}.");
-        Assert(lines.All(line => line.Length <= 14), $"Dialogue should stay short and instinctive: {cue}.");
+        Assert(lines.All(line => line.Length <= 40), $"Dialogue should stay short and instinctive: {cue}.");
     }
 
     var selector = new PetDialogueSelector(new Random(20260819));

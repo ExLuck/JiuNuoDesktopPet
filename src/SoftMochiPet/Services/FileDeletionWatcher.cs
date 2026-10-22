@@ -324,7 +324,7 @@ public sealed class FileDeletionWatcher : IDisposable
         displayName ??= Path.GetFileName(originalPath.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar));
         if (string.IsNullOrWhiteSpace(displayName))
         {
-            displayName = "神秘文件";
+            displayName = "mystery file";
         }
 
         var iconCapturedBeforeDeletion = _iconCache.TryRemove(originalPath, out var cachedIcon);

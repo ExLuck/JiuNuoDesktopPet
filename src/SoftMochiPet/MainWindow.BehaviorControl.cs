@@ -24,16 +24,16 @@ public partial class MainWindow
         {
             _behaviorAutonomyEnabled = enabled;
             ScheduleNextAutonomousDecision(4, 4);
-            SetBehaviorControlStatus(enabled ? "自主日常已开启" : "自主日常已关闭，可直接点选行为");
+            SetBehaviorControlStatus(enabled ? "Autonomous daily activity is on" : "Autonomous daily activity is off; pick a behavior directly");
         };
-        SetBehaviorControlStatus("右键选择行为 · 自主日常默认关闭");
+        SetBehaviorControlStatus("Right-click to choose a behavior · autonomous activity off by default");
     }
 
     private void QueueBehaviorControl(BehaviorControlAction action)
     {
         if (!IsBehaviorControlMode || _isClosing) return;
         _pendingBehavior = (action, _character.Id);
-        SetBehaviorControlStatus("关菜单后执行：" + BehaviorControlCatalog.Get(action).Title);
+        SetBehaviorControlStatus("Runs after the menu closes: " + BehaviorControlCatalog.Get(action).Title);
     }
 
     private void SetBehaviorControlStatus(string text)
@@ -52,31 +52,31 @@ public partial class MainWindow
     private string? BehaviorUnavailableReason(BehaviorControlAction action)
     {
         var item = BehaviorControlCatalog.Get(action);
-        if (!item.Supports(_character)) return "当前角色没有这个行为";
+        if (!item.Supports(_character)) return "This character does not have that behavior";
         if (action == BehaviorControlAction.Stop) return null;
-        if (_sessionLocked || _isClosing) return "当前会话不可用";
-        if (_isDragging) return "先松开桌宠";
+        if (_sessionLocked || _isClosing) return "Not available in this session";
+        if (_isDragging) return "Let go of the pet first";
         if (action == BehaviorControlAction.ReturnWindows)
-            return !HasHeldPrank ? "帽子里没有窗口" : _manualRestoreInProgress ? "正在归还窗口" : null;
-        if (_prankPhase != PrankPhase.None || _prankAwaitingSystem) return "先停止当前捣蛋，或等她收好帽子";
-        if (_animator.Hatless) return "等她捡回帽子";
+            return !HasHeldPrank ? "There is no window in the hat" : _manualRestoreInProgress ? "Returning the window" : null;
+        if (_prankPhase != PrankPhase.None || _prankAwaitingSystem) return "Stop the current prank first, or wait until she stows her hat";
+        if (_animator.Hatless) return "Wait for her to pick her hat back up";
         if (_settings.QuietMode && action is not (BehaviorControlAction.Stand or BehaviorControlAction.Sleep or BehaviorControlAction.Wake))
-            return "请先关闭安静模式";
+            return "Turn off quiet mode first";
         var needs = item.Requirements;
         if (needs.HasFlag(BehaviorControlRequirements.Awake) && _state is PetState.Sleeping or PetState.Waking)
-            return "先叫醒她";
+            return "Wake her first";
         if (needs.HasFlag(BehaviorControlRequirements.Sleeping) && _state != PetState.Sleeping)
-            return "她现在没有睡觉";
+            return "She is not asleep right now";
         if (needs.HasFlag(BehaviorControlRequirements.EmptyHat) && HasHeldPrank)
-            return "帽子已有窗口，请先归还";
+            return "The hat already holds a window; give it back first";
         if (needs.HasFlag(BehaviorControlRequirements.OutsideEnclosure) && _enclosureHandle != IntPtr.Zero)
-            return "先把她拖到窗口外";
+            return "Drag her off the window first";
         if (needs.HasFlag(BehaviorControlRequirements.FoodEnabled) && _settings.FastingMode)
-            return "请先关闭辟谷模式";
+            return "Turn off fasting mode first";
         if (needs.HasFlag(BehaviorControlRequirements.GroundSupport) && BehaviorSupport() is null)
-            return "先让她站稳";
+            return "Let her find her footing first";
         if (needs.HasFlag(BehaviorControlRequirements.WindowPlatform) && _supportIsDesktopFloor)
-            return "需要先站在真实窗口顶边";
+            return "She needs to be standing on a real window top edge first";
         return null;
     }
 
@@ -110,7 +110,7 @@ public partial class MainWindow
             {
                 _activeBehavior = action;
                 RequestWindowReturn();
-                SetBehaviorControlStatus("正在归还原窗口");
+                SetBehaviorControlStatus("Returning the original window");
                 return;
             }
             // Commands replace ordinary movement, never another native-window
@@ -121,11 +121,11 @@ public partial class MainWindow
             if (!started)
             {
                 _activeBehavior = null;
-                if (!_behaviorRequestFailed) RejectBehavior("暂时无法执行，请检查支撑面或目标");
+                if (!_behaviorRequestFailed) RejectBehavior("Not possible right now; check the surface or the target");
                 return;
             }
             if (!_behaviorRequestFailed)
-                SetBehaviorControlStatus("执行：" + BehaviorControlCatalog.Get(action).Title);
+                SetBehaviorControlStatus("Running: " + BehaviorControlCatalog.Get(action).Title);
             DiagnosticsLog.WriteEvent("BehaviorControlStarted", ("Action", action), ("Character", _character.Id),
                 ("State", _state), ("Animation", _animator.CurrentClip));
         }
@@ -135,7 +135,7 @@ public partial class MainWindow
             ClearFoodInteractions();
             _activeBehavior = null;
             ReturnToIdle();
-            RejectBehavior("行为未完成，请查看日志");
+            RejectBehavior("The behavior did not finish; check the log");
             DiagnosticsLog.WriteEvent("BehaviorControlFailed", ("Action", action), ("Reason", exception.GetType().Name));
         }
     }
@@ -171,7 +171,7 @@ public partial class MainWindow
                 return true;
             case BehaviorControlAction.LickIcon:
                 if (TryBeginIconLick(manualRequest: true)) return true;
-                RejectBehavior("没有可见桌面图标，请露出桌面后重试");
+                RejectBehavior("No visible desktop icons; show the desktop and try again");
                 return false;
             case BehaviorControlAction.EatIcon: return StartControlledIconMeal();
             case BehaviorControlAction.Satisfied:
@@ -187,7 +187,7 @@ public partial class MainWindow
             case BehaviorControlAction.Tear: return StartControlledPrank(PrankKind.Tear);
             case BehaviorControlAction.Tease:
                 UpdateMischief(0);
-                if (!_mischief.Tease()) { RejectBehavior("逗弄或大招仍在冷却"); return false; }
+                if (!_mischief.Tease()) { RejectBehavior("Teasing or the big move is still on cooldown"); return false; }
                 PlayMischiefVoice(MischiefCue.Teased);
                 SaveMischiefState();
                 return true;
@@ -223,7 +223,7 @@ public partial class MainWindow
         ResetOrdinaryBehavior();
         if (!TryResolveGroundSupport(false)) BeginFall(reason: "BehaviorControlStop");
         _voice.Stop();
-        SetBehaviorControlStatus(HasHeldPrank ? "已停止 · 帽中窗口仍保留，可右键归还" : "已停止，等待选择行为");
+        SetBehaviorControlStatus(HasHeldPrank ? "Stopped · the hat still holds a window; right-click to give it back" : "Stopped; waiting for a behavior");
         DiagnosticsLog.WriteEvent("BehaviorControlStopped", ("HatOccupied", HasHeldPrank));
     }
 
@@ -239,7 +239,7 @@ public partial class MainWindow
         if (!IsBehaviorControlMode || _activeBehavior is not { } action || _state != PetState.Idle || _prankPhase != PrankPhase.None) return;
         _activeBehavior = null;
         if (_behaviorRequestFailed) return;
-        SetBehaviorControlStatus("已完成：" + BehaviorControlCatalog.Get(action).Title + (HasHeldPrank ? " · 窗口留在帽中" : ""));
+        SetBehaviorControlStatus("Finished: " + BehaviorControlCatalog.Get(action).Title + (HasHeldPrank ? " · window left in the hat" : ""));
         DiagnosticsLog.WriteEvent("BehaviorControlCompleted", ("Action", action), ("HatOccupied", HasHeldPrank));
     }
 
@@ -250,7 +250,7 @@ public partial class MainWindow
         if (surface is null) return false;
         var foot = PrankFoot();
         var plan = WindowClimbPlanner.Choose(_surfaceProvider.Surfaces, surface, (int)Math.Round(foot.X), PetPhysicalScale(), 0);
-        if (plan is null) { RejectBehavior("附近没有能够到的窗口边缘"); return false; }
+        if (plan is null) { RejectBehavior("No reachable window edge nearby"); return false; }
         _pendingClimb = plan;
         _movementPurpose = MovementPurpose.ClimbApproach;
         _targetScreenX = plan.ApproachX;
@@ -265,7 +265,7 @@ public partial class MainWindow
     {
         RefreshSurfaceMap(force: true);
         var surface = BehaviorSupport();
-        if (surface is null || surface.IsDesktopFloor) { RejectBehavior("先把她放到真实窗口的顶边"); return false; }
+        if (surface is null || surface.IsDesktopFloor) { RejectBehavior("Put her on a real window top edge first"); return false; }
         var foot = PrankFoot();
         _patrolDirection = foot.X - surface.Left < surface.Right - foot.X ? -1 : 1;
         _targetScreenX = _patrolDirection < 0 ? surface.Left + 20 : surface.Right - 20;
@@ -284,7 +284,7 @@ public partial class MainWindow
         if (!toss)
         {
             var available = PrankFoot().Y - monitor.WorkArea.Top - Height * monitor.Scale;
-            if (available < 36) { RejectBehavior("上方空间不足，请把她放低一些"); return false; }
+            if (available < 36) { RejectBehavior("Not enough room above; place her lower"); return false; }
             DisplayGeometry.OffsetWindowPhysical(_windowHandle, 0, -(int)Math.Min(available, 220 * monitor.Scale));
         }
         BeginFall(toss ? -650 * monitor.Scale : 0, toss ? "BehaviorControlToss" : "BehaviorControlFall",
@@ -324,12 +324,12 @@ public partial class MainWindow
                 DesktopIconLocator.FindListViewAt(candidate.Center) != IntPtr.Zero)
             .OrderBy(candidate => Math.Pow(candidate.Center.X - origin.X, 2) + Math.Pow(candidate.Center.Y - origin.Y, 2))
             .FirstOrDefault();
-        if (icon is null) { RejectBehavior("没有可见桌面图标，请露出桌面后重试"); return false; }
+        if (icon is null) { RejectBehavior("No visible desktop icons; show the desktop and try again"); return false; }
         var bitmap = DesktopIconCopyCapture.Capture(icon);
-        if (bitmap is null) { RejectBehavior("图标被遮挡或无法读取，请换一个位置重试"); return false; }
+        if (bitmap is null) { RejectBehavior("The icon is covered or unreadable; try a different spot"); return false; }
         var target = DisplayGeometry.ClampPointToNearestWorkArea(
             new DrawingPoint(icon.Center.X + icon.PixelSize.Width + 24, icon.Center.Y), 36);
-        var meal = new DeletedItemInfo("behavior-icon-copy.snack", "图标副本", DateTimeOffset.UtcNow, false,
+        var meal = new DeletedItemInfo("behavior-icon-copy.snack", "Icon copy", DateTimeOffset.UtcNow, false,
             CachedIcon: bitmap, ScreenX: target.X, ScreenY: target.Y,
             IconPixelWidth: bitmap.PixelWidth, IconPixelHeight: bitmap.PixelHeight,
             QueueId: Interlocked.Increment(ref _nextMealQueueId), AnchorSource: "BehaviorControlIconCopy");

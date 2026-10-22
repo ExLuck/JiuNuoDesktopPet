@@ -5,30 +5,30 @@ internal static class FeibiJiubiDialogue
     private static readonly IReadOnlyDictionary<DialogueCue, IReadOnlyList<string>> Lines =
         new Dictionary<DialogueCue, IReadOnlyList<string>>
         {
-            [DialogueCue.Startup] = ["啾，你来啦！", "嗨，陪我玩！", "今天去哪呀？", "嘿嘿，见面啦。"],
-            [DialogueCue.IconsHidden] = ["咦，都躲啦？", "在玩捉迷藏？", "出来玩嘛！", "我明明看见啦。"],
-            [DialogueCue.PlatformLaunch] = ["芜湖——！", "帽子抓紧我！", "哇，脚轻轻！", "还能更高吗？"],
-            [DialogueCue.HardLanding] = ["哎哟，弹一下！", "鞋鞋先到啦！", "嘿，还能蹦！", "啾，没摔扁！"],
-            [DialogueCue.ConfidentClimb] = ["嘿，看我爬！", "上面有啥呀？", "小脚很有劲！", "冲呀冲呀！"],
-            [DialogueCue.CarefulClimb] = ["鞋鞋别滑呀。", "再够高一点！", "我抓得住嘛？", "帽子别挡眼呀。"],
-            [DialogueCue.ClimbSlip] = ["哎呀，手滑滑！", "差一小点嘛！", "墙墙好滑呀。", "不服，再爬！"],
-            [DialogueCue.ClimbSuccess] = ["看，我在这儿！", "嘿嘿，够高吧！", "风吹帽子啦！", "下面变小啦！"],
-            [DialogueCue.Exploration] = ["那边亮亮的！", "嘿，去瞅瞅！", "还有哪儿没玩？", "跟小脚走嘛！"],
-            [DialogueCue.Sleep] = ["眼皮好重呀。", "再玩……一会。", "啾，借我靠靠。", "梦里也有你？"],
-            [DialogueCue.WakeNormally] = ["嘿，又见面啦！", "梦里跑好远呀。", "睡翘一撮毛！", "啾，还想出去！"],
-            [DialogueCue.PickedUp] = ["举高高耶！", "啾，带我去哪？", "小脚够不到啦。", "晃晃还挺好玩！"],
-            [DialogueCue.Released] = ["哇，地板来啦！", "小脚找地板！", "等等我的帽子！", "啾，轻轻一点！"],
-            [DialogueCue.DragThrow] = ["咻——好快呀！", "帽子追不上啦！", "哇，风呼呼的！", "再飞一小会！"],
-            [DialogueCue.TerrainHop] = ["蹦高一点嘛！", "嘿，小脚弹弹！", "啾，够得着！", "一下就过去呀！"],
-            [DialogueCue.TerrainJumpDown] = ["下面也想逛！", "嘿，接住帽子！", "往下蹦蹦嘛！", "啾，那儿好玩！"],
-            [DialogueCue.EdgeSlide] = ["哧溜，好滑呀！", "小手抓牢嘛！", "鞋鞋蹭痒痒。", "再溜一小段！"],
-            [DialogueCue.WindowMaximized] = ["哇，挤到我啦！", "窗窗长好快！", "帽子吓歪啦！", "怎么突然飞啦！"],
-            [DialogueCue.Home] = ["窝窝真舒服！", "嘿，还是这里！", "回来看你啦！", "帽子也歇歇。"],
-            [DialogueCue.VoiceEnabled] = ["啾，在这里！", "嘿，看看我！", "哈喽小伙伴！", "想我了没呀？"],
-            [DialogueCue.VoiceDisabled] = ["嘘，悄悄的。", "蹑手蹑脚走。", "啾……小小声。", "偷偷陪着你。"],
+            [DialogueCue.Startup] = ["Chirp, you are here!", "Hi, play with me!", "Where are we going today?", "Hehe, we meet again."],
+            [DialogueCue.IconsHidden] = ["Huh, everyone hid?", "Are we playing hide and seek?", "Come out and play!", "I definitely saw you."],
+            [DialogueCue.PlatformLaunch] = ["Woohoo--!", "Hat, hold on tight!", "Wow, light little feet!", "Can we go higher?"],
+            [DialogueCue.HardLanding] = ["Oops, a bounce!", "My shoes got there first!", "Hey, I can still bounce!", "Chirp, not squashed!"],
+            [DialogueCue.ConfidentClimb] = ["Hey, watch me climb!", "What is up there?", "My little feet are strong!", "Go go go!"],
+            [DialogueCue.CarefulClimb] = ["Shoes, do not slip.", "Just a little higher!", "Can I hold on?", "Hat, do not cover my eyes."],
+            [DialogueCue.ClimbSlip] = ["Oh no, slippery hands!", "So close!", "The wall is so slippery.", "Not giving up, climbing again!"],
+            [DialogueCue.ClimbSuccess] = ["Look, I am up here!", "Hehe, high enough!", "The wind is blowing my hat!", "Everything looks tiny below!"],
+            [DialogueCue.Exploration] = ["It is all shiny over there!", "Hey, let us go look!", "Where have we not played yet?", "Follow my little feet!"],
+            [DialogueCue.Sleep] = ["My eyelids are so heavy.", "Play... a little longer.", "Chirp, let me lean on you.", "Are you in my dream too?"],
+            [DialogueCue.WakeNormally] = ["Hey, we meet again!", "I ran so far in my dream.", "Slept my hair into a tuft!", "Chirp, I want to go out again!"],
+            [DialogueCue.PickedUp] = ["Lift me up high!", "Chirp, where are you taking me?", "My little feet cannot reach.", "Swinging is pretty fun!"],
+            [DialogueCue.Released] = ["Whoa, here comes the floor!", "Little feet, find the floor!", "Wait for my hat!", "Chirp, gently!"],
+            [DialogueCue.DragThrow] = ["Whoosh-- so fast!", "My hat cannot keep up!", "Whoa, the wind is whooshing!", "Fly a little longer!"],
+            [DialogueCue.TerrainHop] = ["Bounce a bit higher!", "Hey, springy little feet!", "Chirp, I can reach!", "Over in one go!"],
+            [DialogueCue.TerrainJumpDown] = ["I want to wander down there too!", "Hey, catch my hat!", "Bounce on down!", "Chirp, that looks fun!"],
+            [DialogueCue.EdgeSlide] = ["Wheee, so slippery!", "Little hands, hold tight!", "My shoes are tickling.", "One more little slide!"],
+            [DialogueCue.WindowMaximized] = ["Whoa, it is squishing me!", "The window grew so fast!", "My hat got knocked crooked!", "Why am I suddenly flying!"],
+            [DialogueCue.Home] = ["My nest is so cosy!", "Hey, this place is the best!", "Came back to see you!", "My hat is resting too."],
+            [DialogueCue.VoiceEnabled] = ["Chirp, over here!", "Hey, look at me!", "Hello, buddy!", "Did you miss me?"],
+            [DialogueCue.VoiceDisabled] = ["Shh, quietly.", "Tiptoeing along.", "Chirp... very softly.", "Secretly keeping you company."],
         };
 
-    private static readonly IReadOnlyList<string> PlayLines = ["嘿，玩什么呀？", "陪我蹦一下！", "我有小主意！", "帽子藏好啦。"];
+    private static readonly IReadOnlyList<string> PlayLines = ["Hey, what are we playing?", "Bounce with me!", "I have a little idea!", "My hat is well hidden."];
 
     public static IReadOnlyList<string> GetLines(DialogueCue cue) =>
         Lines.TryGetValue(cue, out var lines) ? lines : PlayLines;

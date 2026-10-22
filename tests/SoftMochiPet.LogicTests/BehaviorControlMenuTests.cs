@@ -106,10 +106,10 @@ internal static class BehaviorControlMenuTests
         {
             var status = Item(menu, "Status");
             var actions = Item(menu, "Actions");
-            foreach (var message in new[] { "正在执行：散步", "没有合适的窗口", "需要站在窗口上" })
+            foreach (var message in new[] { "Running: Take a walk", "No suitable window", "Must stand on a window" })
             {
                 Invoke(menu, "SetStatus", message);
-                Assert(ReferenceEquals(status, Item(menu, "Status")) && status.Text == $"行为控制版：{message}" &&
+                Assert(ReferenceEquals(status, Item(menu, "Status")) && status.Text == $"Behavior Control: {message}" &&
                     !status.Enabled && ReferenceEquals(actions, Item(menu, "Actions")),
                     "Status feedback must update in place and cannot become an executable action.");
             }

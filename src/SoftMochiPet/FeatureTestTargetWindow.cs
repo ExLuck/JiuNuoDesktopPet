@@ -11,7 +11,7 @@ namespace SoftMochiPet;
 /// <summary>A user-requested, disposable window used only by the isolated feature-test process.</summary>
 public sealed class FeatureTestTargetWindow : Window
 {
-    public const string WindowTitle = "菲比啾比专用测试窗口";
+    public const string WindowTitle = "Feibi Jiubi dedicated test window";
     private readonly Process _parent;
     private readonly DispatcherTimer _parentTimer;
 
@@ -38,7 +38,7 @@ public sealed class FeatureTestTargetWindow : Window
         root.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
         var heading = new TextBlock
         {
-            Text = "给菲比啾比的小玩具",
+            Text = "A little toy for Feibi Jiubi",
             FontSize = 24,
             FontWeight = FontWeights.SemiBold,
             Foreground = new SolidColorBrush(Color.FromRgb(55, 43, 98)),
@@ -53,7 +53,7 @@ public sealed class FeatureTestTargetWindow : Window
         tiles.ColumnDefinitions.Add(new ColumnDefinition());
         Color[] colors = [Color.FromRgb(160, 212, 250), Color.FromRgb(202, 182, 245),
             Color.FromRgb(255, 206, 154), Color.FromRgb(172, 226, 205)];
-        string[] labels = ["01  跳跳", "02  帽子", "03  纸片", "04  回来啦"];
+        string[] labels = ["01  Hop", "02  Hat", "03  Paper", "04  Back again"];
         for (var index = 0; index < colors.Length; index++)
         {
             var tile = new Border
@@ -80,7 +80,7 @@ public sealed class FeatureTestTargetWindow : Window
 
         var footer = new TextBlock
         {
-            Text = "仅用于窗口互动测试，不含文件内容。\n可以移动、最小化，或直接关闭。",
+            Text = "For window interaction testing only; it holds no file content.\nYou can move it, minimize it, or just close it.",
             FontSize = 13,
             TextWrapping = TextWrapping.Wrap,
             Foreground = new SolidColorBrush(Color.FromRgb(74, 74, 100)),

@@ -56,7 +56,7 @@ public sealed class PetCharacterProfile
     public PetCharacterGeometry Geometry { get; }
 
     public static PetCharacterProfile Nuonuo { get; } = new(
-        "nuonuo", "糯糯",
+        "nuonuo", "Nuonuo",
         Path.Combine("assets", "sprites", "runtime"),
         Path.Combine("assets", "audio", "voice"),
         Path.Combine("assets", "pet.ico"),
@@ -68,7 +68,7 @@ public sealed class PetCharacterProfile
             45, 267, 60, 334, 407, 96, 92, 416, 466, 191, 304));
 
     public static PetCharacterProfile FeibiJiubi { get; } = new(
-        "feibijiubi", "菲比啾比",
+        "feibijiubi", "Feibi Jiubi",
         Path.Combine("assets", "characters", "feibijiubi", "runtime"),
         Path.Combine("assets", "characters", "feibijiubi", "audio"),
         Path.Combine("assets", "characters", "feibijiubi", "pet.ico"),

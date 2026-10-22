@@ -54,283 +54,283 @@ public static class PetDialogueCatalog
         {
             [DialogueCue.Startup] =
             [
-                "早呀。",
-                "我醒啦。",
-                "今天吃什么？",
-                "先发会儿呆。",
+                "Morning.",
+                "I am awake.",
+                "What are we eating today?",
+                "Just gonna space out a bit.",
             ],
             [DialogueCue.Buffet] =
             [
-                "好多！",
-                "都是我的？",
-                "吃不完啦。",
-                "嘿嘿，开饭。",
+                "So many!",
+                "All mine?",
+                "I cannot finish it all.",
+                "Hehe, dinner time.",
             ],
             [DialogueCue.MealSpotted] =
             [
-                "有吃的。",
-                "香香的。",
-                "我来啦。",
-                "那个能吃吗？",
+                "There is food.",
+                "Smells nice.",
+                "Here I come.",
+                "Can I eat that?",
             ],
             [DialogueCue.MealQueueContinues] =
             [
-                "还有呀。",
-                "下一个。",
-                "都要吃。",
-                "别跑。",
+                "There is more.",
+                "Next one.",
+                "I want them all.",
+                "Do not run.",
             ],
             [DialogueCue.IconsHidden] =
             [
-                "没有图标……",
-                "藏哪啦？",
-                "舔不到。",
-                "空空的。",
+                "No icons...",
+                "Where did they hide?",
+                "Cannot reach to lick.",
+                "All empty.",
             ],
             [DialogueCue.ManualIconLick] =
             [
-                "好饿……",
-                "先舔一口。",
-                "就一小口。",
-                "这个能吃吗？",
+                "So hungry...",
+                "One lick first.",
+                "Just a tiny bite.",
+                "Is this edible?",
             ],
             [DialogueCue.CuriousIconLick] =
             [
-                "什么味呀？",
-                "舔一下。",
-                "看着好香。",
-                "就试试。",
+                "What flavour is it?",
+                "A little lick.",
+                "Looks tasty.",
+                "Just a taste.",
             ],
             [DialogueCue.PlatformLaunch] =
             [
-                "飞起来啦！",
-                "呜哇！",
-                "脚呢？",
-                "好高！",
+                "I am flying!",
+                "Wooah!",
+                "Where are my feet?",
+                "So high!",
             ],
             [DialogueCue.HardLanding] =
             [
-                "噗叽。",
-                "扁掉啦。",
-                "呼，到了。",
-                "我又圆啦。",
+                "Squish.",
+                "I went flat.",
+                "Phew, made it.",
+                "I am round again.",
             ],
             [DialogueCue.VeryHungry] =
             [
-                "好饿……",
-                "饿扁了。",
-                "想吃东西。",
-                "肚子空啦。",
+                "So hungry...",
+                "Flat with hunger.",
+                "I want a snack.",
+                "My tummy is empty.",
             ],
             [DialogueCue.ABitHungry] =
             [
-                "有点饿。",
-                "想吃一口。",
-                "有吃的吗？",
-                "嘴馋了。",
+                "A little hungry.",
+                "I want one bite.",
+                "Any food?",
+                "My mouth is watering.",
             ],
             [DialogueCue.ConfidentClimb] =
             [
-                "我能上去。",
-                "看我的。",
-                "嘿咻。",
-                "上面有吃的？",
+                "I can get up there.",
+                "Watch me.",
+                "Heave ho.",
+                "Is there food up there?",
             ],
             [DialogueCue.CarefulClimb] =
             [
-                "好高……",
-                "慢一点。",
-                "别掉呀。",
-                "我试试。",
+                "So high...",
+                "Slow down.",
+                "Do not fall.",
+                "Let me try.",
             ],
             [DialogueCue.ClimbSlip] =
             [
-                "滑下来啦……",
-                "没抓住。",
-                "呜……差一点。",
-                "再来。",
+                "Sliding back down...",
+                "Lost my grip.",
+                "Aww... so close.",
+                "Again.",
             ],
             [DialogueCue.ClimbSuccess] =
             [
-                "上来啦。",
-                "嘿嘿。",
-                "我厉害吧。",
-                "这里好高。",
+                "I made it up.",
+                "Hehe.",
+                "Pretty good, right?",
+                "It is high up here.",
             ],
             [DialogueCue.HungryRoll] =
             [
-                "好饿好饿。",
-                "给我吃的。",
-                "我滚一下。",
-                "饿扁啦。",
+                "So so hungry.",
+                "Give me food.",
+                "I will roll.",
+                "Flattened by hunger.",
             ],
             [DialogueCue.Suction] =
             [
-                "吸过来！",
-                "啊——",
-                "到嘴里来。",
-                "我要吃啦。",
+                "Slurp it over!",
+                "Aaah--",
+                "Into my mouth.",
+                "I am going to eat.",
             ],
             [DialogueCue.Exploration] =
             [
-                "这里是哪？",
-                "没来过。",
-                "看看这边。",
-                "好奇。",
+                "Where is this?",
+                "Never been here.",
+                "Let me look over here.",
+                "Curious.",
             ],
             [DialogueCue.Sleep] =
             [
-                "我要睡觉啦。",
-                "困困。",
-                "先睡一会儿。",
-                "晚安。",
+                "I am going to sleep.",
+                "Sleepy.",
+                "Just a little nap.",
+                "Good night.",
             ],
             [DialogueCue.WakeForFood] =
             [
-                "有吃的？",
-                "我醒啦！",
-                "香香的！",
-                "开饭吗？",
+                "Food?",
+                "I am awake!",
+                "Smells so nice!",
+                "Is it dinner time?",
             ],
             [DialogueCue.WakeNormally] =
             [
-                "醒啦。",
-                "还想睡……",
-                "睡饱啦。",
-                "再躺一下？",
+                "Awake now.",
+                "Still sleepy...",
+                "Slept enough.",
+                "Lie down a bit more?",
             ],
             [DialogueCue.ComfortablyFull] =
             [
-                "吃饱啦。",
-                "肚子圆圆。",
-                "好撑。",
-                "不动了。",
+                "All full.",
+                "Round little tummy.",
+                "So stuffed.",
+                "Not moving.",
             ],
             [DialogueCue.IconTaste] =
             [
-                "不好吃。",
-                "只有图标味。",
-                "空的。",
-                "再舔一下？",
+                "Not tasty.",
+                "Tastes like icon only.",
+                "Empty.",
+                "Another lick?",
             ],
             [DialogueCue.FeastContinues] =
             [
-                "还能吃！",
-                "再来一个。",
-                "都给我。",
-                "还没饱。",
+                "I can eat more!",
+                "One more.",
+                "Give them all to me.",
+                "Not full yet.",
             ],
             [DialogueCue.AnotherBite] =
             [
-                "下一个。",
-                "还有吗？",
-                "继续吃。",
-                "我还要。",
+                "Next one.",
+                "Any more?",
+                "Keep eating.",
+                "I want more.",
             ],
             [DialogueCue.Stuffed] =
             [
-                "吃撑啦。",
-                "肚子好圆。",
-                "真的饱了。",
-                "动不了啦。",
+                "Too stuffed.",
+                "My tummy is so round.",
+                "Really full now.",
+                "Cannot move.",
             ],
             [DialogueCue.TastedItem] =
             [
-                "{item} 好吃。",
-                "{item} 香香的。",
-                "喜欢 {item}。",
-                "这个叫 {item}？",
+                "{item} is tasty.",
+                "{item} smells nice.",
+                "I like {item}.",
+                "This one is called {item}?",
             ],
             [DialogueCue.PickedUp] =
             [
-                "被抓住啦。",
-                "轻一点。",
-                "要拉长啦。",
-                "呜……",
+                "You caught me.",
+                "Gently.",
+                "I am stretching.",
+                "Ooow...",
             ],
             [DialogueCue.Released] =
             [
-                "放开啦。",
-                "我掉啦。",
-                "脚在哪里？",
-                "转圈圈……",
+                "Let go.",
+                "I am falling.",
+                "Where are my feet?",
+                "Spinning around...",
             ],
             [DialogueCue.DragThrow] =
             [
-                "飞走啦！",
-                "呜哇——",
-                "停不下来！",
-                "我被甩啦！",
+                "Flying away!",
+                "Wooah--",
+                "I cannot stop!",
+                "I got flung!",
             ],
             [DialogueCue.TerrainHop] =
             [
-                "跳一下。",
-                "嘿咻！",
-                "我会飞。",
-                "蹦起来啦。",
+                "A little jump.",
+                "Heave ho!",
+                "I can fly.",
+                "Bouncing up.",
             ],
             [DialogueCue.TerrainJumpDown] =
             [
-                "我跳啦。",
-                "下面接住我。",
-                "走你！",
-                "飞下去。",
+                "I am jumping.",
+                "Catch me down there.",
+                "Off I go!",
+                "Flying down.",
             ],
             [DialogueCue.EdgeSlide] =
             [
-                "滑下去啦。",
-                "慢慢滑。",
-                "手要抓住。",
-                "这是滑梯？",
+                "Sliding down.",
+                "Sliding slowly.",
+                "Hold on tight.",
+                "Is this a slide?",
             ],
             [DialogueCue.WindowMaximized] =
             [
-                "变大啦！",
-                "被弹飞啦！",
-                "呜哇，好大！",
-                "窗口长大了！",
+                "I got bigger!",
+                "I got bounced away!",
+                "Wooah, so big!",
+                "The window grew!",
             ],
             [DialogueCue.HungryRequestQueued] =
             [
-                "好饿……等一下。",
-                "站稳就吃。",
-                "马上去舔。",
-                "肚子等不及啦。",
+                "So hungry... one moment.",
+                "I will eat once I am steady.",
+                "Going to lick it now.",
+                "My tummy cannot wait.",
             ],
             [DialogueCue.Home] =
             [
-                "到家啦。",
-                "回窝。",
-                "这里好。",
-                "不走了。",
+                "Home at last.",
+                "Back to my nest.",
+                "This spot is good.",
+                "Not leaving.",
             ],
             [DialogueCue.DeleteReactionEnabled] =
             [
-                "删掉的给我吃。",
-                "我会接住。",
-                "记得叫我。",
-                "有吃的啦。",
+                "Let me eat what you delete.",
+                "I will catch it.",
+                "Remember to call me.",
+                "Food at last.",
             ],
             [DialogueCue.DeleteReactionDisabled] =
             [
-                "今天不吃。",
-                "先忍一下。",
-                "不追啦。",
-                "图标安全啦。",
+                "Not eating today.",
+                "Holding back for now.",
+                "Not chasing any more.",
+                "The icons are safe.",
             ],
             [DialogueCue.VoiceEnabled] =
             [
-                "我有声音啦。",
-                "听得到吗？",
-                "嘿嘿，是我。",
-                "我说话啦。",
+                "I have a voice now.",
+                "Can you hear me?",
+                "Hehe, it is me.",
+                "I am talking.",
             ],
             [DialogueCue.VoiceDisabled] =
             [
-                "我安静啦。",
-                "嘘。",
-                "不说话啦。",
-                "小声一点。",
+                "I will be quiet.",
+                "Shh.",
+                "No more talking.",
+                "A bit softer.",
             ],
         };
 
@@ -360,6 +360,6 @@ public sealed class PetDialogueSelector
         }
 
         _lastLineByCue[cue] = index;
-        return lines[index].Replace("{item}", itemName ?? "这份文件", StringComparison.Ordinal);
+        return lines[index].Replace("{item}", itemName ?? "this file", StringComparison.Ordinal);
     }
 }

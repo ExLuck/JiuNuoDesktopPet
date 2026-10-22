@@ -134,7 +134,7 @@ public partial class MainWindow
         catch (OperationCanceledException) { }
         catch (Exception exception)
         {
-            _featureResults.Add(new("Session", "测试准备或运行", 1, "Failed", 0,
+            _featureResults.Add(new("Session", "Test setup or run", 1, "Failed", 0,
                 exception.GetType().Name, _prankPhase.ToString(), null, CurrentFeatureManualRestore()));
             DiagnosticsLog.Write("Feature demo stopped safely.", exception);
         }
@@ -167,9 +167,9 @@ public partial class MainWindow
             WriteFeatureReport(status);
             if (!_isClosing)
             {
-                _trayIcon.SetFeatureTestProgress(_featureStopRequested ? "测试已停止"
-                    : review > 0 ? "测试结束：无帽中断表演待观察"
-                    : $"专属测试完成 {completed}/{FeatureDemoPlan.Steps.Count}", false);
+                _trayIcon.SetFeatureTestProgress(_featureStopRequested ? "Test stopped"
+                    : review > 0 ? "Test finished: the hatless interruption still needs watching"
+                    : $"Feature test complete {completed}/{FeatureDemoPlan.Steps.Count}", false);
             }
             DiagnosticsLog.WriteEvent("FeatureDemoFinished", ("Result", status), ("CompletedSteps", completed),
                 ("NeedsReviewSteps", review), ("FailedAttempts", failed), ("ReportDirectory", _featureSession!.DirectoryPath));
@@ -183,7 +183,7 @@ public partial class MainWindow
         PlaceFeatureOnFloor();
         _featureRetry = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
         var hint = FeatureDemoPlan.FailureHint(reason);
-        _trayIcon.SetFeatureTestProgress($"{_featureCurrentStep!.Title}：{hint}", true, canRetry: true);
+        _trayIcon.SetFeatureTestProgress($"{_featureCurrentStep!.Title}: {hint}", true, canRetry: true);
         _featureTarget?.SetStep(hint);
         WriteFeatureReport("PausedOnFailure");
         try { await _featureRetry.Task.WaitAsync(token); }
@@ -199,21 +199,21 @@ public partial class MainWindow
             _featureCurrentStep?.RequiresManualRestore != true) return;
         var hint = _prankPhase switch
         {
-            PrankPhase.HatOpen => "正在摘帽",
-            PrankPhase.HatStore => "正在把窗口装进帽子",
-            PrankPhase.HatReturn => "正在取出窗口",
-            PrankPhase.CollectRemains => "正在把碎片收进帽子",
-            PrankPhase.Reassemble => "正在拼回完整窗口",
-            PrankPhase.FetchHat => "正在跑去捡帽子",
-            PrankPhase.PickHat => "正在捡起帽子",
-            PrankPhase.Restoring => "正在恢复真实窗口",
-            PrankPhase.WearHat => "正在戴回帽子",
+            PrankPhase.HatOpen => "Taking the hat off",
+            PrankPhase.HatStore => "Putting the window into the hat",
+            PrankPhase.HatReturn => "Taking the window out",
+            PrankPhase.CollectRemains => "Putting the pieces into the hat",
+            PrankPhase.Reassemble => "Reassembling the whole window",
+            PrankPhase.FetchHat => "Running to fetch the hat",
+            PrankPhase.PickHat => "Picking the hat up",
+            PrankPhase.Restoring => "Restoring the real window",
+            PrankPhase.WearHat => "Putting the hat back on",
             _ => null,
         };
         if (hint is null || hint == _featurePhaseHint) return;
         _featurePhaseHint = hint;
         var ordinal = FeatureDemoPlan.Steps.ToList().IndexOf(_featureCurrentStep) + 1;
-        var label = $"{ordinal}/{FeatureDemoPlan.Steps.Count} {_featureCurrentStep.Title}：{hint}";
+        var label = $"{ordinal}/{FeatureDemoPlan.Steps.Count} {_featureCurrentStep.Title}: {hint}";
         _trayIcon.SetFeatureTestProgress(label, true);
         _featureTarget?.SetStep(label);
         DiagnosticsLog.WriteEvent("FeatureDemoPhase", ("Step", _featureCurrentStep.Id),
@@ -237,7 +237,7 @@ public partial class MainWindow
         if (_prankLarge) _featureRemainsStoredBeforeReturn = _windowPranks.IsCollected;
         _featureManualRestore = new("ManualRestoreRequested", FormatHandle(_featureTarget.Handle),
             _featureTarget.ProcessId, Math.Round(_featureManualWait?.Elapsed.TotalSeconds ?? 0, 2), DateTimeOffset.UtcNow);
-        SetFeatureManualRestoreProgress("已收到右键恢复请求，正在确认真实窗口");
+        SetFeatureManualRestoreProgress("Restore request received; confirming the real window");
         WriteFeatureReport("ManualRestoreRequested");
         DiagnosticsLog.WriteEvent("FeatureDemoManualRestoreRequested", ("Step", _featureCurrentStep.Id),
             ("Window", _featureManualRestore.Window), ("ProcessId", _featureManualRestore.ProcessId),
@@ -248,7 +248,7 @@ public partial class MainWindow
     {
         _featurePhaseHint = hint;
         var ordinal = FeatureDemoPlan.Steps.ToList().IndexOf(_featureCurrentStep!) + 1;
-        var label = $"{ordinal}/{FeatureDemoPlan.Steps.Count} {_featureCurrentStep!.Title}：{hint}";
+        var label = $"{ordinal}/{FeatureDemoPlan.Steps.Count} {_featureCurrentStep!.Title}: {hint}";
         _trayIcon.SetFeatureTestProgress(label, true);
         _featureTarget?.SetStep(label);
     }
@@ -306,7 +306,7 @@ public partial class MainWindow
         _voice.Stop();
         CancelWindowPrank("FeatureDemoStopped", false, false);
         _featureTarget?.Dispose();
-        if (!_isClosing) _trayIcon.SetFeatureTestProgress("测试已停止", false);
+        if (!_isClosing) _trayIcon.SetFeatureTestProgress("Test stopped", false);
     }
 
     private void WriteFeatureReport(string status)

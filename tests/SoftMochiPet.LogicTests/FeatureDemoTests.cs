@@ -60,11 +60,12 @@ internal static class FeatureDemoTests
                 FeatureDemoAction.Tear, FeatureDemoAction.HatlessInterruption }),
             "Every held snapshot, including an interrupted burst, must require a real manual restoration request.");
         Assert(new[] { 0d, 3d, 12d, 60d, 3600d }.Select(FeatureDemoPlan.ManualRestoreHint).SequenceEqual(
-            new[] { "等待右键恢复（已等待 0 秒）", "等待右键恢复（已等待 3 秒）", "等待右键恢复（已等待 12 秒）",
-                "等待右键恢复（已等待 60 秒）", "等待右键恢复（已等待 3600 秒）" }),
+            new[] { "Right-click to restore (waited 0s)", "Right-click to restore (waited 3s)",
+                "Right-click to restore (waited 12s)", "Right-click to restore (waited 60s)",
+                "Right-click to restore (waited 3600s)" }),
             "Human waiting must count elapsed time without announcing or scheduling automatic restoration.");
         Assert(new[] { -1d, double.NaN, double.PositiveInfinity }.All(value =>
-                FeatureDemoPlan.ManualRestoreHint(value) == "等待右键恢复（已等待 0 秒）") &&
+                FeatureDemoPlan.ManualRestoreHint(value) == "Right-click to restore (waited 0s)") &&
             FeatureDemoPlan.RestoreTimeoutSeconds > 0 && FeatureDemoPlan.RestoreTimeoutSeconds <= 60,
             "The wait label must handle invalid clocks; native restoration keeps its own bounded deadline.");
         Assert(FeatureDemoPlan.Steps.All(step => step.CompletionAction ==

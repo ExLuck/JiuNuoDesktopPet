@@ -340,7 +340,7 @@ public partial class MainWindow
         if (_windowPranks.HasActiveOperation) return;
         if (HasStoredPrank && directKind is PrankKind.Hat or PrankKind.Shatter or PrankKind.Tear)
         {
-            RejectBehavior("帽子已有窗口，请先选择归还");
+            RejectBehavior("The hat already holds a window; choose \"Give the window back\" first");
             return;
         }
         var foot = PrankFoot();
@@ -363,7 +363,7 @@ public partial class MainWindow
                 ("RetrySeconds", MischiefController.TargetRetrySeconds), ("HatOccupied", HasStoredPrank),
                 ("Reasons", _windowPranks.LastSelectionRejections));
             if (manual) PlayMischiefVoice(MischiefCue.NoTarget);
-            if (directKind is not null) RejectBehavior("没有合适窗口：请同屏、保持非最大化并留出右侧空间");
+            if (directKind is not null) RejectBehavior("No suitable window: keep it on this screen, not maximized, with space on the right");
             return;
         }
         DiagnosticsLog.WriteEvent("MischiefTargetSelected",
@@ -408,7 +408,7 @@ public partial class MainWindow
             (int)Math.Round(physicalPetWidth), (int)Math.Round(foot.X));
         if (approach is null)
         {
-            RejectBehavior("窗口两侧都没有足够靠近空间");
+            RejectBehavior("Neither side of the window has enough room to approach");
             _mischief.Interrupt();
             return;
         }
@@ -1063,7 +1063,7 @@ public partial class MainWindow
         if (IsBehaviorControlMode && _activeBehavior is not null && reason != "ManualRestorePreparation")
         {
             _behaviorRequestFailed = true;
-            SetBehaviorControlStatus("动作已中断：" + reason + (HasHeldPrank ? " · 帽中窗口仍保留" : ""));
+            SetBehaviorControlStatus("Action interrupted: " + reason + (HasHeldPrank ? " · window still held in the hat" : ""));
         }
         SaveMischiefState();
         if (returnToIdle && !_isClosing)

@@ -317,7 +317,7 @@ internal static class MischiefTests
         foreach (var cue in Enum.GetValues<MischiefCue>())
         {
             var lines = MischiefDialogueSelector.GetLines(cue);
-            Assert(lines.Count == 4 && lines.Distinct().Count() == 4 && lines.All(line => line.Length <= 8),
+            Assert(lines.Count == 4 && lines.Distinct().Count() == 4 && lines.All(line => line.Length <= 36),
                 $"Mischief reactions need short, distinct alternatives: {cue}.");
             string? previous = null;
             for (var index = 0; index < 20; index++)
@@ -327,7 +327,8 @@ internal static class MischiefTests
                 previous = current;
             }
         }
-        var foodWords = new[] { "饿", "舔", "吃", "饭饭", "点心", "肚", "好香", "口水" };
+        var foodWords = new[] { "饿", "舔", "吃", "饭饭", "snack", "肚", "好香", "口水",
+            "hungry", "lick", "eat ", "tummy", "food", "cake", "yum", "drool", "tasty", "bite" };
         Assert(Enum.GetValues<DialogueCue>().SelectMany(cue => PetDialogueCatalog.GetLines(cue, PetCharacterProfile.FeibiJiubi))
             .All(line => foodWords.All(word => !line.Contains(word, StringComparison.Ordinal))),
             "Feibi's dialogue catalog must not retain food, licking, or hunger lines.");

@@ -36,10 +36,10 @@ public sealed class FeatureTestTargetClient : IDisposable
     public static async Task<FeatureTestTargetClient> StartAsync(CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-        var processPath = Environment.ProcessPath ?? throw new InvalidOperationException("找不到当前程序入口。");
+        var processPath = Environment.ProcessPath ?? throw new InvalidOperationException("Could not find the current program entry point.");
         var startInfo = FeatureTestTargetLaunchPolicy.CreateStartInfo(processPath,
             Assembly.GetEntryAssembly()?.Location, Environment.ProcessId);
-        var process = Process.Start(startInfo) ?? throw new InvalidOperationException("专用测试窗口没有启动。");
+        var process = Process.Start(startInfo) ?? throw new InvalidOperationException("The dedicated test window did not start.");
         process.EnableRaisingEvents = true;
         try
         {
@@ -47,7 +47,7 @@ public sealed class FeatureTestTargetClient : IDisposable
             while (watch.Elapsed < TimeSpan.FromSeconds(10))
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                if (process.HasExited) throw new InvalidOperationException("专用测试窗口已退出。");
+                if (process.HasExited) throw new InvalidOperationException("The dedicated test window has exited.");
                 process.Refresh();
                 var handle = process.MainWindowHandle;
                 if (handle != IntPtr.Zero)
@@ -58,7 +58,7 @@ public sealed class FeatureTestTargetClient : IDisposable
                 }
                 await Task.Delay(25, cancellationToken);
             }
-            throw new TimeoutException("等待专用测试窗口超时。");
+            throw new TimeoutException("Timed out waiting for the dedicated test window.");
         }
         catch
         {

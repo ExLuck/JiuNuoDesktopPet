@@ -28,7 +28,7 @@ public sealed class StartupRegistrationService
         if (enabled)
         {
             using var key = Registry.CurrentUser.CreateSubKey(RunKeyPath, writable: true)
-                ?? throw new InvalidOperationException("无法打开当前用户的 Windows 启动项。");
+                ?? throw new InvalidOperationException("Could not open the current user's Windows startup key.");
             key.SetValue(ValueName, BuildRunCommand(_launchPath), RegistryValueKind.String);
             return;
         }
@@ -54,7 +54,7 @@ public sealed class StartupRegistrationService
             return Path.GetFullPath(processPath);
         }
 
-        throw new InvalidOperationException("无法确定啾糯桌宠的启动程序路径。");
+        throw new InvalidOperationException("Could not determine the launcher path for JiuNuo Desktop Pet.");
     }
 
     public static string BuildRunCommand(string launchPath) => $"\"{Path.GetFullPath(launchPath)}\"";

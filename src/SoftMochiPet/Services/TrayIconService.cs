@@ -52,26 +52,26 @@ public sealed class TrayIconService : IDisposable
         _character = character ?? PetCharacterProfile.Get("nuonuo");
         _customIcon = LoadCharacterIcon(_character);
 
-        _mute = new Forms.ToolStripMenuItem("禁音")
+        _mute = new Forms.ToolStripMenuItem("Mute")
         {
             Checked = !soundEnabled,
             CheckOnClick = true,
         };
         _mute.CheckedChanged += (_, _) => SoundEnabledChanged?.Invoke(!_mute.Checked);
 
-        _startWithWindows = CreateToggle("开机自启", startWithWindows);
-        _fastingMode = CreateToggle("禁食模式（永不饥饿）", fastingMode);
-        _infiniteMode = CreateToggle("无限模式（隐藏双方进度条）", infiniteMode);
-        _coexistenceMode = CreateToggle("双宠共存", coexistenceMode);
-        _speechBubbles = CreateToggle("显示头顶对话气泡", showSpeechBubbles);
+        _startWithWindows = CreateToggle("Start with Windows", startWithWindows);
+        _fastingMode = CreateToggle("Fasting mode (never hungry)", fastingMode);
+        _infiniteMode = CreateToggle("Infinite mode (hide both bars)", infiniteMode);
+        _coexistenceMode = CreateToggle("Both pets together", coexistenceMode);
+        _speechBubbles = CreateToggle("Show speech bubbles", showSpeechBubbles);
         _coexisting = coexistenceMode;
-        _quietMode = CreateToggle("安静模式（只站立或睡觉）", quietMode);
-        _allowMischief = CreateToggle("允许自主捣蛋", allowMischief);
+        _quietMode = CreateToggle("Quiet mode (stand or sleep only)", quietMode);
+        _allowMischief = CreateToggle("Allow autonomous mischief", allowMischief);
         _mischiefStatus = new Forms.ToolStripMenuItem { Enabled = false };
-        SetMischiefStatus(allowMischief ? "蓄力中" : "已关闭");
-        _prankOnce = new Forms.ToolStripMenuItem("捣蛋一下", null, (_, _) => MischiefRequested?.Invoke());
-        _tease = new Forms.ToolStripMenuItem("逗逗她", null, (_, _) => TeaseRequested?.Invoke());
-        _returnWindows = new Forms.ToolStripMenuItem("把窗口还回来", null, (_, _) => ReturnWindowsRequested?.Invoke())
+        SetMischiefStatus(allowMischief ? "Building up" : "Off");
+        _prankOnce = new Forms.ToolStripMenuItem("Play a prank", null, (_, _) => MischiefRequested?.Invoke());
+        _tease = new Forms.ToolStripMenuItem("Tease her", null, (_, _) => TeaseRequested?.Invoke());
+        _returnWindows = new Forms.ToolStripMenuItem("Give the window back", null, (_, _) => ReturnWindowsRequested?.Invoke())
         {
             Enabled = false,
         };
@@ -157,7 +157,7 @@ public sealed class TrayIconService : IDisposable
             if (!_suppressSettingEvents) SpeechBubblesChanged?.Invoke(_speechBubbles.Checked);
         };
 
-        var characterMenu = new Forms.ToolStripMenuItem("桌宠角色");
+        var characterMenu = new Forms.ToolStripMenuItem("Pet character");
         foreach (var profile in PetCharacterProfile.All)
         {
             var item = new Forms.ToolStripMenuItem(profile.DisplayName)
@@ -184,20 +184,20 @@ public sealed class TrayIconService : IDisposable
             _menu.Items.Add(new Forms.ToolStripSeparator());
             _startWithWindows.Available = false;
         }
-        _menu.Items.Add("让她回家", null, (_, _) => BringHomeRequested?.Invoke());
+        _menu.Items.Add("Bring her home", null, (_, _) => BringHomeRequested?.Invoke());
         _menu.Items.Add(characterMenu);
         if (!behaviorControl) _menu.Items.Add(_coexistenceMode);
         if (!behaviorControl)
         {
-            _pairMenu = new Forms.ToolStripMenuItem("双人互动演示");
-            _pairMenu.DropDownItems.Add("菲比揪糯糯的脸", null, (_, _) => PairInteractionRequested?.Invoke("cheek"));
-            _pairMenu.DropDownItems.Add("靠在一起睡觉", null, (_, _) => PairInteractionRequested?.Invoke("sleep"));
-            _pairMenu.DropDownItems.Add("从帽子里掏零食投喂", null, (_, _) => PairInteractionRequested?.Invoke("feed"));
-            _pairMenu.DropDownItems.Add("小跟屁虫", null, (_, _) => PairInteractionRequested?.Invoke("follow"));
-            _pairMenu.DropDownItems.Add("路过蹭一下", null, (_, _) => PairInteractionRequested?.Invoke("nuzzle"));
-            _pairMenu.DropDownItems.Add("一起玩小球", null, (_, _) => PairInteractionRequested?.Invoke("ball"));
-            _pairMenu.DropDownItems.Add("一起看热闹", null, (_, _) => PairInteractionRequested?.Invoke("watch"));
-            _pairDialogueItem = new Forms.ToolStripMenuItem("让她们聊两句", null,
+            _pairMenu = new Forms.ToolStripMenuItem("Two-pet interactions");
+            _pairMenu.DropDownItems.Add("Feibi pinches Nuonuo's cheek", null, (_, _) => PairInteractionRequested?.Invoke("cheek"));
+            _pairMenu.DropDownItems.Add("Nap together", null, (_, _) => PairInteractionRequested?.Invoke("sleep"));
+            _pairMenu.DropDownItems.Add("Feed a snack from the hat", null, (_, _) => PairInteractionRequested?.Invoke("feed"));
+            _pairMenu.DropDownItems.Add("Follow along", null, (_, _) => PairInteractionRequested?.Invoke("follow"));
+            _pairMenu.DropDownItems.Add("Nuzzle in passing", null, (_, _) => PairInteractionRequested?.Invoke("nuzzle"));
+            _pairMenu.DropDownItems.Add("Play with the ball", null, (_, _) => PairInteractionRequested?.Invoke("ball"));
+            _pairMenu.DropDownItems.Add("Watch together", null, (_, _) => PairInteractionRequested?.Invoke("watch"));
+            _pairDialogueItem = new Forms.ToolStripMenuItem("Let them chat", null,
                 (_, _) => PairDialogueRequested?.Invoke());
             _pairMenu.DropDownItems.Add(_pairDialogueItem);
             _menu.Items.Add(_pairMenu);
@@ -216,7 +216,7 @@ public sealed class TrayIconService : IDisposable
         _menu.Items.Add(_quietMode);
         if (!behaviorControl) _menu.Items.Add(_speechBubbles);
         _menu.Items.Add(_mute);
-        _menu.Items.Add("退出桌宠", null, (_, _) => ExitRequested?.Invoke());
+        _menu.Items.Add("Exit", null, (_, _) => ExitRequested?.Invoke());
 
         _notifyIcon = new Forms.NotifyIcon
         {
@@ -313,11 +313,11 @@ public sealed class TrayIconService : IDisposable
     public void ConfigureFeatureTest()
     {
         foreach (Forms.ToolStripItem item in _menu.Items)
-            item.Enabled = ReferenceEquals(item, _mute) || item.Text == "退出桌宠";
-        _featureTestStatus = new Forms.ToolStripMenuItem("准备专属功能测试…") { Enabled = false };
-        _featureTestStop = new Forms.ToolStripMenuItem("停止专属功能测试", null,
+            item.Enabled = ReferenceEquals(item, _mute) || item.Text == "Exit";
+        _featureTestStatus = new Forms.ToolStripMenuItem("Preparing feature test…") { Enabled = false };
+        _featureTestStop = new Forms.ToolStripMenuItem("Stop feature test", null,
             (_, _) => FeatureTestStopRequested?.Invoke());
-        _featureTestRetry = new Forms.ToolStripMenuItem("重试本项", null,
+        _featureTestRetry = new Forms.ToolStripMenuItem("Retry this item", null,
             (_, _) => FeatureTestRetryRequested?.Invoke()) { Enabled = false };
         _menu.Items.Insert(0, _featureTestStatus);
         _menu.Items.Insert(1, _featureTestStop);
@@ -411,7 +411,7 @@ public sealed class TrayIconService : IDisposable
     public void SetMischiefStatus(string status)
     {
         if (_disposed) return;
-        var text = $"捣蛋状态：{status}";
+        var text = $"Mischief: {status}";
         if (!string.Equals(_mischiefStatus.Text, text, StringComparison.Ordinal))
             _mischiefStatus.Text = text;
     }
@@ -430,8 +430,8 @@ public sealed class TrayIconService : IDisposable
         if (_pairDialogueItem is not null) _pairDialogueItem.Enabled = _coexisting && _speechBubbles.Checked && !_quietMode.Checked;
         _fastingMode.Visible = _coexisting || _character.SupportsFood;
         _fastingMode.ToolTipText = _coexisting
-            ? "糯糯不再饥饿，同时隐藏双方进度条；菲比的捣蛋蓄力不变。"
-            : "糯糯不再饥饿，并隐藏饥饿条。";
+            ? "Nuonuo never gets hungry and both bars are hidden; Feibi's mischief build-up is unchanged."
+            : "Nuonuo never gets hungry, and the hunger bar is hidden.";
         _allowMischief.Visible = _coexisting || _character.UsesMischief;
         _mischiefStatus.Visible = _coexisting || _character.UsesMischief;
         _prankOnce.Visible = (_coexisting || _character.UsesMischief) && _behaviorControlMenu is null;
@@ -440,13 +440,13 @@ public sealed class TrayIconService : IDisposable
         _behaviorControlMenu?.SetCharacter(_character);
     }
 
-    private string TrayTitle => _coexisting ? "啾糯桌宠 · 双宠共存"
-        : _behaviorControlMenu is null ? $"啾糯桌宠 · {_character.DisplayName}"
-        : $"啾糯桌宠 · 行为控制版 · {_character.DisplayName}";
+    private string TrayTitle => _coexisting ? "JiuNuo Desktop Pet · Both pets"
+        : _behaviorControlMenu is null ? $"JiuNuo Desktop Pet · {_character.DisplayName}"
+        : $"JiuNuo Desktop Pet · Behavior Control · {_character.DisplayName}";
 
     private void UpdateSizeLabel()
     {
-        _sizeLabel.Text = $"{(_coexisting ? "两人" : _character.DisplayName)}大小  {_sizeSlider.Value}%";
+        _sizeLabel.Text = $"{(_coexisting ? "Both" : _character.DisplayName)} size  {_sizeSlider.Value}%";
     }
 
     public void ShowMenu()
@@ -471,8 +471,8 @@ public sealed class TrayIconService : IDisposable
         private readonly Dictionary<string, Forms.ToolStripMenuItem> _groups = new(StringComparer.Ordinal);
         private PetCharacterProfile _character;
 
-        public Forms.ToolStripMenuItem Status { get; } = new("行为控制版：请选择行为") { Enabled = false };
-        public Forms.ToolStripMenuItem Actions { get; } = new("直接触发行为");
+        public Forms.ToolStripMenuItem Status { get; } = new("Behavior Control: choose a behavior") { Enabled = false };
+        public Forms.ToolStripMenuItem Actions { get; } = new("Trigger a behavior");
         public Forms.ToolStripMenuItem Stop { get; }
         public Forms.ToolStripMenuItem Autonomy { get; }
 
@@ -480,9 +480,9 @@ public sealed class TrayIconService : IDisposable
             Action stop, Action<bool> autonomyChanged)
         {
             _character = character;
-            Stop = new Forms.ToolStripMenuItem("停止当前行为", null, (_, _) => stop());
-            Autonomy = CreateToggle("自动日常活动（行为控制版）", false);
-            Autonomy.ToolTipText = "开启后允许自行散步、休息等日常活动；此选项仅用于当前行为控制会话。";
+            Stop = new Forms.ToolStripMenuItem("Stop current behavior", null, (_, _) => stop());
+            Autonomy = CreateToggle("Automatic daily activity (Behavior Control)", false);
+            Autonomy.ToolTipText = "When on, she may walk, rest and do other daily activities on her own; this applies only to the current Behavior Control session.";
             Autonomy.CheckedChanged += (_, _) => autonomyChanged(Autonomy.Checked);
             foreach (var definition in BehaviorControlCatalog.All.Where(item => item.Action != BehaviorControlAction.Stop))
             {
@@ -507,7 +507,7 @@ public sealed class TrayIconService : IDisposable
 
         public void SetStatus(string status)
         {
-            var text = $"行为控制版：{status}";
+            var text = $"Behavior Control: {status}";
             if (!string.Equals(Status.Text, text, StringComparison.Ordinal)) Status.Text = text;
         }
 

@@ -11,12 +11,12 @@ public static class PairSpriteGeometry
     private static readonly Lazy<Dictionary<string, Transform[]>> Calibration = new(() =>
         JsonSerializer.Deserialize<Dictionary<string, Transform[]>>(File.ReadAllText(
             Path.Combine(AppContext.BaseDirectory, "assets", "pair_interactions", "calibration.json")))
-        ?? throw new InvalidDataException("双人动作锚点文件为空。"));
+        ?? throw new InvalidDataException("The two-pet anchor file is empty."));
 
     public static Point Map(PetCharacterProfile character, string folder, int frame, double x, double y)
     {
         if (!Calibration.Value.TryGetValue($"{character.Id}/{folder}", out var frames)) return new Point(x,y);
-        if (frames.Length != 16) throw new InvalidDataException("双人动作锚点帧数不匹配。");
+        if (frames.Length != 16) throw new InvalidDataException("The two-pet anchor frame count does not match.");
         var transform = frames[Math.Clamp(frame,0,15)];
         return new Point(x*transform.Scale+transform.X, y*transform.Scale+transform.Y);
     }

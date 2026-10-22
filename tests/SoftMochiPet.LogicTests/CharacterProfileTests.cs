@@ -109,8 +109,8 @@ internal static class CharacterProfileTests
             exchanges.Any(exchange => !exchange.FeibiFirst),
             "Pair dialogue needs variety with both characters taking the opening line.");
         Assert(exchanges.All(exchange => !string.IsNullOrWhiteSpace(exchange.First) &&
-            !string.IsNullOrWhiteSpace(exchange.Reply) && exchange.First.Length <= 16 &&
-            exchange.Reply.Length <= 16 && exchange.First != exchange.Reply),
+            !string.IsNullOrWhiteSpace(exchange.Reply) && exchange.First.Length <= 36 &&
+            exchange.Reply.Length <= 36 && exchange.First != exchange.Reply),
             "Every exchange must have two distinct, short and visible lines.");
         Assert(exchanges.Select(exchange => (exchange.First, exchange.Reply)).Distinct().Count() == exchanges.Count,
             "Pair dialogue must not repeat an identical exchange in its catalog.");
@@ -154,8 +154,8 @@ internal static class CharacterProfileTests
             var lines = PetDialogueCatalog.GetLines(cue, PetCharacterProfile.FeibiJiubi);
             Assert(lines.Count >= 4 && lines.Distinct(StringComparer.Ordinal).Count() == lines.Count,
                 $"Feibi Jiubi needs distinct alternatives for every cue: {cue}.");
-            Assert(lines.All(line => !string.IsNullOrWhiteSpace(line) && line.Length <= 7 &&
-                !line.Contains("糯糯", StringComparison.Ordinal) && !originalLines.Contains(line)),
+            Assert(lines.All(line => !string.IsNullOrWhiteSpace(line) && line.Length <= 36 &&
+                !line.Contains("Nuonuo", StringComparison.Ordinal) && !originalLines.Contains(line)),
                 $"Feibi Jiubi must have her own short lines, never Nuonuo's: {cue}.");
             string? previous = null;
             for (var index = 0; index < 20; index++)
@@ -172,7 +172,7 @@ internal static class CharacterProfileTests
         var nuonuoSelector = new PetDialogueSelector(new Random(42), PetCharacterProfile.Nuonuo);
         foreach (var cue in Enum.GetValues<DialogueCue>())
         {
-            Assert(defaultSelector.Choose(cue, "点心") == nuonuoSelector.Choose(cue, "点心"),
+            Assert(defaultSelector.Choose(cue, "snack") == nuonuoSelector.Choose(cue, "snack"),
                 "Existing Random-only selector callers must keep Nuonuo's exact dialogue behavior.");
         }
     }

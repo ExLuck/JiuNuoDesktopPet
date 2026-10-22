@@ -1,11 +1,11 @@
-# 两角色语音响度
+# Voice loudness for both characters
 
-2026-09-30 隐私清理：公开 WAV 已移除 LIST/INFO 描述元数据，PCM 采样、播放时长及补偿系数完全不变。`voice-levels.json` 的文件哈希对应脱敏后的公开容器；不再宣称容器文件与私有原始文件逐字节相同。统一隐私规则见 [隐私与公开边界](PRIVACY.md)。
+2026-09-30 privacy cleanup: the public WAV files have had their LIST/INFO descriptive metadata removed, while the PCM samples, playback duration and compensation coefficients are completely unchanged. The file hashes in `voice-levels.json` correspond to the sanitized public containers; we no longer claim that the container files are byte-for-byte identical to the private originals. The unified privacy rules are in [Privacy and the public boundary](PRIVACY.md).
 
-2026-09-29 已采用：原录音保持不变，离线逐段测量整合响度和真峰值，生成 assets/audio/voice-levels.json；运行时将每段衰减系数乘以用户共享音量。普通语音、捣蛋台词及独立大招播放器使用同一补偿，不改变系统或其他应用音量。
+2026-09-29, adopted: the original recordings are left untouched. Integrated loudness and true peak are measured offline, clip by clip, to produce assets/audio/voice-levels.json, and at runtime each clip's attenuation coefficient is multiplied by the user's shared volume. Ordinary speech, mischief lines and the separate finisher player all use the same compensation, and none of it changes the system volume or that of other applications.
 
-目标以糯糯录音中位数向下取整与 -24 LUFS 中较低者为准，仅衰减不放大；标记为小声、轻声、悄悄话、困倦的录音额外保留 3 LU 安静差异，真峰值不高于 -2 dBTP。每个条目保存源录音哈希，后台核对发布录音一致。系数只加载小型 JSON，不在启动或播放时重新分析 WAV。
+The target is whichever is lower: the median of Nuonuo's recordings rounded down, or -24 LUFS. It only attenuates, never amplifies. Recordings marked as soft, quiet, whispered or sleepy keep an extra 3 LU of quiet headroom, and the true peak is never above -2 dBTP. Each entry stores the hash of its source recording, so the released recordings can be checked for consistency in the background. The coefficients load from a small JSON file; no WAV is re-analysed at startup or during playback.
 
-本次实测 21 段糯糯、25 段菲比录音，中位整合响度原为 -23.61 / -23.19 LUFS，补偿后均为 -24 LUFS。单段差异更明显：菲比 `014` 为 -16.36 LUFS，衰减 7.64 dB；糯糯“软”为 -17.51 LUFS，衰减 6.49 dB。不是简单给菲比统一乘一个系数，也不放大本来较轻的录音。
+This round measured 21 Nuonuo clips and 25 Feibi clips. The median integrated loudness was originally -23.61 / -23.19 LUFS, and -24 LUFS for both after compensation. Individual clips differ far more: Feibi's `014` was -16.36 LUFS and is attenuated by 7.64 dB, and Nuonuo's "soft" clip was -17.51 LUFS and is attenuated by 6.49 dB. This is not a single flat coefficient applied to Feibi, and it never amplifies a recording that was already quiet.
 
-测量复用机器已装 FFmpeg 的 loudnorm（EBU R128），来源：https://ffmpeg.org/ffmpeg-filters.html#loudnorm ，版本随索引记录；原工具未修改，也不随发行包分发。测量进程输出到 null，隐藏运行且不接音频输出设备；无新增运行依赖。本项目维护补偿索引，替换录音后运行 tools/measure_voice_levels.py 并重新验收。客观响度接近不能代替用户对不同音色的听感确认。
+Measurement reuses loudnorm (EBU R128) from the FFmpeg already installed on the machine, from https://ffmpeg.org/ffmpeg-filters.html#loudnorm , with the version recorded alongside the index. The original tool is unmodified and is not distributed with the release package. The measuring process writes to null, runs hidden and never attaches to an audio output device, so it adds no runtime dependency. This project maintains the compensation index; after replacing a recording, run tools/measure_voice_levels.py and accept the result again. Objective loudness being close together is no substitute for the user confirming how the different voices actually sound.

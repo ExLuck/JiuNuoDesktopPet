@@ -1,36 +1,36 @@
-# 发布记录与后续事项
+# Release record and follow-up items
 
-此文件集中维护 v1.3.3 的发布记录、长期决定和接续事项。角色功能验收仍由 `CHARACTERS.md` 维护；素材权利仅由 [ASSET_RIGHTS.md](../ASSET_RIGHTS.md) 维护。
+This file is where the v1.3.3 release record, the long-term decisions and the follow-up items are kept together. Character feature acceptance is still maintained in `CHARACTERS.md`, and asset rights are maintained solely in [ASSET_RIGHTS.md](../ASSET_RIGHTS.md).
 
-## 已采用的决定
+## Adopted decisions
 
-- 源码公开采用 PolyForm Noncommercial 1.0.0，以满足维护者禁止商业使用的要求。第三方代码保持原许可，角色素材另行管理；不宣称符合 OSI 开源定义。
-- 公开仓库采用 [nicedoctors/JiuNuoDesktopPet](https://github.com/nicedoctors/JiuNuoDesktopPet)，从当前源码快照建立独立 Git 根历史。原 `NuonuoDesktopPet` 仓库保持私有，其旧 PR 引用和托管缓存不进入新仓库。
-- 2026-10-01，维护者在了解素材授权尚待确认及原仓库历史风险后明确要求上传并公开。本次按此决定发布源码和 v1.3.3 免安装包；该决定不补足第三方素材授权，也不改变代码与素材分别管理的边界。
-- 自包含包的 .NET 与 Windows Desktop 运行时固定为 8.0.31，正式值维护在 `Directory.Build.props`。该版本的许可证原文与来源哈希随包分发。升级运行时必须同步更新声明及校验记录。
-- 启动器优先用 Visual Studio 2022 的 v143 工具链。无该工具链时可显式设置 `LLVM_MINGW_ROOT` 使用 LLVM-MinGW；已验证的发行版本为 20260616 UCRT x64。此后备路径只服务当前原生启动器，由项目维护者维护编译参数及分发声明。
-- 构建脚本可通过 `DOTNET_EXE`、隐私检查通过 `PYTHON_EXE` 指定本机工具；默认使用 PATH，不依赖维护者的私人目录。Python 图像检查依赖 Pillow。
-- 打包前运行素材隐私与声明完整性检查，打包后核对版本、内置运行时、许可证、源素材和 ZIP 哈希。自动检查只进行后台无界面测试，不启动桌宠或播放声音。
+- The source is published under PolyForm Noncommercial 1.0.0, to meet the maintainer's requirement that commercial use be prohibited. Third-party code keeps its original licences and the character assets are managed separately; no claim is made that this meets the OSI definition of open source.
+- The public repository is [nicedoctors/JiuNuoDesktopPet](https://github.com/nicedoctors/JiuNuoDesktopPet), created as an independent Git root history from a snapshot of the current source. The original `NuonuoDesktopPet` repository stays private, and its old PR references and hosted caches do not carry over into the new one.
+- On 2026-10-01, having understood that the asset licensing is still unconfirmed and that the original repository's history carries risk, the maintainer explicitly asked for it to be uploaded and made public. The source and the v1.3.3 portable package are released on that basis. That decision does not supply the missing third-party asset permissions, and it does not change the boundary between managing the code and managing the assets.
+- The .NET and Windows Desktop runtimes for the self-contained package are pinned to 8.0.31, with the authoritative value kept in `Directory.Build.props`. That version's licence text and source hashes are distributed with the package. Upgrading the runtime requires updating the notices and the verification record at the same time.
+- The launcher prefers the v143 toolchain from Visual Studio 2022. Where that toolchain is absent, `LLVM_MINGW_ROOT` can be set explicitly to use LLVM-MinGW; the verified release is 20260616 UCRT x64. That fallback path serves only the current native launcher, and its compile flags and distribution notices are maintained by the project maintainer.
+- The build scripts can be pointed at local tools with `DOTNET_EXE`, and the privacy check with `PYTHON_EXE`. Both default to PATH and depend on no private directory of the maintainer's. The Python image check requires Pillow.
+- Asset privacy and notice integrity are checked before packaging, and the version, bundled runtime, licences, source assets and ZIP hashes are checked afterwards. The automated checks only run headless background tests; they never start the pet or play sound.
 
-## 验证与当前交付
+## Verification and current delivery
 
-2026-10-01 本地验证结果：
+Local verification results from 2026-10-01:
 
-- 使用 .NET SDK 8.0.201 构建 Release，0 警告、0 错误；217 项无界面逻辑测试通过。CI 配置使用 8.0.425，持续检查结果见 [GitHub Actions](https://github.com/nicedoctors/JiuNuoDesktopPet/actions)。
-- 7 项 Python 隐私与许可证完整性测试通过，包含临时目录路径规范化的兼容性；源码图片和音频未发现残留描述性元数据，文本扫描未发现维护者私人信息或已覆盖的凭据模式。
-- 普通免安装包包含 1,402 个文件，1,128 个运行素材文件逐个与源码哈希一致；启动器与主程序版本均为 1.3.3.0，内置两个框架均为 8.0.31，ZIP 与解压目录逐文件匹配。
-- 缺少许可证、携带旧版运行时两种错误包均被验证器拒绝。启动器使用 LLVM-MinGW 编译，其导入表只依赖 Windows 系统组件。
-- Gitleaks 8.30.1 对准备目录的凭据扫描无发现。独立 Git 根历史只保存本次完整源码快照；不包含原仓库历史对象或 PR 引用。扫描只能覆盖现有规则与可访问内容，不构成对任意秘密的绝对保证。
+- Built Release with .NET SDK 8.0.201: 0 warnings, 0 errors, and 217 headless logic tests passed. The CI configuration uses 8.0.425, and continuous check results are at [GitHub Actions](https://github.com/nicedoctors/JiuNuoDesktopPet/actions).
+- 7 Python privacy and licence-integrity tests passed, including compatibility with temp-directory path normalization. No residual descriptive metadata was found in the source images or audio, and the text scan found no private maintainer information and none of the credential patterns covered.
+- The ordinary portable package contains 1,402 files, of which 1,128 runtime asset files each hash-match the source. The launcher and the main program are both version 1.3.3.0, both bundled frameworks are 8.0.31, and the ZIP matches the extracted directory file by file.
+- Two deliberately broken packages — one missing licences, one carrying an old runtime — were both rejected by the verifier. The launcher is compiled with LLVM-MinGW and its import table depends only on Windows system components.
+- Gitleaks 8.30.1 found no credentials when scanning the staging directory. The independent Git root history holds only this complete source snapshot, with no history objects or PR references from the original repository. A scan can only cover its existing rules and the content it can reach, so it is no absolute guarantee against any secret.
 
-源码位于本仓库，免安装包通过 [v1.3.3 Release](https://github.com/nicedoctors/JiuNuoDesktopPet/releases/tag/v1.3.3) 分发；本地打包路径为 `dist/啾糯桌宠-免安装版.zip`。安装包附带本文件与素材权利记录，附件 SHA-256 记录在 Release 说明及校验文件中。
+The source is in this repository and the portable package is distributed through the [v1.3.3 Release](https://github.com/nicedoctors/JiuNuoDesktopPet/releases/tag/v1.3.3); the local packaging path was `dist/啾糯桌宠-免安装版.zip`. The package ships with this file and the asset rights record, and the attachment SHA-256 values are recorded in the release notes and the checksum file.
 
-## 后续事项
+## Follow-up items
 
-2026-10-05 复查发现 11 张历史桌面测试截图及其裁剪、拼接图混入源码；这些文件不属于免安装包。已删除该批文件，并重写公开仓库全部 3 个提交，核对 main 与 v1.3.3 标签均不含这些图片；两项引用通过 GitHub API 的旧值比较原子更新。媒体画面检查和测试截图存放规则由 [隐私与公开边界](PRIVACY.md) 统一维护。当前分支的图片链接已返回 404，但旧提交号对应的图片对象仍可访问，需 GitHub Support 进一步清理；当前未提交客服申请。已检查仓库没有 PR、fork 或 Actions 附件。7 项 Python 检查通过，当前文件的隐私扫描没有发现所覆盖的问题。免安装包校验值未改变。
+A 2026-10-05 review found 11 historical desktop test screenshots, along with their crops and composites, mixed into the source; those files do not belong in the portable package. They were deleted and all 3 commits of the public repository were rewritten, with both `main` and the v1.3.3 tag checked to confirm the images are gone. Both references were updated atomically using old-value comparison through the GitHub API. The rules for checking media content and for where test screenshots are kept are maintained in [Privacy and the public boundary](PRIVACY.md). Image links on the current branch now return 404, but the image objects remain reachable through the old commit IDs and need further cleanup from GitHub Support; no support request has been filed yet. The repository was checked and has no PRs, forks or Actions attachments. The 7 Python checks pass, and a privacy scan of the current files found none of the issues it covers. The portable package checksums are unchanged.
 
-1. 完成 [素材权利记录](../ASSET_RIGHTS.md) 中的授权核对。来源署名、自己制作序列帧及禁止商业使用均不能替代上游授权。
-2. 原仓库继续保持私有。如果后续公开原地址，应先通过 GitHub Support 处理旧 PR 引用、缓存和无法由普通推送删除的对象，再复查对外可见内容。当前未向 GitHub Support 或画师发送消息。
-3. 用户按 `SELF_TEST.md` 验收实际桌面交互；本次维护不更改角色行为，自动验证不代表人工视觉、听觉验收。
-4. .NET 8 将于 2026-11-10 结束支持，维护者须在此之前规划迁移至受支持运行时。依据：[Microsoft 支持策略](https://dotnet.microsoft.com/en-us/platform/support/policy)。
+1. Complete the licensing review in the [asset rights record](../ASSET_RIGHTS.md). Crediting a source, producing the frame sequences oneself and prohibiting commercial use are none of them a substitute for upstream permission.
+2. The original repository stays private. If that address is ever made public, the old PR references, caches and objects that an ordinary push cannot remove should be handled through GitHub Support first, and the externally visible content reviewed again afterwards. No message has been sent to GitHub Support or to the artists.
+3. The user accepts the real desktop interaction following `SELF_TEST.md`. This round of maintenance does not change character behaviour, and automated verification is not a substitute for human visual and audio acceptance.
+4. .NET 8 reaches end of support on 2026-11-10, and the maintainer has to plan a migration to a supported runtime before then. Source: [Microsoft support policy](https://dotnet.microsoft.com/en-us/platform/support/policy).
 
-本次发布验收条件：独立源码、许可和说明一致，后台测试及完整打包校验通过，远端源码与附件校验值相符，原仓库保持私有。素材授权核对持续保留在后续事项中，不标记为已完成。
+Acceptance conditions for this release: the standalone source, licence and documentation are consistent; the background tests and the full packaging verification pass; the remote source and attachment checksums match; and the original repository stays private. The asset licensing review stays in the follow-up items and is not marked as complete.

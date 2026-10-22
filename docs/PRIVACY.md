@@ -1,37 +1,37 @@
-# 隐私与公开边界
+# Privacy and the public boundary
 
-当前非商业许可、素材权利与公开准备状态见 [发布准备状态](RELEASE_READINESS.md)。提交贡献前请确认拥有相应权利，并同意代码按本项目许可分发；不要提交私人凭据、原始日志或未获许可的素材。
+The current noncommercial licence, the asset rights and the state of public-release preparation are in [release readiness](RELEASE_READINESS.md). Before contributing, confirm you hold the relevant rights and agree that your code is distributed under this project's licence; do not submit private credentials, raw logs or assets you have no permission for.
 
-## 已采用规则
+## Adopted rules
 
-2026-09-30，适用于源码、制作记录、运行素材与正式发布包：本项目维护者公开署名仅使用 **桃天帝不差 / nicedoctors**。提交使用 GitHub noreply 地址，不公开私人邮箱；这不是联系邮箱。第三方许可证、作者署名及来源声明不因维护者隐私清理而删除。
+2026-09-30, applying to the source, the production records, the runtime assets and the official release packages: this project's maintainer is credited publicly only as **桃天帝不差 / nicedoctors**. Commits use a GitHub noreply address and no private email is published; that address is not a contact address. Third-party licences, author credits and provenance statements are never removed by a maintainer privacy cleanup.
 
-私人磁盘位置、账号凭据、调试日志和用户配置不属于公开资料。素材记录使用相对路径和校验值。公开图片移除描述、生成来源封装和注释，保留像素、透明度、色彩与动画数据；录音移除描述性容器字段，保留 PCM、时长和原有响度补偿。需要恢复的原始资料留在项目外受限备份，不能上传或放入分享包。
+Private disk locations, account credentials, debug logs and user configuration are not public material. Asset records use relative paths and checksums. Public images have their descriptions, generation-source wrappers and comments removed while pixels, transparency, colour and animation data are preserved; recordings have descriptive container fields removed while the PCM, duration and original loudness compensation are preserved. Original material that may need restoring stays in a restricted backup outside the project and must not be uploaded or placed in a shared package.
 
-发布程序版本号不自动附加本地 Git 提交号，避免构建产物暴露历史对象标识。版本对应源码由 Release 标签维护。
+The released program version number does not automatically carry the local Git commit ID, so build artifacts do not expose history object identifiers. The source corresponding to a version is maintained through the Release tags.
 
-日志中的路径、文件显示名和窗口标题替换为会话内 HMAC 关联编号，随机密钥不持久化。保留事件、状态、窗口句柄、坐标、DPI、错误类型、错误码和不含源码路径的调用位置，以继续支持故障排查。原始异常消息不写入日志。此规则不修改运行所需的用户设置或用户真正的文件名。
+Paths, file display names and window titles in logs are replaced with session-scoped HMAC correlation IDs, and the random key is not persisted. Events, state, window handles, coordinates, DPI, error types, error codes and call sites without source paths are retained, so troubleshooting still works. Raw exception messages are not written to the log. This rule does not alter the user settings needed to run, nor the user's real file names.
 
-## 校验与维护
+## Verification and maintenance
 
-2026-10-05 起，真实桌面的测试截图、裁剪图与拼接图不进入公开源码或发行资料，统一输出到已忽略的 `test_artifacts/`。已移除的历史截图路径同时加入忽略规则。公开演示使用隔离的测试背景；发布前人工检查全部新增或修改媒体的画面内容，动图须检查完整动画。元数据与文本扫描不能替代这项检查。
+From 2026-10-05, test screenshots of a real desktop, along with their crops and composites, do not enter the public source or the release material; they all go to the ignored `test_artifacts/` directory. The paths of the removed historical screenshots were added to the ignore rules at the same time. Public demonstrations use an isolated test background, and the visible content of every added or modified piece of media is checked by hand before release, with animations checked across the whole animation. Metadata and text scanning is no substitute for that check.
 
-`python -X utf8 tools/public_privacy.py` 检查所有受 Git 管理及未被忽略的待公开文件；报告只列相对文件名和问题类别，不回显匹配内容。该工具是当前项目已有媒体格式的发布检查，不是通用秘密检测器，不能识别图片画面、录音内容或所有形式的凭据。
+`python -X utf8 tools/public_privacy.py` checks every Git-managed, non-ignored file that is about to be made public. The report lists only relative file names and issue categories, and never echoes the matched content. The tool is a release check for the media formats this project already has, not a general secret detector, and it cannot recognise the content of an image, the content of a recording, or every form of credential.
 
-`python -X utf8 -m unittest discover -s tests -p test_public_privacy.py` 检查元数据去除不改变像素、透明度和音频数据。生产素材清理逐张比较解码像素或音频数据，更新对应文件哈希；相关程序由项目维护者维护。
+`python -X utf8 -m unittest discover -s tests -p test_public_privacy.py` checks that metadata removal does not change pixels, transparency or audio data. Production asset cleanup compares decoded pixels or audio data image by image and updates the corresponding file hashes; the programs involved are maintained by the project maintainer.
 
-历史重写采用 [git-filter-repo](https://github.com/newren/git-filter-repo) 2.47.0，使用其 MIT 许可；工具原样使用，不随桌宠分发。处理遵循 [GitHub 敏感数据清理说明](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository)。重写前备份，处理全部公开分支及标签，更新远端时使用指定旧值的租约检查，避免覆盖并行更新。
+History rewriting uses [git-filter-repo](https://github.com/newren/git-filter-repo) 2.47.0 under its MIT licence; the tool is used as-is and is not distributed with the pet. The process follows [GitHub's guidance on removing sensitive data](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository). Back up before rewriting, process all public branches and tags, and use lease checks with specified old values when updating the remote, to avoid overwriting a parallel update.
 
-重写不能收回他人的克隆、已下载文件、第三方缓存或平台内部副本。既有协作者应重新克隆，不要合并或推送旧历史。服务器旧提交缓存及只读引用如仍可访问，需由仓库所有者联系 GitHub Support 处理；不据此承诺绝对匿名。
+A rewrite cannot recall someone else's clone, an already downloaded file, a third-party cache or a platform's internal copy. Existing collaborators should re-clone, and must not merge or push the old history. Where a server's old commit caches and read-only references are still reachable, the repository owner needs to contact GitHub Support about them; no absolute anonymity is promised on that basis.
 
-## 2026-09-30 清理记录
+## 2026-09-30 cleanup record
 
-以下记录仅涵盖当时处理的分支、标签及发行包。随后审查发现旧 PR 引用与托管缓存仍可保留重写前对象，因此不能据此判定原仓库可以安全公开。当前处理决定和进度见 [发布准备状态](RELEASE_READINESS.md)。
+The record below covers only the branches, tags and release packages handled at the time. A later review found that old PR references and hosted caches can still retain pre-rewrite objects, so it cannot be taken as establishing that the original repository is safe to make public. The current decisions and progress are in [release readiness](RELEASE_READINESS.md).
 
-- 已完成当前源码及封面输出的元数据清理：77 张图片、46 段录音；逐张解码像素或音频数据比较不变，文件哈希同步更新。
-- 当前待公开文件基础扫描没有命中所检个人路径、私人邮箱或常见凭据模式。
-- 已完成零警告构建、217 项后台静音逻辑回归及 2 项元数据测试；未启动桌宠或播放声音。
-- 按用户授权完成全部远端分支及既有标签的历史重写，并核对远端引用；维护者提交署名为 `nicedoctors`，邮箱为 GitHub noreply 地址。仓库仍保持私有，尚未执行开源可见性变更。
-- [v1.3.2 正式包](https://github.com/nicedoctors/NuonuoDesktopPet/releases/tag/v1.3.2) 已发布为 Latest，服务器大小和 SHA-256 与本地一致。ZIP 为 175,374,749 字节，SHA-256 为 `e6473c2cf88bba2f87efa127a2e420fc9743329b9f65edfb0035ffe8b49ccdaa`。
-- v1.0.0、v1.3.1 旧下载附件已在校验受限备份后撤下，版本说明保留并指向新包。行为控制版不更新；本地旧包、历史制作缓存及旧 Git 元数据已移至项目外的受限备份，不随仓库或新包分发。项目 `dist` 仅保留当前正式目录和 ZIP。
-- 待仓库所有者处理：2026-09-30 核实旧提交仍可通过原提交号在 GitHub 访问。重写分支不能删除平台保留的旧对象；需向 GitHub Support 申请敏感数据缓存清理，是否受理及清除范围由平台审核。不能将本次重写视为所有平台副本已被物理抹除。
+- Metadata cleanup of the current source and cover output is complete: 77 images and 46 recordings, each compared by decoded pixels or audio data and found unchanged, with file hashes updated to match.
+- A basic scan of the files awaiting publication matched none of the personal paths, private emails or common credential patterns checked for.
+- A zero-warning build, 217 headless logic regressions and 2 metadata tests all completed; the pet was not started and no sound was played.
+- At the user's authorization, the history of all remote branches and existing tags was rewritten and the remote references were checked. The maintainer's commit credit is `nicedoctors` with a GitHub noreply address. The repository remained private and no visibility change was made.
+- The [v1.3.2 release package](https://github.com/nicedoctors/NuonuoDesktopPet/releases/tag/v1.3.2) was published as Latest, with the server-side size and SHA-256 matching the local copy. The ZIP is 175,374,749 bytes with SHA-256 `e6473c2cf88bba2f87efa127a2e420fc9743329b9f65edfb0035ffe8b49ccdaa`.
+- The old v1.0.0 and v1.3.1 download attachments were withdrawn after the restricted backup was verified, with the release notes kept and pointed at the new package. The Behavior Control edition is not updated. Old local packages, historical production caches and old Git metadata have been moved to a restricted backup outside the project and are not distributed with the repository or the new package. The project's `dist` keeps only the current official directory and ZIP.
+- For the repository owner to handle: on 2026-09-30 it was confirmed that old commits are still reachable on GitHub through their original commit IDs. Rewriting a branch cannot delete the old objects the platform retains; a sensitive-data cache cleanup has to be requested from GitHub Support, and whether it is accepted and how much it clears is for the platform to decide. This rewrite must not be treated as having physically erased every copy on the platform.

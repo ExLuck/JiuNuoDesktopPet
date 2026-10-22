@@ -1,14 +1,14 @@
-# 本地版本同步记录
+# Local version sync record
 
-本页保留同步当时的版本与发布路径；当前“啾糯桌宠”的发行名称、路径及兼容决定见 [正式更名说明](../README.md#正式更名与旧版兼容)。
+This page preserves the version and release paths as they were at the time of the sync. For the current release name, paths and compatibility decisions for "JiuNuo Desktop Pet", see [the official rename](../README.md#official-rename-and-compatibility-with-older-versions).
 
 ## 2026-09-07
 
-- 来源：GitHub 仓库 `nicedoctors/NuonuoDesktopPet` 的 `main` 分支。
-- 版本：`df33a256da1175ab76db15501a3669f1bb60f6ab`（隐私清理后对应提交），提交日期 2026-09-05。
-- 决定与适用范围：本地源码及 Windows x64 发布产物以该远端版本为基准，本地 `main` 跟踪 `origin/main`，远端抓取规则覆盖所有分支。
-- 依据：该版本提供“禁食模式（永不饥饿）”，启用后隐藏饥饿条并将饥饿值保持为 0，同时包含大小滑条、安静模式与新版待机素材。
-- 本地修改保留方式：同步前的已跟踪修改与未跟踪文件已归档到项目外的受限私有备份，不随公开历史分发。当前源码采用远端实现；备份供维护者按需检索。
-- 发布范围：`dist/糯糯桌宠-免安装版`、对应 ZIP，以及 `run.ps1` 使用的 `dist/糯糯桌宠`。
-- 验证状态：Release 构建通过；65 项无界面逻辑测试通过，覆盖禁食模式与饥饿显示策略。桌面交互由用户依照 `SELF_TEST.md` 人工验收。
-- 维护：后续同步由项目维护者核对远端提交和目标功能，并更新本记录中的版本依据。
+- Source: the `main` branch of the GitHub repository `nicedoctors/NuonuoDesktopPet`.
+- Version: `df33a256da1175ab76db15501a3669f1bb60f6ab` (the commit after the privacy cleanup), committed 2026-09-05.
+- Decision and scope: the local source and the Windows x64 release artifacts are based on that remote version. Local `main` tracks `origin/main`, and the remote fetch rules cover all branches.
+- Rationale: that version provides "Fasting mode (never hungry)", which hides the hunger bar and holds hunger at 0 when enabled, and it also includes the size slider, quiet mode and the new idle artwork.
+- How local modifications were preserved: tracked modifications and untracked files from before the sync were archived to a restricted private backup outside the project, and are not distributed with the public history. The current source uses the remote implementation; the backup is there for the maintainer to consult as needed.
+- Release scope: `dist/糯糯桌宠-免安装版`, the matching ZIP, and `dist/糯糯桌宠` as used by `run.ps1`.
+- Verification status: the Release build passed, and 65 headless logic tests passed, covering fasting mode and the hunger display policy. Desktop interaction is accepted manually by the user following `SELF_TEST.md`.
+- Maintenance: later syncs are checked against the remote commit and the target feature by the project maintainer, who also updates the version rationale in this record.

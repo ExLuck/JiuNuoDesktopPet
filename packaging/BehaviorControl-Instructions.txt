@@ -3,13 +3,13 @@ JiuNuo Desktop Pet v1.3.3 · Behavior Control edition · 2026-10-01
 How to use
 1. Exit the normal edition or any other running instance from the tray first, then extract this package in full to its own folder.
 2. Double-click "JiuNuoDesktopPet-BehaviorControl.exe" in the root folder. Do not open the EXE inside "Program" directly.
-3. Right-click the pet and pick an action under "Trigger a behavior"; it runs once the menu closes. "Pet character" switches between Nuonuo and Feibi Jiubi.
+3. Right-click the pet and pick an action under "Trigger a behavior"; it runs once the menu closes. "Pet character" switches between Nuonuo and Phibi Cubi.
 4. To quit, choose "Exit" from the right-click menu. The whole folder works as it is, with no extra runtime to install.
 
 Separate data, and things to note
 - This edition is not the feature-test entry point that plays a fixed sequence automatically, and it does not include the "Test Tools" folder.
-- Both characters can walk, run, explore, jump, climb, sleep and be tossed on demand. Nuonuo additionally has hunger, icon licking and slurping an icon copy; Feibi additionally has targeted kicks, punches and charges, hiding a window in her hat, smashing and tearing windows, and the hat interactions.
-- Feibi's targeted attacks do not require a full mischief bar first, but they still have to meet the safety conditions for a real window and for her own state. A manual trigger can attack any foreground window that is not maximized and not fullscreen; the program never force-activates a window or creates a test window.
+- Both characters can walk, run, explore, jump, climb, sleep and be tossed on demand. Nuonuo additionally has hunger, icon licking and slurping an icon copy; Phibi additionally has targeted kicks, punches and charges, hiding a window in her hat, smashing and tearing windows, and the hat interactions.
+- Phibi's targeted attacks do not require a full mischief bar first, but they still have to meet the safety conditions for a real window and for her own state. A manual trigger can attack any foreground window that is not maximized and not fullscreen; the program never force-activates a window or creates a test window.
 - "Stop current action" ends the current behavior. A window already stored in the hat stays there, and you still have to choose "Give the window back" to return it. Storing, smashing and tearing all use a snapshot of the window and damage no application or file; an icon copy never deletes the real icon or file.
 - A greyed-out option means something does not currently allow it: the character's state, the surface she is on, quiet or fasting mode, or the hat already being occupied. Windows and icons are checked again for availability when an action runs, so if something will not start, read the menu status.
 - "Automatic daily activity (Behavior Control)" is off at every launch and can be turned on from the menu when you want it. On first run it makes a read-only copy of the normal edition's character, size, volume and mute settings, with autonomous mischief off by default. Deletion watching is always off, and it neither reads nor copies the normal edition's watched folders.

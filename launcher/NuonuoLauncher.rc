@@ -5,7 +5,7 @@
 #define LAUNCHER_DESCRIPTION "JiuNuo Desktop Pet · Behavior Control\0"
 #define LAUNCHER_FILENAME "JiuNuoDesktopPet-BehaviorControl.exe\0"
 #elif defined(FEATURE_TEST_LAUNCHER)
-#define LAUNCHER_DESCRIPTION "JiuNuo Desktop Pet · Feibi Jiubi feature test\0"
+#define LAUNCHER_DESCRIPTION "JiuNuo Desktop Pet · Phibi Cubi feature test\0"
 #define LAUNCHER_FILENAME "JiuNuoDesktopPet-FeatureTest.exe\0"
 #else
 #define LAUNCHER_DESCRIPTION "JiuNuo Desktop Pet launcher\0"

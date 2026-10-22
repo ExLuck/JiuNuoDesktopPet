@@ -190,7 +190,7 @@ public sealed class TrayIconService : IDisposable
         if (!behaviorControl)
         {
             _pairMenu = new Forms.ToolStripMenuItem("Two-pet interactions");
-            _pairMenu.DropDownItems.Add("Feibi pinches Nuonuo's cheek", null, (_, _) => PairInteractionRequested?.Invoke("cheek"));
+            _pairMenu.DropDownItems.Add("Phibi pinches Nuonuo's cheek", null, (_, _) => PairInteractionRequested?.Invoke("cheek"));
             _pairMenu.DropDownItems.Add("Nap together", null, (_, _) => PairInteractionRequested?.Invoke("sleep"));
             _pairMenu.DropDownItems.Add("Feed a snack from the hat", null, (_, _) => PairInteractionRequested?.Invoke("feed"));
             _pairMenu.DropDownItems.Add("Follow along", null, (_, _) => PairInteractionRequested?.Invoke("follow"));
@@ -430,7 +430,7 @@ public sealed class TrayIconService : IDisposable
         if (_pairDialogueItem is not null) _pairDialogueItem.Enabled = _coexisting && _speechBubbles.Checked && !_quietMode.Checked;
         _fastingMode.Visible = _coexisting || _character.SupportsFood;
         _fastingMode.ToolTipText = _coexisting
-            ? "Nuonuo never gets hungry and both bars are hidden; Feibi's mischief build-up is unchanged."
+            ? "Nuonuo never gets hungry and both bars are hidden; Phibi's mischief build-up is unchanged."
             : "Nuonuo never gets hungry, and the hunger bar is hidden.";
         _allowMischief.Visible = _coexisting || _character.UsesMischief;
         _mischiefStatus.Visible = _coexisting || _character.UsesMischief;

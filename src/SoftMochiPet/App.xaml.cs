@@ -75,8 +75,8 @@ public partial class App : System.Windows.Application
             if (featureTest)
             {
                 System.Windows.MessageBox.Show(
-                    "The pet or the feature test is already running.\n\nExit the current pet from the tray first, then open the Feibi Jiubi feature test.",
-                    "JiuNuo Desktop Pet · Feibi Jiubi feature test",
+                    "The pet or the feature test is already running.\n\nExit the current pet from the tray first, then open the Phibi Cubi feature test.",
+                    "JiuNuo Desktop Pet · Phibi Cubi feature test",
                     MessageBoxButton.OK,
                     MessageBoxImage.Information);
                 DiagnosticsLog.WriteEvent("FeatureTestStartBlockedByExistingInstance");

@@ -68,7 +68,7 @@ public sealed class PetCharacterProfile
             45, 267, 60, 334, 407, 96, 92, 416, 466, 191, 304));
 
     public static PetCharacterProfile FeibiJiubi { get; } = new(
-        "feibijiubi", "Feibi Jiubi",
+        "feibijiubi", "Phibi Cubi",
         Path.Combine("assets", "characters", "feibijiubi", "runtime"),
         Path.Combine("assets", "characters", "feibijiubi", "audio"),
         Path.Combine("assets", "characters", "feibijiubi", "pet.ico"),

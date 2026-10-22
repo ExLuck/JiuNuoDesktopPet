@@ -10,7 +10,7 @@
 #define LAUNCHER_TITLE L"JiuNuo Desktop Pet · Behavior Control"
 #define LAUNCHER_LAYOUT_HELP L"Make sure the Program folder sits next to this Behavior Control EXE and that its contents are complete."
 #elif defined(FEATURE_TEST_LAUNCHER)
-#define LAUNCHER_TITLE L"JiuNuo Desktop Pet · Feibi Jiubi feature test"
+#define LAUNCHER_TITLE L"JiuNuo Desktop Pet · Phibi Cubi feature test"
 #define LAUNCHER_LAYOUT_HELP L"Keep this EXE inside the Test Tools folder and keep the Program folder in the same portable directory."
 #else
 #define LAUNCHER_TITLE L"JiuNuo Desktop Pet"

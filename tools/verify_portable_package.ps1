@@ -10,7 +10,7 @@ $packageRoot = (Resolve-Path -LiteralPath $PackageDirectory).Path
 $runtimeRoot = Join-Path $packageRoot 'Program'
 $rootFiles = @(Get-ChildItem -LiteralPath $packageRoot -File)
 if ($rootFiles.Count -ne 2 -or $rootFiles.Name -notcontains $LauncherName -or
-    $rootFiles.Name -notcontains '使用说明.txt') { throw 'Unexpected files at the package root.' }
+    $rootFiles.Name -notcontains 'Instructions.txt') { throw 'Unexpected files at the package root.' }
 
 $launcher = Get-Item -LiteralPath (Join-Path $packageRoot $LauncherName)
 $runtimeExe = Get-Item -LiteralPath (Join-Path $runtimeRoot 'JiuNuoDesktopPet.exe')
@@ -37,9 +37,9 @@ foreach ($framework in @('Microsoft.NETCore.App', 'Microsoft.WindowsDesktop.App'
 [xml]$appProject = Get-Content -LiteralPath (Join-Path $projectRoot 'src\SoftMochiPet\SoftMochiPet.csproj') -Raw
 $version = $appProject.Project.PropertyGroup.Version | Where-Object { $_ }
 if ($runtimeExe.VersionInfo.FileVersion -ne "$version.0") { throw 'Packaged version differs from source.' }
-$instructions = Get-Content -LiteralPath (Join-Path $packageRoot '使用说明.txt') -Raw
+$instructions = Get-Content -LiteralPath (Join-Path $packageRoot 'Instructions.txt') -Raw
 if ($instructions -notmatch ('v' + [regex]::Escape($version) + '\b')) { throw 'Instructions contain an outdated version.' }
-$noticeRoot = Join-Path $packageRoot '许可证与声明'
+$noticeRoot = Join-Path $packageRoot 'Licenses and Notices'
 $noticeFiles = @('LICENSE', 'NOTICE', 'ASSET_RIGHTS.md', 'docs/RELEASE_READINESS.md', 'packaging/third-party-notices.json')
 $manifest = Get-Content -LiteralPath (Join-Path $projectRoot 'packaging\third-party-notices.json') -Raw | ConvertFrom-Json
 $noticeFiles += @($manifest.files.file)
@@ -57,7 +57,7 @@ $files = @(Get-ChildItem -LiteralPath $packageRoot -Recurse -File)
 $hashes = @{}
 foreach ($file in $files) {
     $relative = $file.FullName.Substring($packageRoot.Length + 1).Replace('\', '/')
-    if ($relative -match '测试工具|LogicTests|testhost|\.pdb$|(^|/)(activity\.log|settings\.json|life-state\.json|mischief-state\.json)$') {
+    if ($relative -match '测试工具|Test Tools|LogicTests|testhost|\.pdb$|(^|/)(activity\.log|settings\.json|life-state\.json|mischief-state\.json)$') {
         throw "Development or user data found in release: $relative"
     }
     $hashes[$relative] = (Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash

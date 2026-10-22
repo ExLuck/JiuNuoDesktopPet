@@ -1,0 +1,36 @@
+JiuNuo Desktop Pet v1.3.3 · Portable edition · 2026-10-01
+
+In this update: per-line voice loudness balanced across both characters; kicking an icon over to be eaten no longer repeats the solo slurp; pinching a cheek with the mouse now has continuous stretching, narrowed eyes and a springy rebound; feeding happens where they stand, no longer requires them to be close, and allows height differences and separate monitors.
+
+How to use
+1. Extract the whole archive to an ordinary folder first. Do not run it from inside your archive tool's preview window.
+2. Double-click "JiuNuoDesktopPet.exe", the only normal entry point in the root folder. You do not need to install .NET or any other runtime.
+3. Right-click the pet or the tray icon and pick Nuonuo or Feibi Jiubi under "Pet character". Turn on "Both pets together" to have them appear at once. Size, mute and quiet mode stay in sync. While both are present, fasting mode or infinite mode each hide the hunger bar and the mischief bar together, and both bars come back only when both options are off. Fasting still changes only Nuonuo's hunger behaviour and does not clear Feibi's mischief meter. "Show speech bubbles" controls the text balloons, and supports two-pet conversations as well.
+4. Feibi Jiubi has "Allow autonomous mischief" on by default. If your saved settings are version 4 or older, the first upgrade turns it on once; if you then switch it off from the menu, it stays off across restarts and the bar above her head turns grey. Right-click "Mischief" to see whether she is building up, cooling down, waiting for a window, or holding one in her hat.
+5. Try "Play a prank" and "Tease her" on a plain empty test window first. The hat holds at most one window. While it is occupied she can still kick, punch and charge another compatible window, but she will not take a second window or start a new hat-storing finisher. After a finisher puts shards or two halves into the hat, nothing is restored automatically; right-click "Give the window back" and she will stop whatever small action she is doing first, then return the original window.
+6. To quit, right-click the pet or the tray icon and choose "Exit".
+
+New interactions
+- Hold the left mouse button on a cheek and drag outward or diagonally: the cheek stretches continuously and the eyes narrow, pulling far and holding briefly opens her mouth, and releasing snaps it back. The body tilts slightly and the overall size does not change. Both characters support either cheek. Dragging from the hat or the body still picks her up and throws her as before.
+- Feeding under "Two-pet interactions" now happens where they stand instead of requiring them to walk together. It works with either one on the left or right, at different heights, and across screens; the further apart they are, the longer the food flies. It still will not start while a pet is quiet, being dragged, or busy attacking.
+- When both are present, they start inviting each other to interact after about 12 seconds, then wait 30-55 seconds after each exchange before trying again, deferring while busy. If Nuonuo is hungry, feeding comes first; if either is sleepy, napping together comes first; otherwise they play ball, pinch cheeks and toss snacks. You can also trigger any of it from the right-click menu.
+- Added "Follow along", "Nuzzle in passing", "Play with the ball" and "Watch together". One will catch up if the other wanders off, they may nuzzle when they meet, and they may look over together when a window nearby opens or moves. The ball comes out of the hat, gets kicked back and forth, and is put away at the end.
+- "Two-pet interactions" in the right-click menu triggers each of those four directly. Turn quiet mode off first and put both on the same screen, on the same stretch of ground or the same window ledge; the ball needs a reasonably wide space. Watching together needs a visible window on that screen. All four step aside for icon deletion, dragging or deliberate mischief, and none of them change real windows or files.
+- When you delete a desktop icon and both are on the same screen, Feibi kicks it over to Nuonuo first; walking, or holding a window in the hat, no longer prevents the relay. If Feibi is landing or waking she waits up to 5 seconds, and if she is asleep she is woken first. If a pet is being dragged or attacking, if they are on different screens, or if the position cannot be pinned down, Nuonuo eats it alone as before. Use a freshly created temporary file to try this.
+- Changing the size, turning off coexistence, locking the screen or sleeping all stop the current two-pet interaction, so the characters and the food do not end up out of place.
+
+Notes
+- "JiuNuoDesktopPet.exe" in the root folder is the entry point. The "Program" subfolder holds the animations, voice clips and the bundled .NET runtime. Keep the two together.
+- Do not move, rename or separately copy anything inside "Program".
+- The feature-test entry point is not included in the release package. The release package provides only "JiuNuoDesktopPet.exe" in the root and the "Program" runtime folder.
+- This is the Windows 10/11 x64 release portable edition. Window interaction and how the voices sound still need checking against your own monitor and applications.
+- Once a window is stored away, quiet mode, going home, size changes and dragging across screens do not trigger a restore. Switching characters, quitting, locking, sleeping, or a real change to your display layout or work area all return it safely, so no window is left behind.
+- While the pet or tray menu is open the character stops walking and animating, and resumes when the menu closes. Submenus, the size slider and the window safety checks all keep working.
+- Before updating, exit the old version from the tray, then extract the new one into a new folder, so the old process does not take over the launch request.
+- If Windows shows a security prompt because the publisher is unknown, make sure the file came from someone you trust. This version has no code-signing certificate.
+- The rename changes only the product name and the released file names. The characters are still called Nuonuo and Feibi Jiubi, and settings, volume and saved state from older versions stay in the original SoftMochiPet data folder, so nothing needs migrating by hand.
+- To upgrade, extract the whole package into a new folder. Do not replace only the EXE or mix old and new "Program" contents. If you want it to start with Windows, tick "Start with Windows" again in the new version so the existing startup entry points at the new location.
+
+Licence and notices
+The program code is under PolyForm Noncommercial 1.0.0, which grants noncommercial use only, within the terms. The character artwork is not covered by the code licence and its upstream rights are still to be confirmed; this project being public does not mean permission has been obtained. The full licence, third-party notices and release record are in the "Licenses and Notices" folder.
+This build bundles .NET and Windows Desktop 8.0.31, so no separate runtime install is needed.

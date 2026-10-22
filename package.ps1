@@ -92,9 +92,9 @@ if (-not (Test-Path -LiteralPath $packageLauncher)) {
     throw "Portable launcher was not produced: $packageLauncher"
 }
 
-$instructions = if ($BehaviorControl) { 'packaging\行为控制版使用说明.txt' } else { 'packaging\便携版使用说明.txt' }
+$instructions = if ($BehaviorControl) { 'packaging\BehaviorControl-Instructions.txt' } else { 'packaging\Portable-Instructions.txt' }
 Copy-Item -LiteralPath (Join-Path $projectRoot $instructions) `
-    -Destination (Join-Path $stagingDirectory '使用说明.txt')
+    -Destination (Join-Path $stagingDirectory 'Instructions.txt')
 
 & (Join-Path $projectRoot 'tools\copy_distribution_notices.ps1') -Destination $stagingDirectory
 

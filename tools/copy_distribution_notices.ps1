@@ -10,7 +10,7 @@ foreach ($entry in $manifest.files) {
         throw "License original is missing or changed: $($entry.file)"
     }
 }
-$target = Join-Path $Destination '许可证与声明'
+$target = Join-Path $Destination 'Licenses and Notices'
 New-Item -ItemType Directory -Path $target -Force | Out-Null
 foreach ($name in @('LICENSE', 'NOTICE', 'ASSET_RIGHTS.md')) {
     Copy-Item -LiteralPath (Join-Path $projectRoot $name) -Destination $target

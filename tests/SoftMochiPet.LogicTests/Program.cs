@@ -453,8 +453,8 @@ static void IdleNameCallsStayWithinRequestedInterval()
 static void StartupRegistrationSelectsPortableLauncher()
 {
     var root = Path.Combine(Path.GetTempPath(), $"SoftMochiPet-startup-{Guid.NewGuid():N}");
-    var programDirectory = Path.Combine(root, "程序文件");
-    var launcher = Path.Combine(root, "啾糯桌宠.exe");
+    var programDirectory = Path.Combine(root, "Program");
+    var launcher = Path.Combine(root, "JiuNuoDesktopPet.exe");
     var legacyLauncher = Path.Combine(root, "糯糯桌宠.exe");
     var fallback = Path.Combine(programDirectory, "internal.exe");
     try

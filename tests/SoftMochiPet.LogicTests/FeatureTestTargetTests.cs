@@ -27,16 +27,16 @@ internal static class FeatureTestTargetTests
     public static void HelperLaunchUsesArgumentListAndNoShellOrConsole()
     {
         var native = FeatureTestTargetLaunchPolicy.CreateStartInfo(
-            @"C:\Feature Test\啾糯桌宠.exe", null, 2345);
-        Assert(native.FileName == @"C:\Feature Test\啾糯桌宠.exe" &&
+            @"C:\Feature Test\JiuNuoDesktopPet.exe", null, 2345);
+        Assert(native.FileName == @"C:\Feature Test\JiuNuoDesktopPet.exe" &&
             native.ArgumentList.SequenceEqual(new[] { "--feibi-feature-target", "--parent-pid", "2345" }) &&
             !native.UseShellExecute && native.CreateNoWindow && native.WindowStyle == ProcessWindowStyle.Hidden &&
             string.IsNullOrEmpty(native.Arguments),
             "The launcher must start its own executable with escaped ArgumentList fields and no shell window.");
         var hosted = FeatureTestTargetLaunchPolicy.CreateStartInfo(
-            @"C:\Runtime\dotnet.exe", @"C:\Feature Test\啾糯桌宠.dll", 2345);
+            @"C:\Runtime\dotnet.exe", @"C:\Feature Test\JiuNuoDesktopPet.dll", 2345);
         Assert(hosted.ArgumentList.SequenceEqual(new[]
-            { @"C:\Feature Test\啾糯桌宠.dll", "--feibi-feature-target", "--parent-pid", "2345" }),
+            { @"C:\Feature Test\JiuNuoDesktopPet.dll", "--feibi-feature-target", "--parent-pid", "2345" }),
             "A dotnet-hosted run must prepend the actual entry assembly without string-built shell commands.");
         var rejected = false;
         try { FeatureTestTargetLaunchPolicy.CreateStartInfo(@"C:\Runtime\dotnet.exe", null, 2345); }

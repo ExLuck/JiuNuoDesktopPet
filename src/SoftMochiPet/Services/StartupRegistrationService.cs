@@ -42,7 +42,7 @@ public sealed class StartupRegistrationService
         var appDirectory = new DirectoryInfo(Path.GetFullPath(baseDirectory));
         if (appDirectory.Parent is not null)
         {
-            var portableLauncher = Path.Combine(appDirectory.Parent.FullName, "啾糯桌宠.exe");
+            var portableLauncher = Path.Combine(appDirectory.Parent.FullName, "JiuNuoDesktopPet.exe");
             if (File.Exists(portableLauncher))
             {
                 return portableLauncher;

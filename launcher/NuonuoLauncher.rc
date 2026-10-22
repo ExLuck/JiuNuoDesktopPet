@@ -2,14 +2,14 @@
 #include <windows.h>
 
 #if defined(BEHAVIOR_CONTROL_LAUNCHER)
-#define LAUNCHER_DESCRIPTION "啾糯桌宠 · 行为控制版\0"
-#define LAUNCHER_FILENAME "啾糯桌宠-行为控制版.exe\0"
+#define LAUNCHER_DESCRIPTION "JiuNuo Desktop Pet · Behavior Control\0"
+#define LAUNCHER_FILENAME "JiuNuoDesktopPet-BehaviorControl.exe\0"
 #elif defined(FEATURE_TEST_LAUNCHER)
-#define LAUNCHER_DESCRIPTION "啾糯桌宠 · 菲比啾比专属功能测试\0"
-#define LAUNCHER_FILENAME "菲比啾比专属功能测试.exe\0"
+#define LAUNCHER_DESCRIPTION "JiuNuo Desktop Pet · Feibi Jiubi feature test\0"
+#define LAUNCHER_FILENAME "JiuNuoDesktopPet-FeatureTest.exe\0"
 #else
-#define LAUNCHER_DESCRIPTION "啾糯桌宠启动器\0"
-#define LAUNCHER_FILENAME "啾糯桌宠.exe\0"
+#define LAUNCHER_DESCRIPTION "JiuNuo Desktop Pet launcher\0"
+#define LAUNCHER_FILENAME "JiuNuoDesktopPet.exe\0"
 #endif
 
 101 ICON "..\\assets\\pet.ico"
@@ -33,7 +33,7 @@ BEGIN
             VALUE "InternalName", LAUNCHER_FILENAME
             VALUE "LegalCopyright", "Copyright © 2026 桃天帝不差\0"
             VALUE "OriginalFilename", LAUNCHER_FILENAME
-            VALUE "ProductName", "啾糯桌宠\0"
+            VALUE "ProductName", "JiuNuoDesktopPet\0"
             VALUE "ProductVersion", "1.3.3.0\0"
         END
     END

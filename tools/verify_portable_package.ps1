@@ -1,19 +1,19 @@
 ﻿param(
     [Parameter(Mandatory)][string]$PackageDirectory,
     [Parameter(Mandatory)][string]$ArchivePath,
-    [string]$LauncherName = '啾糯桌宠.exe'
+    [string]$LauncherName = 'JiuNuoDesktopPet.exe'
 )
 
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
 $packageRoot = (Resolve-Path -LiteralPath $PackageDirectory).Path
-$runtimeRoot = Join-Path $packageRoot '程序文件'
+$runtimeRoot = Join-Path $packageRoot 'Program'
 $rootFiles = @(Get-ChildItem -LiteralPath $packageRoot -File)
 if ($rootFiles.Count -ne 2 -or $rootFiles.Name -notcontains $LauncherName -or
     $rootFiles.Name -notcontains '使用说明.txt') { throw 'Unexpected files at the package root.' }
 
 $launcher = Get-Item -LiteralPath (Join-Path $packageRoot $LauncherName)
-$runtimeExe = Get-Item -LiteralPath (Join-Path $runtimeRoot '啾糯桌宠.exe')
+$runtimeExe = Get-Item -LiteralPath (Join-Path $runtimeRoot 'JiuNuoDesktopPet.exe')
 if ($launcher.VersionInfo.FileVersion -ne $runtimeExe.VersionInfo.FileVersion) {
     throw 'Launcher and application versions do not match.'
 }
@@ -25,7 +25,7 @@ foreach ($binary in @($launcher, $runtimeExe)) {
         throw "Not a Windows x64 GUI executable: $($binary.Name)"
     }
 }
-$runtimeConfig = Get-Content -LiteralPath (Join-Path $runtimeRoot '啾糯桌宠.runtimeconfig.json') -Raw | ConvertFrom-Json
+$runtimeConfig = Get-Content -LiteralPath (Join-Path $runtimeRoot 'JiuNuoDesktopPet.runtimeconfig.json') -Raw | ConvertFrom-Json
 [xml]$buildProperties = Get-Content -LiteralPath (Join-Path $projectRoot 'Directory.Build.props') -Raw
 $expectedRuntime = $buildProperties.Project.PropertyGroup.JiuNuoRuntimeVersion
 foreach ($framework in @('Microsoft.NETCore.App', 'Microsoft.WindowsDesktop.App')) {
@@ -64,8 +64,8 @@ foreach ($file in $files) {
 }
 $assetCount = 0
 foreach ($entry in $hashes.GetEnumerator()) {
-    if (-not $entry.Key.StartsWith('程序文件/assets/')) { continue }
-    $asset = $entry.Key.Substring('程序文件/'.Length)
+    if (-not $entry.Key.StartsWith('Program/assets/')) { continue }
+    $asset = $entry.Key.Substring('Program/'.Length)
     $source = if ($asset.StartsWith('assets/audio/voice/')) {
         Join-Path $projectRoot ('音效/' + [IO.Path]::GetFileName($asset))
     } else { Join-Path $projectRoot $asset }

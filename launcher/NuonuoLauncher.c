@@ -7,14 +7,14 @@
 #endif
 
 #if defined(BEHAVIOR_CONTROL_LAUNCHER)
-#define LAUNCHER_TITLE L"啾糯桌宠 · 行为控制版"
-#define LAUNCHER_LAYOUT_HELP L"请确认“程序文件”文件夹与这个行为控制版 EXE 放在一起，且文件夹内容完整。"
+#define LAUNCHER_TITLE L"JiuNuo Desktop Pet · Behavior Control"
+#define LAUNCHER_LAYOUT_HELP L"Make sure the Program folder sits next to this Behavior Control EXE and that its contents are complete."
 #elif defined(FEATURE_TEST_LAUNCHER)
-#define LAUNCHER_TITLE L"啾糯桌宠 · 菲比啾比专属功能测试"
-#define LAUNCHER_LAYOUT_HELP L"请把这个 EXE 留在“测试工具”文件夹中，并保留同一免安装目录下的“程序文件”文件夹。"
+#define LAUNCHER_TITLE L"JiuNuo Desktop Pet · Feibi Jiubi feature test"
+#define LAUNCHER_LAYOUT_HELP L"Keep this EXE inside the Test Tools folder and keep the Program folder in the same portable directory."
 #else
-#define LAUNCHER_TITLE L"啾糯桌宠"
-#define LAUNCHER_LAYOUT_HELP L"请确认“程序文件”文件夹与这个 EXE 放在一起，且文件夹内容完整。"
+#define LAUNCHER_TITLE L"JiuNuo Desktop Pet"
+#define LAUNCHER_LAYOUT_HELP L"Make sure the Program folder sits next to this EXE and that its contents are complete."
 #endif
 
 static int ShowLaunchError(DWORD errorCode)
@@ -80,13 +80,13 @@ int APIENTRY wWinMain(HINSTANCE instance, HINSTANCE previousInstance, LPWSTR com
     }
 #endif
 
-    result = PathCchCombine(appDirectory, ARRAYSIZE(appDirectory), rootDirectory, L"程序文件");
+    result = PathCchCombine(appDirectory, ARRAYSIZE(appDirectory), rootDirectory, L"Program");
     if (FAILED(result))
     {
         return ShowLaunchError((DWORD)result);
     }
 
-    result = PathCchCombine(appPath, ARRAYSIZE(appPath), appDirectory, L"啾糯桌宠.exe");
+    result = PathCchCombine(appPath, ARRAYSIZE(appPath), appDirectory, L"JiuNuoDesktopPet.exe");
     if (FAILED(result))
     {
         return ShowLaunchError((DWORD)result);

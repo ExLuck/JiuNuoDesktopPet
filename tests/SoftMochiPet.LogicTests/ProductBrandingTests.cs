@@ -7,7 +7,7 @@ internal static class ProductBrandingTests
 {
     public static void ProductionAssemblyAndHelperCommandsUseOfficialName()
     {
-        const string productName = "啾糯桌宠";
+        const string productName = "JiuNuoDesktopPet";
         var assembly = typeof(PetCharacterProfile).Assembly;
         Assert(assembly.GetName().Name == productName &&
             Path.GetFileName(assembly.Location) == $"{productName}.dll" &&

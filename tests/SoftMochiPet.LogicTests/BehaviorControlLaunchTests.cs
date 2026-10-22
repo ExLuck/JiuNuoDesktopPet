@@ -27,20 +27,20 @@ internal static class BehaviorControlLaunchTests
         XNamespace ns = project.Root!.Name.Namespace;
         var properties = project.Root.Elements(ns + "PropertyGroup").Single(element =>
             (string?)element.Attribute("Condition") == "'$(BehaviorControlLauncher)'=='true'");
-        Assert((string?)properties.Element(ns + "TargetName") == "啾糯桌宠-行为控制版" &&
+        Assert((string?)properties.Element(ns + "TargetName") == "JiuNuoDesktopPet-BehaviorControl" &&
             ((string?)properties.Element(ns + "OutDir"))?.Contains("\\BehaviorControl\\", StringComparison.Ordinal) == true &&
             ((string?)properties.Element(ns + "IntDir"))?.Contains("\\BehaviorControl\\", StringComparison.Ordinal) == true,
             "The control launcher must have independent output and intermediate compilation directories.");
         Assert(c.Contains("#if defined(BEHAVIOR_CONTROL_LAUNCHER)", StringComparison.Ordinal) &&
             c.Contains("--behavior-control", StringComparison.Ordinal) && c.Contains("UNREFERENCED_PARAMETER(commandLine)", StringComparison.Ordinal) &&
-            rc.Contains("啾糯桌宠-行为控制版.exe", StringComparison.Ordinal),
+            rc.Contains("JiuNuoDesktopPet-BehaviorControl.exe", StringComparison.Ordinal),
             "The native control launcher must carry only its fixed mode flag and its own filename metadata.");
         var package = File.ReadAllText(Path.Combine(root, "package.ps1"));
         Assert(package.Contains("param([switch]$BehaviorControl)", StringComparison.Ordinal) &&
-            package.Contains("$packageName = if ($BehaviorControl) { '啾糯桌宠-行为控制版' } else { '啾糯桌宠-免安装版' }", StringComparison.Ordinal) &&
+            package.Contains("$packageName = if ($BehaviorControl) { 'JiuNuoDesktopPet-BehaviorControl' } else { 'JiuNuoDesktopPet-Portable' }", StringComparison.Ordinal) &&
             !package.Contains("$testToolsDirectory", StringComparison.Ordinal) &&
             !package.Contains("FeatureTestLauncher=true", StringComparison.Ordinal) &&
-            package.Contains("BehaviorControl\\啾糯桌宠-行为控制版.exe", StringComparison.Ordinal),
+            package.Contains("BehaviorControl\\JiuNuoDesktopPet-BehaviorControl.exe", StringComparison.Ordinal),
             "Packaging must select only its own folder/ZIP and keep the formal package free of the test directory.");
         Assert(package.Contains("/p:BehaviorControlLauncher=$($BehaviorControl.IsPresent.ToString().ToLowerInvariant())", StringComparison.Ordinal) &&
             package.Contains("$packageDirectory.StartsWith($distPrefix", StringComparison.Ordinal) &&
